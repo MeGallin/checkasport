@@ -1,0 +1,7 @@
+@import 'index.scss';
+@import './scssMixIn.scss';
+
+.content-wrapper {
+  @include border-all(1px, solid, $light-orange);
+  min-height: calc(100vh - #{$header-height + $footer-height});
+}

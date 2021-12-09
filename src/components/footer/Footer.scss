@@ -1,0 +1,7 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+
+.footer {
+  @include border-all(1px, solid, $light-orange);
+  height: $footer-height;
+}

@@ -1,0 +1,7 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+
+header {
+  @include border-all(1px, solid, $light-orange);
+  height: $header-height;
+}
