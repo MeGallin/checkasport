@@ -8,4 +8,7 @@ header {
     background-color: $main-bg-colour;
     color: $main-font-colour;
   }
+  nav {
+    display: flex;
+  }
 }
