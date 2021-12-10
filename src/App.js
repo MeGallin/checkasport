@@ -6,18 +6,21 @@ import HomeView from './views/HomeView/HomeView';
 import ContactFormView from './views/contactFormView/ContactFormView';
 import ErrorView from './views/errorView/ErrorView';
 
+// Change the display width by removing the --fluid after the container class
 const App = () => {
   return (
     <Router>
-      <Header />
-      <div className="content-wrapper">
-        <Routes>
-          <Route path="/" element={<HomeView />} exact />
-          <Route path="/contact" element={<ContactFormView />} />
-          <Route path="*" element={<ErrorView />} />
-        </Routes>
+      <div className="container--fluid">
+        <Header />
+        <div className="content-wrapper">
+          <Routes>
+            <Route path="/" element={<HomeView />} exact />
+            <Route path="/contact" element={<ContactFormView />} />
+            <Route path="*" element={<ErrorView />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </Router>
   );
 };
