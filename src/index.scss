@@ -77,6 +77,9 @@ a:not([class]) {
 a:link {
   text-decoration: none;
 }
+a {
+  color: $main-font-colour;
+}
 
 /* Make images easier to work with */
 img {

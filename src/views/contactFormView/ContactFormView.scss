@@ -1,0 +1,6 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+
+.contact-form-view {
+  @include border-all(1px, solid, $light-orange);
+}
