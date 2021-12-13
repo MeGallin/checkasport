@@ -1,7 +1,9 @@
 @import '../../index.scss';
-@import '../../scssMixIn.scss';
-
-.contact-form-view-wrapper {
+.input-field-wrapper {
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='search'],
   textarea {
     background: rgba(255, 255, 255, 0.1);
     border: none;
@@ -19,6 +21,5 @@
     color: #8a97a0;
     -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
-    min-height: 250px;
   }
 }

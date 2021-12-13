@@ -14,7 +14,7 @@ const Button = ({ colour, text, onClick }) => {
   );
 };
 
-Button.defaultrops = {
+Button.defaultProps = {
   color: 'yellow',
 };
 
