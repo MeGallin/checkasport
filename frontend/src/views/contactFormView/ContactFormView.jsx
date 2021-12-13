@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { contactFormMessageAction } from '../../store/actions/contactFormActions';
 import './ContactFormView.scss';
 import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
 
 const ContactFormView = ({ type }) => {
+  const dispatch = useDispatch();
+  const contactForm = useSelector((state) => state.contactForm);
+  const { loading, error, success, payload } = contactForm;
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, email, message);
+    // Call action creator function
+    dispatch(contactFormMessageAction(name, email, message));
+    setName('');
+    setEmail('');
+    setMessage('');
   };
 
   return (
