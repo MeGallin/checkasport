@@ -1,0 +1,14 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+
+header {
+  @include border-all(1px, solid, $light-orange);
+  height: $header-height;
+  .btn {
+    background-color: $main-bg-colour;
+    color: $main-font-colour;
+  }
+  nav {
+    display: flex;
+  }
+}
