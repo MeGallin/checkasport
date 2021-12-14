@@ -21,4 +21,14 @@
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
     min-height: 250px;
   }
+  textarea.invalid {
+    border-left: $secondary-bg-colour 4px solid;
+    min-height: 250px;
+  }
+  textarea.entered {
+    border-left: greenyellow 4px solid;
+  }
+  .small-text-message {
+    font-size: 0.6em;
+  }
 }

@@ -10,9 +10,12 @@ import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import Message from '../../components/message/Message';
 
 const ContactFormView = ({ type }) => {
+  const nameRegEx = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+  const emailRegEx =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
   const dispatch = useDispatch();
   const contactForm = useSelector((state) => state.contactForm);
-  const { loading, error, success, payload } = contactForm;
+  const { loading, success, payload } = contactForm;
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -21,7 +24,7 @@ const ContactFormView = ({ type }) => {
   useEffect(() => {
     dispatch({ type: CONTACT_FORM_RESET });
     return () => {
-      console.log('cleanup');
+      console.log('Contact form cleanup');
     };
   }, [dispatch]);
 
@@ -55,12 +58,19 @@ const ContactFormView = ({ type }) => {
         <LoadingSpinner />
       ) : (
         <div className="contact-form-view-wrapper">
-          <form>
+          <form onSubmit={handleSubmit}>
             <InputField
               label="Name"
               type={type}
               name={name}
               value={name}
+              required
+              className={!nameRegEx.test(name) ? 'invalid' : 'entered'}
+              error={
+                !nameRegEx.test(name) && name.length !== 0
+                  ? `Name field must start with an uppercase letter and contain at least 3 letters.`
+                  : null
+              }
               onChange={(e) => setName(e.target.value)}
             />
             <InputField
@@ -69,23 +79,47 @@ const ContactFormView = ({ type }) => {
               name={email}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
+              error={
+                !emailRegEx.test(email) && email.length !== 0
+                  ? `Invalid email address.`
+                  : null
+              }
             />
 
             <div>
               <label htmlFor="message">
-                Message
+                Message{' '}
+                {message.length >= 10 ? null : (
+                  <span className="small-text-message">
+                    You need enter at least 10 characters and currently you have
+                    entered {message.length}
+                  </span>
+                )}
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   name="message"
+                  className={message.length < 10 ? 'invalid' : 'entered'}
                 />
               </label>
             </div>
+            {nameRegEx.test(name) ||
+            emailRegEx.test(email) ||
+            message.length > 10 ? (
+              <span className="small-text-message">
+                You form is now valid and can be submitted.
+              </span>
+            ) : null}
             <Button
               colour="transparent"
               text="submit"
               className="btn"
-              onClick={handleSubmit}
+              disabled={
+                !nameRegEx.test(name) ||
+                !emailRegEx.test(email) ||
+                message.length < 10
+              }
             ></Button>
           </form>
         </div>
