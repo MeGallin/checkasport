@@ -23,4 +23,33 @@
     -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
   }
+  .validation-error {
+    color: $danger;
+    padding: 0.2em;
+    font-weight: bold;
+  }
+  input[type='text'].entered {
+    border-left: greenyellow 4px solid;
+  }
+  input[type='email'].entered {
+    border-left: greenyellow 4px solid;
+  }
+  input[type='text'].invalid {
+    border-left: $secondary-bg-colour 4px solid;
+  }
+  input[type='email'].invalid {
+    border-left: $secondary-bg-colour 4px solid;
+  }
+  input[type='password'].entered {
+    border-left: greenyellow 4px solid;
+  }
+  input[type='password'].invalid {
+    border-left: $secondary-bg-colour 4px solid;
+  }
+  input[type='search'].entered {
+    border-left: greenyellow 4px solid;
+  }
+  input[type='search'].invalid {
+    border-left: $secondary-bg-colour 4px solid;
+  }
 }
