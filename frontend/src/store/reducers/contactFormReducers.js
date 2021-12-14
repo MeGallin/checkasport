@@ -17,7 +17,12 @@ export const contactFormReducer = (state = {}, action) => {
         payload: action.payload,
       };
     case CONTACT_FORM_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        payload: action.payload,
+      };
     case CONTACT_FORM_RESET:
       return {};
     default:

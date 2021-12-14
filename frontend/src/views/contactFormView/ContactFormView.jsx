@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { contactFormMessageAction } from '../../store/actions/contactFormActions';
+import { CONTACT_FORM_RESET } from '../../store/constants/contactFormConstants';
 import './ContactFormView.scss';
+
 import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
+import Message from '../../components/message/Message';
 
 const ContactFormView = ({ type }) => {
   const dispatch = useDispatch();
@@ -15,6 +18,13 @@ const ContactFormView = ({ type }) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
+  useEffect(() => {
+    dispatch({ type: CONTACT_FORM_RESET });
+    return () => {
+      console.log('cleanup');
+    };
+  }, [dispatch]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Call action creator function
@@ -24,8 +34,23 @@ const ContactFormView = ({ type }) => {
     setMessage('');
   };
 
+  const closeHandler = () => {
+    //Dispatch CONTACT_FORM_RESET
+    dispatch({ type: CONTACT_FORM_RESET });
+  };
+
   return (
     <>
+      {success ? (
+        <Message
+          message={payload.message}
+          success={success}
+          onClick={closeHandler}
+        />
+      ) : (
+        <Message message={payload} success={success} onClick={closeHandler} />
+      )}
+
       {loading ? (
         <LoadingSpinner />
       ) : (

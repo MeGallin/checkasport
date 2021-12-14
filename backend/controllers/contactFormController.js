@@ -10,9 +10,14 @@ const sendContactForm = asyncHandler(async (req, res, next) => {
 
   if ((name, email, message)) {
     res.status(201).json({
-      message: 'Contact form sent successfully',
+      message: 'Contact form sent successfully.',
     });
     // nodemailer stuff to follow
+  } else {
+    res.status(400).json({
+      message: 'There was an error sending your form. Please try again.',
+    });
+    throw new Error('Contact FORM error');
   }
 });
 
