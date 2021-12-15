@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import './InputField.scss';
 import PropTypes from 'prop-types';
 
@@ -12,11 +12,19 @@ const InputField = ({
   className,
   onChange,
 }) => {
+  const inputFocus = useRef(null);
+
+  useEffect(() => {
+    if (inputFocus.current.type === 'text') {
+      inputFocus.current.focus();
+    }
+  }, []);
+
   return (
     <div className="input-field-wrapper">
       {label && <label htmlFor="input-field">{label}</label>}
       <input
-        className="input-field"
+        ref={inputFocus}
         type={type}
         name={name}
         value={value}
