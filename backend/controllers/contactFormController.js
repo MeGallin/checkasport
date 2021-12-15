@@ -17,7 +17,6 @@ const sendContactForm = asyncHandler(async (req, res, next) => {
     res.status(400).json({
       message: 'There was an error sending your form. Please try again.',
     });
-    throw new Error('Contact FORM error');
   }
 });
 

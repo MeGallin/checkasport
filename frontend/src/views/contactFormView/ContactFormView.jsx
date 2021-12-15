@@ -92,8 +92,8 @@ const ContactFormView = ({ type }) => {
                 Message{' '}
                 {message.length >= 10 ? null : (
                   <span className="small-text-message">
-                    You need enter at least 10 characters and currently you have
-                    entered {message.length}
+                    Requires a minimum of 10 characters and currently there are{' '}
+                    {message.length}
                   </span>
                 )}
                 <textarea
@@ -104,11 +104,11 @@ const ContactFormView = ({ type }) => {
                 />
               </label>
             </div>
-            {nameRegEx.test(name) ||
-            emailRegEx.test(email) ||
-            message.length > 10 ? (
+            {nameRegEx.test(name) &&
+            emailRegEx.test(email) &&
+            message.length >= 10 ? (
               <span className="small-text-message">
-                You form is now valid and can be submitted.
+                The form is now valid and can be submitted.
               </span>
             ) : null}
             <Button

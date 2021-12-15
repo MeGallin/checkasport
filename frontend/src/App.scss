@@ -11,6 +11,5 @@ $grid__bp-md: 1280;
   }
 }
 .content-wrapper {
-  @include border-all(1px, solid, $light-orange);
   min-height: calc(100vh - #{$header-height + $footer-height});
 }
