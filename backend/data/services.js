@@ -1,7 +1,7 @@
 const services = [
   {
-    name: 'Zacharias Frankgou',
-    image: '/images/airpods.jpg',
+    name: 'Zacharias Frangou',
+    image: '/images/man.png',
     description:
       'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
     brand: 'Apple',
@@ -12,8 +12,8 @@ const services = [
     numReviews: 12,
   },
   {
-    name: 'iPhone 11 Pro 256GB Memory',
-    image: '/images/phone.jpg',
+    name: 'Tom Jones',
+    image: '/images/man.png',
     description:
       'Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
     brand: 'Apple',
@@ -24,8 +24,8 @@ const services = [
     numReviews: 8,
   },
   {
-    name: 'Cannon EOS 80D DSLR Camera',
-    image: '/images/camera.jpg',
+    name: 'Di Nyamite',
+    image: '/images/man.png',
     description:
       'Characterized by versatile imaging specs, the Canon EOS 80D further clarifies itself using a pair of robust focusing systems and an intuitive design',
     brand: 'Cannon',
@@ -36,8 +36,8 @@ const services = [
     numReviews: 12,
   },
   {
-    name: 'Sony Playstation 4 Pro White Version',
-    image: '/images/playstation.jpg',
+    name: 'Sue Perb',
+    image: '/images/man.png',
     description:
       'The ultimate home entertainment center starts with PlayStation. Whether you are into gaming, HD movies, television, music',
     brand: 'Sony',
@@ -48,8 +48,8 @@ const services = [
     numReviews: 12,
   },
   {
-    name: 'Logitech G-Series Gaming Mouse',
-    image: '/images/mouse.jpg',
+    name: 'Godfree Atheist',
+    image: '/images/man.png',
     description:
       'Get a better handle on your games with this Logitech LIGHTSYNC gaming mouse. The six programmable buttons allow customization for a smooth playing experience',
     brand: 'Logitech',
@@ -60,8 +60,8 @@ const services = [
     numReviews: 10,
   },
   {
-    name: 'Amazon Echo Dot 3rd Generation',
-    image: '/images/alexa.jpg',
+    name: 'Johnny Bravo',
+    image: '/images/man.png',
     description:
       'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
     brand: 'Amazon',
@@ -73,4 +73,4 @@ const services = [
   },
 ];
 
-export default products;
+export default services;
