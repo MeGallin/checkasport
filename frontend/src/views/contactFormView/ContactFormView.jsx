@@ -37,7 +37,7 @@ const ContactFormView = ({ type }) => {
     setMessage('');
   };
 
-  const closeHandler = () => {
+  const closeMessageHandler = () => {
     //Dispatch CONTACT_FORM_RESET
     dispatch({ type: CONTACT_FORM_RESET });
   };
@@ -48,10 +48,14 @@ const ContactFormView = ({ type }) => {
         <Message
           message={payload.message}
           success={success}
-          onClick={closeHandler}
+          onClick={closeMessageHandler}
         />
       ) : (
-        <Message message={payload} success={success} onClick={closeHandler} />
+        <Message
+          message={payload}
+          success={success}
+          onClick={closeMessageHandler}
+        />
       )}
 
       {loading ? (
