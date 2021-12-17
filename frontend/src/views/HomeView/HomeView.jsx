@@ -5,6 +5,7 @@ import './HomeView.scss';
 
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import Message from '../../components/message/Message';
+import Card from '../../components/card/Card';
 
 const HomeView = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const HomeView = () => {
   }, [dispatch]);
 
   const servicesList = useSelector((state) => state.servicesList);
-  const { loading, success, error, services } = servicesList;
+  const { loading, error, services } = servicesList;
 
   const closeMessageHandler = () => {
     dispatch(listServicesAction());
@@ -26,13 +27,21 @@ const HomeView = () => {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="home-view">
+        <div className="home-view ">
           <h1>Services</h1>
-          {services?.map((service) => (
-            <>
-              <div>{service.name}</div>
-            </>
-          ))}
+          <div className="card-wrapper">
+            {services?.map((service) => (
+              <div key={service.id}>
+                <Card
+                  className="card"
+                  name={service.name + service.id}
+                  src={service.image}
+                  alt={service.name}
+                  description={service.description}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </>

@@ -1,0 +1,11 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+
+.card {
+  @include border-all(1px, solid, $light-orange);
+
+  .card-img {
+    width: 120px;
+    height: 120px;
+  }
+}
