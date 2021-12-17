@@ -11,5 +11,6 @@ $grid__bp-md: 1280;
   }
 }
 .content-wrapper {
-  min-height: calc(100vh - #{$header-height + $footer-height});
+  height: calc(100vh - #{$header-height + $footer-height});
+  overflow-y: auto;
 }

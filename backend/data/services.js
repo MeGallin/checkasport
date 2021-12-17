@@ -1,5 +1,6 @@
 const services = [
   {
+    id: 1,
     name: 'Zacharias Frangou',
     image: '/images/man.png',
     description:
@@ -12,8 +13,9 @@ const services = [
     numReviews: 12,
   },
   {
+    id: 2,
     name: 'Tom Jones',
-    image: '/images/man.png',
+    image: '/images/avatar.png',
     description:
       'Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
     brand: 'Apple',
@@ -24,6 +26,7 @@ const services = [
     numReviews: 8,
   },
   {
+    id: 3,
     name: 'Di Nyamite',
     image: '/images/man.png',
     description:
@@ -36,8 +39,9 @@ const services = [
     numReviews: 12,
   },
   {
+    id: 4,
     name: 'Sue Perb',
-    image: '/images/man.png',
+    image: '/images/avatar.png',
     description:
       'The ultimate home entertainment center starts with PlayStation. Whether you are into gaming, HD movies, television, music',
     brand: 'Sony',
@@ -48,6 +52,7 @@ const services = [
     numReviews: 12,
   },
   {
+    id: 5,
     name: 'Godfree Atheist',
     image: '/images/man.png',
     description:
@@ -60,7 +65,21 @@ const services = [
     numReviews: 10,
   },
   {
+    id: 6,
     name: 'Johnny Bravo',
+    image: '/images/avatar.png',
+    description:
+      'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
+    brand: 'Amazon',
+    category: 'Electronics',
+    price: 29.99,
+    countInStock: 0,
+    rating: 4,
+    numReviews: 12,
+  },
+  {
+    id: 7,
+    name: 'Mario Mario',
     image: '/images/man.png',
     description:
       'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
