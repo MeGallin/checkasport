@@ -1,6 +1,6 @@
 const services = [
   {
-    id: 1,
+    _id: 1,
     name: 'Zacharias Frangou',
     image: '/images/man.png',
     description:
@@ -13,7 +13,7 @@ const services = [
     numReviews: 12,
   },
   {
-    id: 2,
+    _id: 2,
     name: 'Tom Jones',
     image: '/images/avatar.png',
     description:
@@ -26,7 +26,7 @@ const services = [
     numReviews: 8,
   },
   {
-    id: 3,
+    _id: 3,
     name: 'Di Nyamite',
     image: '/images/man.png',
     description:
@@ -39,7 +39,7 @@ const services = [
     numReviews: 12,
   },
   {
-    id: 4,
+    _id: 4,
     name: 'Sue Perb',
     image: '/images/avatar.png',
     description:
@@ -52,7 +52,7 @@ const services = [
     numReviews: 12,
   },
   {
-    id: 5,
+    _id: 5,
     name: 'Godfree Atheist',
     image: '/images/man.png',
     description:
@@ -65,7 +65,7 @@ const services = [
     numReviews: 10,
   },
   {
-    id: 6,
+    _id: 6,
     name: 'Johnny Bravo',
     image: '/images/avatar.png',
     description:
@@ -78,7 +78,7 @@ const services = [
     numReviews: 12,
   },
   {
-    id: 7,
+    _id: 7,
     name: 'Mario Mario',
     image: '/images/man.png',
     description:

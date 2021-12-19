@@ -1,4 +1,5 @@
 import express from 'express';
+import connectDB from './config/bd.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
@@ -6,7 +7,9 @@ import contactFormRoutes from './routes/contactFormRoutes.js';
 import servicesRoutes from './routes/servicesRoutes.js';
 
 dotenv.config();
+connectDB();
 const app = express();
+
 app.get('/', (req, res) => {
   res.send('API is running');
 });
