@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import contactFormRoutes from './routes/contactFormRoutes.js';
 import servicesRoutes from './routes/servicesRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
 connectDB();
@@ -21,6 +22,11 @@ app.use(express.json()); // This needed to accept json data
 app.use('/', contactFormRoutes);
 app.use('/', servicesRoutes);
 app.use('/', userRoutes);
+
+// @Error handling middleware
+app.use(notFound);
+app.use(errorHandler);
+// @Error handling middleware
 
 const PORT = process.env.PORT || 5000;
 
