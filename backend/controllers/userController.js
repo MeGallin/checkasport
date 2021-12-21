@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
 import User from '../models/userModel.js';
+import nodemailer from 'nodemailer';
 
 // @description: Authenticate a user and get a token
 // @route: POST /api/users/login
@@ -49,9 +50,53 @@ const registerUser = asyncHandler(async (req, res) => {
       isConfirmed: user.isConfirmed,
       token: generateToken(user._id),
     });
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      host: process.env.MAILER_HOST,
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.MAILER_USER,
+        pass: process.env.MAILER_PW,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
+
+    const link = `${
+      process.env.MAILER_LOCAL_URL
+    }api/verify/token=${generateToken(user._id)}`;
+
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: '"Info Check-A-Sport" <info@trilogywebsolutions.co.uk>', // sender address
+      to: `${user.email}`, // list of receivers
+      bcc: 'me@garyallin.uk',
+      subject: 'Check-A-Sport Registration', // Subject line
+      text: 'Check-A-Sport Registration', // plain text body
+      html: `
+      <h1>Hi ${user.name}</h1>
+      <p>You have successfully registered with Check-A-Sport</p>
+      <p>Please Click on the link to verify your email.</p>
+      <br>
+      <h4>Please note, in order to get full functionality you must confirm your mail address with the link below.</h4>
+      <p><a href=${link} id='link'>Click here to verify</a></p>
+      <p>Thank you Check-A-Sport management</p>
+          
+       
+      `, // html body
+    });
+
+    console.log('Message sent: %s', info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+    // Preview only available when sending through an Ethereal account
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   } else {
     res.status(400);
-    throw new Error('Ivqlid user data');
+    throw new Error('Invalid user data');
   }
 });
 
