@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import contactFormRoutes from './routes/contactFormRoutes.js';
 import servicesRoutes from './routes/servicesRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import confirmEmailRoutes from './routes/confirmEmailRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(cors());
 app.use(express.json()); // This needed to accept json data
 
 //Routes
+app.use('/', confirmEmailRoutes);
 app.use('/', contactFormRoutes);
 app.use('/', servicesRoutes);
 app.use('/', userRoutes);
