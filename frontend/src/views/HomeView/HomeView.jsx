@@ -31,7 +31,7 @@ const HomeView = () => {
           <h1>Services</h1>
           <div className="card-wrapper">
             {services?.map((service) => (
-              <div key={service.id}>
+              <div key={service._id}>
                 <Card
                   className="card"
                   name={service.name + service.id}

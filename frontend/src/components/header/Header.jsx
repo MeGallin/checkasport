@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './Header.scss';
+import LinkComp from '../linkComp/LinkComp';
 import Button from '../../components/button/Button';
 import { logoutAction } from '../../store/actions/userActions';
 
@@ -16,20 +17,29 @@ const Header = () => {
 
   return (
     <header>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/contact">Contact Us</Link>
-        {userInfo ? (
-          <Button
-            colour="primary"
-            text="logout"
-            className="btn"
-            onClick={handleLogout}
-            disabled={false}
-          />
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
+      <nav className="nav-wrapper">
+        <div>
+          <Link to="/">Home</Link>
+          <Link to="/contact">Contact</Link>
+        </div>
+
+        <div>
+          {userInfo ? (
+            <Button
+              colour="primary"
+              text="logout"
+              className="btn"
+              onClick={handleLogout}
+              disabled={false}
+            />
+          ) : (
+            <>
+              <LinkComp route="login" routeName="Login" />
+              or
+              <LinkComp route="registration" routeName="Register" />
+            </>
+          )}
+        </div>
       </nav>
     </header>
   );

@@ -6,6 +6,7 @@ import HomeView from './views/HomeView/HomeView';
 import ContactFormView from './views/contactFormView/ContactFormView';
 import LoginFormView from './views/loginFormView/LoginFormView';
 import ErrorView from './views/errorView/ErrorView';
+import RegistrationView from './views/registrationView/RegistrationView';
 
 // Change the display width by removing the --fluid after the container class
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/" element={<HomeView />} exact />
             <Route path="/contact" element={<ContactFormView />} />
             <Route path="/login" element={<LoginFormView />} />
+            <Route path="/registration" element={<RegistrationView />} />
             <Route path="*" element={<ErrorView />} />
           </Routes>
         </div>
