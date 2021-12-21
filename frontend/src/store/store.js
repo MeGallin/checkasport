@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { contactFormReducer } from './reducers/contactFormReducers';
 import { servicesListReducer } from './reducers/servicesReducers';
+import { userLoginReducer } from './reducers/userReducers';
 
 const reducer = combineReducers({
   servicesList: servicesListReducer,
   contactForm: contactFormReducer,
+  userLogin: userLoginReducer,
 });
 
 const middleware = [thunk];
