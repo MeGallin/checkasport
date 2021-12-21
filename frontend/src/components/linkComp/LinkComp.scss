@@ -1,0 +1,11 @@
+@import '../../index.scss';
+
+.link-comp {
+  opacity: 0.8;
+  color: $link-colour;
+
+  &.link-comp:hover {
+    opacity: 1;
+    transition: opacity 0.6s ease-in-out;
+  }
+}
