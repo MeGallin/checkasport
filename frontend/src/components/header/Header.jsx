@@ -25,13 +25,16 @@ const Header = () => {
 
         <div>
           {userInfo ? (
-            <Button
-              colour="primary"
-              text="logout"
-              className="btn"
-              onClick={handleLogout}
-              disabled={false}
-            />
+            <div className="user-info-wrapper">
+              <Button
+                colour="primary"
+                text="logout"
+                className="btn"
+                onClick={handleLogout}
+                disabled={false}
+              />
+              <LinkComp route="profile" routeName="Profile" />
+            </div>
           ) : (
             <>
               <LinkComp route="login" routeName="Login" />

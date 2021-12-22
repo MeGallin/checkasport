@@ -6,6 +6,8 @@ import { servicesListReducer } from './reducers/servicesReducers';
 import {
   userLoginReducer,
   userRegistrationReducer,
+  userDetailsReducer,
+  userUpdateProfileReducer,
 } from './reducers/userReducers';
 
 const reducer = combineReducers({
@@ -13,11 +15,19 @@ const reducer = combineReducers({
   contactForm: contactFormReducer,
   userLogin: userLoginReducer,
   userRegistration: userRegistrationReducer,
+  userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer,
 });
+
+const userInfoFromStorage = localStorage.getItem('userInfo')
+  ? JSON.parse(localStorage.getItem('userInfo'))
+  : null;
 
 const middleware = [thunk];
 
-const initialState = {};
+const initialState = {
+  userLogin: { userInfo: userInfoFromStorage },
+};
 
 const store = createStore(
   reducer,
