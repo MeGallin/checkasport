@@ -28,11 +28,15 @@ const ProfileView = () => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  console.log(user);
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const userUpdatedProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdatedProfile;
+
+  console.log(success);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -44,6 +48,12 @@ const ProfileView = () => {
     if (!userInfo) {
       navigate('/login');
     } else {
+      if (user.isConfirmed === false) {
+        setMessage(
+          'In oder to update you profile you will need to confirm your email address. This can be done by referring back to the email you received when you first registered.',
+        );
+      }
+
       if (!user || !user.name || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetailsAction('profile'));
@@ -65,9 +75,16 @@ const ProfileView = () => {
       setMessage('Passwords do not match');
     } else {
       // Dispatch UPDATED PROFILE
-      dispatch(
-        updateUserProfileAction({ id: user._id, name, email, password }),
-      );
+      if (user.isConfirmed === true) {
+        dispatch(
+          updateUserProfileAction({ id: user._id, name, email, password }),
+        );
+        navigate('/');
+      } else {
+        setMessage(
+          'You have not yet confirmed your email. Please check you emails.',
+        );
+      }
     }
   };
 
@@ -153,11 +170,13 @@ const ProfileView = () => {
               colour="transparent"
               text="submit"
               className="btn"
+              title={!user.isConfirmed ? 'User must be confirmed' : null}
               disabled={
                 !nameRegEx.test(name) ||
                 !passwordRegEx.test(password) ||
                 !passwordConfirmRegEx.test(confirmPassword) ||
-                !emailRegEx.test(email)
+                !emailRegEx.test(email) ||
+                !user.isConfirmed
               }
             ></Button>
           </form>
