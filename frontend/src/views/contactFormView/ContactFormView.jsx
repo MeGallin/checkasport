@@ -63,7 +63,7 @@ const ContactFormView = ({ type }) => {
       ) : (
         <div className="contact-form-view-wrapper">
           <fieldset className="fieldSet">
-            <legend>Login form</legend>
+            <legend>Contact form</legend>
             <form onSubmit={handleSubmit}>
               <InputField
                 label="Name"

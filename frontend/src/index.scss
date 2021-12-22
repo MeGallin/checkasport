@@ -128,18 +128,19 @@ fieldset.fieldSet {
   border: 1px solid $border-colour;
   background-color: rgba(51, 51, 51, 0.6);
 }
+
 /* SCROLL-BAR CUSTOM STYLING */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: $main-bg-colour;
-}
-::-webkit-scrollbar-thumb {
-  background: $main-font-colour;
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: $border-colour;
-}
+// ::-webkit-scrollbar {
+//   width: 10px;
+// }
+// ::-webkit-scrollbar-track {
+//   background: $main-bg-colour;
+// }
+// ::-webkit-scrollbar-thumb {
+//   background: $main-font-colour;
+//   border-radius: 10px;
+// }
+// ::-webkit-scrollbar-thumb:hover {
+//   background: $border-colour;
+// }
 /* SCROLL-BAR CUSTOM STYLING */
