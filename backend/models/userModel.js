@@ -26,6 +26,14 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    description: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
