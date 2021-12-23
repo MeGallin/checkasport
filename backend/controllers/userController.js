@@ -3,6 +3,19 @@ import generateToken from '../utils/generateToken.js';
 import User from '../models/userModel.js';
 import nodemailer from 'nodemailer';
 
+// @description: Get All the users Profiles
+// @route: GET /api/users
+// @access: Public
+const getAllUsersProfile = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  if (users) {
+    res.json(users);
+  } else {
+    res.status(404);
+    throw new Error('No users found');
+  }
+});
+
 // @description: Authenticate a user and get a token
 // @route: POST /api/users/login
 // @access: Public
@@ -124,14 +137,16 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @access: PRIVATE
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
+
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
+    user.description = req.body.description || user.description;
+    user.location = req.body.location || user.location;
 
     if (req.body.password) {
       user.password = req.body.password;
     }
-
     const updatedUser = await user.save();
 
     res.json({
@@ -139,6 +154,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
+      description: updatedUser.description,
+      location: updatedUser.location,
       token: generateToken(updatedUser._id),
     });
   } else {
@@ -147,4 +164,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile, registerUser, updateUserProfile };
+export {
+  authUser,
+  getUserProfile,
+  registerUser,
+  updateUserProfile,
+  getAllUsersProfile,
+};
