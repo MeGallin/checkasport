@@ -149,7 +149,7 @@ const ProfileView = () => {
                   type="text"
                   name="description"
                   className={
-                    description.length < 10 ? 'description invalid' : 'entered'
+                    description?.length < 10 ? 'description invalid' : 'entered'
                   }
                 />
               </label>
@@ -164,7 +164,7 @@ const ProfileView = () => {
                   type="text"
                   name="location"
                   className={
-                    location.length < 10 ? 'location invalid' : 'entered'
+                    location?.length < 10 ? 'location invalid' : 'entered'
                   }
                 />
               </label>
