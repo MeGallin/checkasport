@@ -7,6 +7,10 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_PROFILE_FAILURE,
+  USER_PROFILE_REQUEST,
+  USER_PROFILE_RESET,
+  USER_PROFILE_SUCCESS,
   USER_REGISTER_FAILURE,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -82,6 +86,25 @@ export const userUpdateProfileReducer = (state = {}, action) => {
     case USER_UPDATE_PROFILE_RESET:
       return { userInfo: {} };
 
+    default:
+      return { ...state };
+  }
+};
+
+export const userProfilesReducer = (state = { profiles: [] }, action) => {
+  switch (action.type) {
+    case USER_PROFILE_REQUEST:
+      return { ...state, loading: true };
+    case USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        profiles: action.payload,
+      };
+    case USER_PROFILE_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case USER_PROFILE_RESET:
+      return { profiles: [] };
     default:
       return { ...state };
   }

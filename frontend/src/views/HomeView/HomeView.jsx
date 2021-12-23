@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listServicesAction } from '../../store/actions/servicesActions';
+import { userProfilesAction } from '../../store/actions/userActions';
 import './HomeView.scss';
 
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
@@ -11,14 +11,14 @@ const HomeView = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(listServicesAction());
+    dispatch(userProfilesAction());
   }, [dispatch]);
 
-  const servicesList = useSelector((state) => state.servicesList);
-  const { loading, error, services } = servicesList;
+  const userProfiles = useSelector((state) => state.userProfiles);
+  const { loading, error, profiles } = userProfiles;
 
   const closeMessageHandler = () => {
-    dispatch(listServicesAction());
+    alert('WIP');
   };
 
   return (
@@ -30,14 +30,16 @@ const HomeView = () => {
         <div className="home-view ">
           <h1>Services</h1>
           <div className="card-wrapper">
-            {services?.map((service) => (
-              <div key={service._id}>
+            {profiles?.map((profile) => (
+              <div key={profile._id}>
                 <Card
                   className="card"
-                  name={service.name + service.id}
-                  src={service.image}
-                  alt={service.name}
-                  description={service.description}
+                  name={profile.name}
+                  src={profile.image}
+                  alt={profile.name}
+                  description={profile.description}
+                  location={profile.location}
+                  email={profile.email}
                 />
               </div>
             ))}
