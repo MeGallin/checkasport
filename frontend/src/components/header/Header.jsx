@@ -33,7 +33,10 @@ const Header = () => {
                 onClick={handleLogout}
                 disabled={false}
               />
-              <LinkComp route="profile" routeName="Profile" />
+              <div className="header-profile-wrapper">
+                <span>{userInfo.name}</span>
+                <LinkComp route="profile" routeName="Profile" />
+              </div>
             </div>
           ) : (
             <>

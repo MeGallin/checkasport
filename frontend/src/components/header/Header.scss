@@ -19,4 +19,13 @@ header {
       align-items: center;
     }
   }
+  .header-profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .header-profile-wrapper span {
+    color: $light-orange;
+    font-size: 0.6rem;
+  }
 }

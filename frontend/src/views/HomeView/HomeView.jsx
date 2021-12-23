@@ -17,6 +17,8 @@ const HomeView = () => {
   const userProfiles = useSelector((state) => state.userProfiles);
   const { loading, error, profiles } = userProfiles;
 
+  console.log('Home Comp', profiles);
+
   const closeMessageHandler = () => {
     alert('WIP');
   };
@@ -30,19 +32,21 @@ const HomeView = () => {
         <div className="home-view ">
           <h1>Services</h1>
           <div className="card-wrapper">
-            {profiles?.map((profile) => (
-              <div key={profile._id}>
-                <Card
-                  className="card"
-                  name={profile.name}
-                  src={profile.image}
-                  alt={profile.name}
-                  description={profile.description}
-                  location={profile.location}
-                  email={profile.email}
-                />
-              </div>
-            ))}
+            {profiles?.map((profile) => {
+              return !profile.isAdmin ? (
+                <div key={profile._id}>
+                  <Card
+                    className="card"
+                    name={profile.name}
+                    src={profile.image}
+                    alt={profile.name}
+                    description={profile.description}
+                    location={profile.location}
+                    email={profile.email}
+                  />
+                </div>
+              ) : null;
+            })}
           </div>
         </div>
       )}
