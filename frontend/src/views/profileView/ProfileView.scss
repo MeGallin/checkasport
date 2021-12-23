@@ -2,4 +2,10 @@
 @import '../../scssMixIn.scss';
 
 .profile-view-wrapper {
+  textarea.location {
+    min-height: 30px;
+  }
+  textarea.description {
+    min-height: 30px;
+  }
 }
