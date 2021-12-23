@@ -148,11 +148,11 @@ textarea {
 }
 textarea.invalid {
   border-left: $secondary-bg-colour 4px solid;
-  min-height: 250px;
+  min-height: 50px;
 }
 textarea.entered {
   border-left: greenyellow 4px solid;
-  min-height: 250px;
+  min-height: 50px;
 }
 
 /* SCROLL-BAR CUSTOM STYLING */

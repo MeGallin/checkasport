@@ -28,20 +28,17 @@ const ProfileView = () => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
-  console.log(user);
-
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const userUpdatedProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdatedProfile;
 
-  console.log(userUpdatedProfile);
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
@@ -62,6 +59,8 @@ const ProfileView = () => {
       } else {
         setName(user.name);
         setEmail(user.email);
+        setDescription(userInfo.description);
+        setLocation(userInfo.location);
       }
     }
   }, [dispatch, navigate, user, userInfo, success]);
@@ -171,40 +170,56 @@ const ProfileView = () => {
               </label>
             </div>
 
-            <InputField
-              label="Password"
-              type="password"
-              name={password}
-              value={password}
-              required
-              className={!passwordRegEx.test(password) ? 'invalid' : 'entered'}
-              error={
-                !passwordRegEx.test(password) && password.length !== 0
-                  ? `Password must contain at least 1 uppercase letter and a number`
-                  : null
-              }
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <label>
+              <input
+                type="checkbox"
+                defaultChecked={!hidePassword}
+                onChange={() => setHidePassword(!hidePassword)}
+              />
+              {!hidePassword
+                ? 'Hide Password Settings'
+                : 'Show Password Settings'}
+            </label>
+            {!hidePassword ? (
+              <div>
+                <InputField
+                  label="Password"
+                  type="password"
+                  name={password}
+                  value={password}
+                  required
+                  className={
+                    !passwordRegEx.test(password) ? 'invalid' : 'entered'
+                  }
+                  error={
+                    !passwordRegEx.test(password) && password.length !== 0
+                      ? `Password must contain at least 1 uppercase letter and a number`
+                      : null
+                  }
+                  onChange={(e) => setPassword(e.target.value)}
+                />
 
-            <InputField
-              label="Confirm Password"
-              type="password"
-              name={confirmPassword}
-              value={confirmPassword}
-              required
-              className={
-                !passwordConfirmRegEx.test(confirmPassword)
-                  ? 'invalid'
-                  : 'entered'
-              }
-              error={
-                !passwordConfirmRegEx.test(confirmPassword) &&
-                confirmPassword.length !== 0
-                  ? `Password must contain at least 1 uppercase letter and a number`
-                  : null
-              }
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+                <InputField
+                  label="Confirm Password"
+                  type="password"
+                  name={confirmPassword}
+                  value={confirmPassword}
+                  required
+                  className={
+                    !passwordConfirmRegEx.test(confirmPassword)
+                      ? 'invalid'
+                      : 'entered'
+                  }
+                  error={
+                    !passwordConfirmRegEx.test(confirmPassword) &&
+                    confirmPassword.length !== 0
+                      ? `Password must contain at least 1 uppercase letter and a number`
+                      : null
+                  }
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </div>
+            ) : null}
 
             <Button
               colour="transparent"
