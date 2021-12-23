@@ -36,13 +36,15 @@ const ProfileView = () => {
   const userUpdatedProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdatedProfile;
 
-  console.log(success);
+  console.log(userUpdatedProfile);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState('');
+  const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
 
   useEffect(() => {
     if (!userInfo) {
@@ -77,7 +79,14 @@ const ProfileView = () => {
       // Dispatch UPDATED PROFILE
       if (user.isConfirmed === true) {
         dispatch(
-          updateUserProfileAction({ id: user._id, name, email, password }),
+          updateUserProfileAction({
+            id: user._id,
+            name,
+            email,
+            description,
+            location,
+            password,
+          }),
         );
         navigate('/');
       } else {
@@ -131,6 +140,37 @@ const ProfileView = () => {
                   : null
               }
             />
+
+            <div>
+              <label htmlFor="description">
+                Description
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  type="text"
+                  name="description"
+                  className={
+                    description.length < 10 ? 'description invalid' : 'entered'
+                  }
+                />
+              </label>
+            </div>
+
+            <div>
+              <label htmlFor="location">
+                Location
+                <textarea
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  type="text"
+                  name="location"
+                  className={
+                    location.length < 10 ? 'location invalid' : 'entered'
+                  }
+                />
+              </label>
+            </div>
+
             <InputField
               label="Password"
               type="password"
@@ -171,13 +211,7 @@ const ProfileView = () => {
               text="submit"
               className="btn"
               title={!user.isConfirmed ? 'User must be confirmed' : null}
-              disabled={
-                !nameRegEx.test(name) ||
-                !passwordRegEx.test(password) ||
-                !passwordConfirmRegEx.test(confirmPassword) ||
-                !emailRegEx.test(email) ||
-                !user.isConfirmed
-              }
+              disabled={!user.isConfirmed}
             ></Button>
           </form>
         </fieldset>
