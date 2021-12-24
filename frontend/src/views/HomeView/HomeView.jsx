@@ -33,13 +33,13 @@ const HomeView = () => {
     setKeyword(e.target.value);
   };
 
-  const closeMessageHandler = () => {
-    alert('WIP');
-  };
+  // const closeMessageHandler = () => {
+  //   alert('WIP');
+  // };
 
   return (
     <>
-      {error ? <Message message={error} onClick={closeMessageHandler} /> : null}
+      {error ? <Message message={error} /> : null}
 
       <div className="home-view ">
         <SearchInput
@@ -49,10 +49,9 @@ const HomeView = () => {
           value={keyword}
           handleSearch={handleSearch}
         />
-
+        {loading ? <LoadingSpinner /> : null}
         {keyword.length > 0 ? (
           <div className="card-wrapper">
-            {loading ? <LoadingSpinner /> : null}
             {searchedProfiles?.map((profile) => {
               return !profile.isAdmin ? (
                 <div key={profile._id}>

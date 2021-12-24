@@ -35,13 +35,9 @@ const LoginFormView = () => {
     dispatch(loginAction(email, password));
   };
 
-  const closeMessageHandler = () => {
-    alert('close');
-  };
-
   return (
     <div className="login-form-wrapper">
-      {error ? <Message message={error} onClick={closeMessageHandler} /> : null}
+      {error ? <Message message={error} /> : null}
       {loading ? (
         <LoadingSpinner />
       ) : (

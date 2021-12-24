@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Message.scss';
 
-const Message = ({ message, success, onClick }) => {
+const Message = ({ message, success }) => {
+  const [showMessage, setShowMessage] = useState(true);
+
   return (
     <>
-      {message ? (
+      {showMessage ? (
         <div className="message-wrapper">
           <div className={success ? 'success' : 'error'}>
             {message}
@@ -14,7 +16,7 @@ const Message = ({ message, success, onClick }) => {
                 className="fa fa-times"
                 aria-hidden="true"
                 title="close"
-                onClick={onClick}
+                onClick={() => setShowMessage(false)}
               ></i>
             </span>
           </div>
