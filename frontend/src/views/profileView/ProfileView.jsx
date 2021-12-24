@@ -15,12 +15,25 @@ import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 
 const ProfileView = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [hidePassword, setHidePassword] = useState(true);
+  const [message, setMessage] = useState('');
+  const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
+  const [telephoneNumber, setTelephoneNumber] = useState('');
+
+  console.log('STATE', telephoneNumber);
+
   const nameRegEx = /^([\w])+\s+([\w\s])+$/i;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
   const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
   const passwordConfirmRegEx =
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+  const telephoneNumberRegEx = /^(?:(?:00)?44|0)7(?:[45789]\d{2}|624)\d{6}$/;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,16 +54,7 @@ const ProfileView = () => {
     return profile._id === userInfo._id;
   });
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [hidePassword, setHidePassword] = useState(true);
-  const [message, setMessage] = useState('');
-  const [description, setDescription] = useState(
-    userProfileInfo[0]?.description,
-  );
-  const [location, setLocation] = useState(userProfileInfo[0]?.location);
+  console.log('GEREnated', userProfileInfo[0]?.telephoneNumber);
 
   useEffect(() => {
     if (!userInfo) {
@@ -70,9 +74,10 @@ const ProfileView = () => {
         setEmail(user.email);
         setDescription(userProfileInfo[0]?.description);
         setLocation(userProfileInfo[0]?.location);
+        setTelephoneNumber(userProfileInfo[0]?.telephoneNumber);
       }
     }
-  }, [dispatch, navigate, user, userInfo, success]);
+  }, [dispatch, navigate, user, userInfo, success, userProfileInfo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,6 +95,7 @@ const ProfileView = () => {
             description,
             location,
             password,
+            telephoneNumber,
           }),
         );
         navigate('/');
@@ -130,7 +136,7 @@ const ProfileView = () => {
             <InputField
               label="Email"
               type="email"
-              name={email}
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
@@ -170,6 +176,25 @@ const ProfileView = () => {
                 />
               </label>
             </div>
+
+            <InputField
+              label="Telephone Number"
+              type="tel"
+              name="telephoneNumber"
+              value={telephoneNumber}
+              onChange={(e) => setTelephoneNumber(e.target.value)}
+              className={
+                !telephoneNumberRegEx.test(telephoneNumber)
+                  ? 'invalid'
+                  : 'entered'
+              }
+              error={
+                !telephoneNumberRegEx.test(telephoneNumber) &&
+                telephoneNumber?.length !== 0
+                  ? `Invalid telephone Number.`
+                  : null
+              }
+            />
 
             <label>
               <input

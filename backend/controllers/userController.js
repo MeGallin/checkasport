@@ -143,6 +143,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.email = req.body.email || user.email;
     user.description = req.body.description || user.description;
     user.location = req.body.location || user.location;
+    user.telephoneNumber = req.body.telephoneNumber || user.telephoneNumber;
 
     if (req.body.password) {
       user.password = req.body.password;
@@ -156,6 +157,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       isAdmin: updatedUser.isAdmin,
       description: updatedUser.description,
       location: updatedUser.location,
+      telephoneNumber: updatedUser.telephoneNumber,
       token: generateToken(updatedUser._id),
     });
   } else {
