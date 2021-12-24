@@ -22,10 +22,13 @@ header {
   .header-profile-wrapper {
     display: flex;
     flex-direction: column;
-    text-align: center;
-  }
-  .header-profile-wrapper span {
-    color: $light-orange;
-    font-size: 0.6rem;
+    align-items: center;
+    i {
+    }
+    span {
+      font-size: 0.7em;
+      position: relative;
+      top: 2px;
+    }
   }
 }

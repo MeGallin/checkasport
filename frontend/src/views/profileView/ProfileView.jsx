@@ -34,14 +34,23 @@ const ProfileView = () => {
   const userUpdatedProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdatedProfile;
 
+  const userProfiles = useSelector((state) => state.userProfiles);
+  const { profiles } = userProfiles;
+
+  const userProfileInfo = profiles.filter((profile) => {
+    return profile._id === userInfo._id;
+  });
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState('');
-  const [description, setDescription] = useState('');
-  const [location, setLocation] = useState('');
+  const [description, setDescription] = useState(
+    userProfileInfo[0]?.description,
+  );
+  const [location, setLocation] = useState(userProfileInfo[0]?.location);
 
   useEffect(() => {
     if (!userInfo) {
@@ -59,8 +68,8 @@ const ProfileView = () => {
       } else {
         setName(user.name);
         setEmail(user.email);
-        setDescription(userInfo.description);
-        setLocation(userInfo.location);
+        setDescription(userProfileInfo[0]?.description);
+        setLocation(userProfileInfo[0]?.location);
       }
     }
   }, [dispatch, navigate, user, userInfo, success]);

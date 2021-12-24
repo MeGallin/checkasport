@@ -33,9 +33,15 @@ const Header = () => {
                 onClick={handleLogout}
                 disabled={false}
               />
+
               <div className="header-profile-wrapper">
-                <span>{userInfo.name}</span>
-                <LinkComp route="profile" routeName="Profile" />
+                <i
+                  className="fa fa-user"
+                  style={{ fontSize: 20 + 'px', color: 'rgba(92, 184, 92, 1)' }}
+                ></i>
+                <span>
+                  <LinkComp route="profile" routeName={userInfo.name} />
+                </span>
               </div>
             </div>
           ) : (
