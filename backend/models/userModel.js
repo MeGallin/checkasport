@@ -32,6 +32,9 @@ const userSchema = mongoose.Schema(
     location: {
       type: String,
     },
+    telephoneNumber: {
+      type: String,
+    },
   },
   {
     timestamps: true,

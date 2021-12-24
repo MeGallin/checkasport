@@ -21,6 +21,7 @@ const ProfileView = () => {
   const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
   const passwordConfirmRegEx =
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+  const telephoneNumberRegEx = /^(07[\d]{8,12}|447[\d]{7,11})$/;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const ProfileView = () => {
   const { profiles } = userProfiles;
 
   const userProfileInfo = profiles.filter((profile) => {
-    return profile._id === userInfo._id;
+    return profile?._id === userInfo?._id;
   });
 
   const [name, setName] = useState('');
@@ -48,9 +49,12 @@ const ProfileView = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState('');
   const [description, setDescription] = useState(
-    userProfileInfo[0]?.description,
+    userProfileInfo[0]?.description || '',
   );
-  const [location, setLocation] = useState(userProfileInfo[0]?.location);
+  const [location, setLocation] = useState(userProfileInfo[0]?.location || '');
+  const [telephoneNumber, setTelephoneNumber] = useState(
+    userProfileInfo[0]?.telephoneNumber || '',
+  );
 
   useEffect(() => {
     if (!userInfo) {
@@ -68,11 +72,26 @@ const ProfileView = () => {
       } else {
         setName(user.name);
         setEmail(user.email);
-        setDescription(userProfileInfo[0]?.description);
-        setLocation(userProfileInfo[0]?.location);
+        setDescription(description);
+        setLocation(location);
+        setTelephoneNumber(telephoneNumber);
       }
     }
-  }, [dispatch, navigate, user, userInfo, success]);
+    const abortConst = new AbortController();
+    return () => {
+      abortConst.abort();
+      console.log('useEffect cleaned');
+    };
+  }, [
+    dispatch,
+    navigate,
+    user,
+    userInfo,
+    success,
+    description,
+    location,
+    telephoneNumber,
+  ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,6 +109,7 @@ const ProfileView = () => {
             description,
             location,
             password,
+            telephoneNumber,
           }),
         );
         navigate('/');
@@ -130,7 +150,7 @@ const ProfileView = () => {
             <InputField
               label="Email"
               type="email"
-              name={email}
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
@@ -170,6 +190,25 @@ const ProfileView = () => {
                 />
               </label>
             </div>
+
+            <InputField
+              label="Telephone Number"
+              type="tel"
+              name="telephoneNumber"
+              value={telephoneNumber}
+              onChange={(e) => setTelephoneNumber(e.target.value)}
+              className={
+                !telephoneNumberRegEx.test(telephoneNumber)
+                  ? 'invalid'
+                  : 'entered'
+              }
+              error={
+                !telephoneNumberRegEx.test(telephoneNumber) &&
+                telephoneNumber?.length !== 0
+                  ? `Invalid telephone Number.`
+                  : null
+              }
+            />
 
             <label>
               <input
