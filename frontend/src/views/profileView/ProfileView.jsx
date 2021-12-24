@@ -15,25 +15,13 @@ import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 
 const ProfileView = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [hidePassword, setHidePassword] = useState(true);
-  const [message, setMessage] = useState('');
-  const [description, setDescription] = useState('');
-  const [location, setLocation] = useState('');
-  const [telephoneNumber, setTelephoneNumber] = useState('');
-
-  console.log('STATE', telephoneNumber);
-
   const nameRegEx = /^([\w])+\s+([\w\s])+$/i;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
   const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
   const passwordConfirmRegEx =
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
-  const telephoneNumberRegEx = /^(?:(?:00)?44|0)7(?:[45789]\d{2}|624)\d{6}$/;
+  const telephoneNumberRegEx = /^(07[\d]{8,12}|447[\d]{7,11})$/;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,10 +39,22 @@ const ProfileView = () => {
   const { profiles } = userProfiles;
 
   const userProfileInfo = profiles.filter((profile) => {
-    return profile._id === userInfo._id;
+    return profile?._id === userInfo?._id;
   });
 
-  console.log('GEREnated', userProfileInfo[0]?.telephoneNumber);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [hidePassword, setHidePassword] = useState(true);
+  const [message, setMessage] = useState('');
+  const [description, setDescription] = useState(
+    userProfileInfo[0]?.description || '',
+  );
+  const [location, setLocation] = useState(userProfileInfo[0]?.location || '');
+  const [telephoneNumber, setTelephoneNumber] = useState(
+    userProfileInfo[0]?.telephoneNumber || '',
+  );
 
   useEffect(() => {
     if (!userInfo) {
@@ -72,12 +72,26 @@ const ProfileView = () => {
       } else {
         setName(user.name);
         setEmail(user.email);
-        setDescription(userProfileInfo[0]?.description);
-        setLocation(userProfileInfo[0]?.location);
-        setTelephoneNumber(userProfileInfo[0]?.telephoneNumber);
+        setDescription(description);
+        setLocation(location);
+        setTelephoneNumber(telephoneNumber);
       }
     }
-  }, [dispatch, navigate, user, userInfo, success, userProfileInfo]);
+    const abortConst = new AbortController();
+    return () => {
+      abortConst.abort();
+      console.log('useEffect cleaned');
+    };
+  }, [
+    dispatch,
+    navigate,
+    user,
+    userInfo,
+    success,
+    description,
+    location,
+    telephoneNumber,
+  ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

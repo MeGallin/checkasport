@@ -63,6 +63,7 @@ const HomeView = () => {
                     description={profile.description}
                     location={profile.location}
                     email={profile.email}
+                    telephoneNumber={profile.telephoneNumber}
                   />
                 </div>
               ) : null;

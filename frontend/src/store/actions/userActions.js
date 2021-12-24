@@ -121,7 +121,6 @@ export const getUserDetailsAction = (id) => async (dispatch, getState) => {
 };
 
 export const updateUserProfileAction = (user) => async (dispatch, getState) => {
-  console.log(user);
   try {
     dispatch({
       type: USER_UPDATE_PROFILE_REQUEST,
