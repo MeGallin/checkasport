@@ -25,7 +25,7 @@ const LoginFormView = () => {
 
   useEffect(() => {
     if (userInfo && userInfo !== undefined) {
-      navigate('/');
+      navigate('/profile');
     }
   }, [userInfo, navigate]);
 
