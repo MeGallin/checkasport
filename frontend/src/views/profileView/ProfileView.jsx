@@ -65,10 +65,6 @@ const ProfileView = () => {
     }
   }, [dispatch, navigate, user, userInfo, success]);
 
-  const closeMessageHandler = () => {
-    alert('WIP');
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Contact form action
@@ -98,13 +94,9 @@ const ProfileView = () => {
 
   return (
     <div className="profile-view-wrapper">
-      {error ? <Message message={error} onClick={closeMessageHandler} /> : null}
-      {message ? (
-        <Message message={message} onClick={closeMessageHandler} />
-      ) : null}
-      {success ? (
-        <Message message={success} onClick={closeMessageHandler} />
-      ) : null}
+      {error ? <Message message={error} /> : null}
+      {message ? <Message message={message} /> : null}
+      {success ? <Message message={success} /> : null}
       {loading ? (
         <LoadingSpinner />
       ) : (

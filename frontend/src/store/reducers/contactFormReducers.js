@@ -20,7 +20,7 @@ export const contactFormReducer = (state = {}, action) => {
       return {
         ...state,
         loading: false,
-        success: false,
+        error: true,
         payload: action.payload,
       };
     case CONTACT_FORM_RESET:

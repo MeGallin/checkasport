@@ -15,7 +15,7 @@ const ContactFormView = ({ type }) => {
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
   const dispatch = useDispatch();
   const contactForm = useSelector((state) => state.contactForm);
-  const { loading, success, payload } = contactForm;
+  const { loading, success, error, payload } = contactForm;
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -37,26 +37,12 @@ const ContactFormView = ({ type }) => {
     setMessage('');
   };
 
-  const closeMessageHandler = () => {
-    //Dispatch CONTACT_FORM_RESET
-    dispatch({ type: CONTACT_FORM_RESET });
-  };
-
   return (
     <>
       {success ? (
-        <Message
-          message={payload.message}
-          success={success}
-          onClick={closeMessageHandler}
-        />
-      ) : (
-        <Message
-          message={payload}
-          success={success}
-          onClick={closeMessageHandler}
-        />
-      )}
+        <Message message="Form successfully submitted" success={success} />
+      ) : null}
+      {error ? <Message message={payload} error={error} /> : null}
 
       {loading ? (
         <LoadingSpinner />

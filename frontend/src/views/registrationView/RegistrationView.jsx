@@ -50,16 +50,10 @@ const RegistrationView = () => {
     }
   };
 
-  const closeMessageHandler = () => {
-    alert('close');
-  };
-
   return (
     <div className="registrationView-wrapper">
-      {error ? <Message message={error} onClick={closeMessageHandler} /> : null}
-      {message ? (
-        <Message message={message} onClick={closeMessageHandler} />
-      ) : null}
+      {error ? <Message message={error} /> : null}
+      {message ? <Message message={message} /> : null}
       {!userInfo && loading ? (
         <LoadingSpinner />
       ) : (
