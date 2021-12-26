@@ -20,10 +20,11 @@ const HomeView = () => {
   const { loading, error, profiles } = userProfiles;
 
   const searchedProfiles = profiles.filter((profile) => {
-    if (profile.description && profile.location) {
+    if (profile.name || profile.description || profile.location) {
+      const name = profile.name;
       const description = profile.description;
       const location = profile.location;
-      const search = description.concat(location);
+      const search = description.concat(...location, ...name);
       return search.toLowerCase().includes(keyword.toLowerCase());
     }
     return false;
@@ -33,9 +34,18 @@ const HomeView = () => {
     setKeyword(e.target.value);
   };
 
-  // const closeMessageHandler = () => {
-  //   alert('WIP');
-  // };
+  const highlightKeywordMatch = (current) => {
+    let reggie = new RegExp(keyword, 'ig');
+    let found = current.search(reggie) !== -1;
+    return !found
+      ? current
+      : current.replace(
+          reggie,
+          '<span style="color:rgba(92, 184, 92, 1); text-decoration:underline" >' +
+            keyword +
+            '</span>',
+        );
+  };
 
   return (
     <>
@@ -57,11 +67,29 @@ const HomeView = () => {
                 <div key={profile._id}>
                   <Card
                     className="card"
-                    name={profile.name}
+                    name={
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: highlightKeywordMatch(profile.name),
+                        }}
+                      ></span>
+                    }
                     src={profile.image}
                     alt={profile.name}
-                    description={profile.description}
-                    location={profile.location}
+                    description={
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: highlightKeywordMatch(profile.description),
+                        }}
+                      ></span>
+                    }
+                    location={
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: highlightKeywordMatch(profile.location),
+                        }}
+                      ></span>
+                    }
                     email={profile.email}
                     telephoneNumber={profile.telephoneNumber}
                   />
