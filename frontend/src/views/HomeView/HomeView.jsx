@@ -65,6 +65,7 @@ const HomeView = () => {
             {searchedProfiles?.map((profile) => {
               return !profile.isAdmin ? (
                 <div key={profile._id}>
+                  {console.log(profile?.image)}
                   <Card
                     className="card"
                     name={
@@ -74,7 +75,7 @@ const HomeView = () => {
                         }}
                       ></span>
                     }
-                    src={profile.image}
+                    src={`uploads/profiles/${profile.profileImage}`}
                     alt={profile.name}
                     description={
                       <span

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './ProfileView.scss';
 
+import axios from 'axios';
+
 import {
   getUserDetailsAction,
   updateUserProfileAction,
@@ -44,10 +46,15 @@ const ProfileView = () => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [profileImage, setProfileImage] = useState(
+    userProfileInfo[0]?.profileImage || '',
+  );
+  const [uploading, setUploading] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState('');
+
   const [description, setDescription] = useState(
     userProfileInfo[0]?.description || '',
   );
@@ -71,6 +78,7 @@ const ProfileView = () => {
         dispatch(getUserDetailsAction('profile'));
       } else {
         setName(user.name);
+        setProfileImage(profileImage);
         setEmail(user.email);
         setDescription(description);
         setLocation(location);
@@ -87,6 +95,7 @@ const ProfileView = () => {
     navigate,
     user,
     userInfo,
+    profileImage,
     success,
     description,
     location,
@@ -105,6 +114,7 @@ const ProfileView = () => {
           updateUserProfileAction({
             id: user._id,
             name,
+            profileImage,
             email,
             description,
             location,
@@ -118,6 +128,33 @@ const ProfileView = () => {
           'You have not yet confirmed your email. Please check you emails.',
         );
       }
+    }
+  };
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('profileImage', file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post(
+        'http://localhost:5000/api/profileUpload',
+        formData,
+        config,
+      );
+
+      setProfileImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.log(error);
+      setUploading(false);
     }
   };
 
@@ -146,7 +183,6 @@ const ProfileView = () => {
                   : null
               }
             />
-
             <InputField
               label="Email"
               type="email"
@@ -160,6 +196,15 @@ const ProfileView = () => {
                   : null
               }
             />
+            <InputField
+              label="Profile Image"
+              type="text"
+              name="profileImage"
+              value={profileImage}
+              onChange={(e) => setProfileImage(e.target.value)}
+            />
+            {uploading ? <LoadingSpinner /> : null}
+            <InputField type="file" name="files" onChange={uploadFileHandler} />
 
             <div>
               <label htmlFor="description">
@@ -175,7 +220,6 @@ const ProfileView = () => {
                 />
               </label>
             </div>
-
             <div>
               <label htmlFor="location">
                 Location
@@ -190,7 +234,6 @@ const ProfileView = () => {
                 />
               </label>
             </div>
-
             <InputField
               label="Telephone Number"
               type="tel"
@@ -209,7 +252,6 @@ const ProfileView = () => {
                   : null
               }
             />
-
             <label>
               <input
                 type="checkbox"
@@ -260,7 +302,6 @@ const ProfileView = () => {
                 />
               </div>
             ) : null}
-
             <Button
               colour="transparent"
               text="submit"
