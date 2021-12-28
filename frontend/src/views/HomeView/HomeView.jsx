@@ -65,7 +65,6 @@ const HomeView = () => {
             {searchedProfiles?.map((profile) => {
               return !profile.isAdmin ? (
                 <div key={profile._id}>
-                  {console.log(profile?.image)}
                   <Card
                     className="card"
                     name={
