@@ -141,6 +141,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
+    user.profileImage = req.body.profileImage || user.profileImage;
     user.description = req.body.description || user.description;
     user.location = req.body.location || user.location;
     user.telephoneNumber = req.body.telephoneNumber || user.telephoneNumber;
@@ -154,6 +155,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
+      profileImage: updatedUser.profileImage,
       isAdmin: updatedUser.isAdmin,
       description: updatedUser.description,
       location: updatedUser.location,
