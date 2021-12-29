@@ -168,10 +168,24 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: Fetch single Profile
+// @route: GET /api/user/profile/:id
+// @access: Public
+const getUserProfileById = asyncHandler(async (req, res) => {
+  const userProfile = await User.findById(req.params.id);
+  if (userProfile) {
+    res.json(userProfile);
+  } else {
+    res.status(404);
+    throw new Error('Profile not found');
+  }
+});
+
 export {
   authUser,
   getUserProfile,
   registerUser,
   updateUserProfile,
   getAllUsersProfile,
+  getUserProfileById,
 };
