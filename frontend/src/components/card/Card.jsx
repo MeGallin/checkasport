@@ -1,5 +1,6 @@
 import React from 'react';
 import './Card.scss';
+import { Link } from 'react-router-dom';
 
 const Card = ({
   name,
@@ -13,7 +14,10 @@ const Card = ({
   return (
     <div className="card" name={name} src={src} alt={alt}>
       <h4>{name}</h4>
-      <img className="card-profile-image" src={src} alt={alt} />
+      <Link to="/fullProfile">
+        <img className="card-profile-image" src={src} alt={alt} />
+      </Link>
+
       <h4>Description</h4>
       {description}
       <h4>Location</h4>
