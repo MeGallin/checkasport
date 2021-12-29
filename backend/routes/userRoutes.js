@@ -5,6 +5,7 @@ import {
   registerUser,
   updateUserProfile,
   getAllUsersProfile,
+  getUserProfileById,
 } from '../controllers/userController.js';
 
 import { protect, admin } from '../middleware/authMiddleware.js';
@@ -16,6 +17,8 @@ router
   .route('/api/users/profile')
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
+
+router.route('/api/user/profile/:id').get(getUserProfileById);
 
 router.route('/api/users').post(registerUser).get(getAllUsersProfile);
 
