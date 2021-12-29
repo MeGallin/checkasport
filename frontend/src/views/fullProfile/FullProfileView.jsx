@@ -1,11 +1,61 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import './FullProfileView.scss';
 
-const FullProfileView = ({ history, match }) => {
-  console.log(match);
-  console.log(history);
+import { userProfileByIdAction } from '../../store/actions/userActions';
+
+import Message from '../../components/message/Message';
+import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
+import LinkComp from '../../components/linkComp/LinkComp';
+
+const FullProfileView = () => {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+  useEffect(() => {
+    // Dispatch action with id
+    dispatch(userProfileByIdAction(id));
+    return () => {
+      console.log('Full Profile cleanup');
+    };
+  }, [dispatch, id]);
+
+  const userProfiles = useSelector((state) => state.userProfileById);
+  const { loading, error, profile } = userProfiles;
+
   return (
-    <div className="full-profile">Show full profile of each member per id:</div>
+    <div>
+      {error ? <Message message={error} /> : null}
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <LinkComp route="" routeName="GO BACK" />
+          <div className="full-profile-wrapper">
+            <div className="item">
+              <h1>{profile?.name}</h1>
+              <img
+                src={`../uploads/profiles/${profile?.profileImage}`}
+                alt={profile?.name}
+              />
+            </div>
+
+            <div className="item">
+              <h1>A little about me</h1>
+              <p>{profile?.description}</p>
+            </div>
+
+            <div className="item">
+              <h1>Contact Details</h1>
+              <p>{profile?.location}</p>
+              <p>Mobile number: {profile?.telephoneNumber}</p>
+              <p>email: {profile?.email}</p>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 

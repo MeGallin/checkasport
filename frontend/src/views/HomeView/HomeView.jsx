@@ -67,6 +67,7 @@ const HomeView = () => {
                 <div key={profile._id}>
                   <Card
                     className="card"
+                    id={profile._id}
                     name={
                       <span
                         dangerouslySetInnerHTML={{

@@ -3,6 +3,9 @@ import {
   USER_DETAILS_FAILURE,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
+  USER_FULL_DETAILS_BY_ID_FAILURE,
+  USER_FULL_DETAILS_BY_ID_REQUEST,
+  USER_FULL_DETAILS_BY_ID_SUCCESS,
   USER_LOGIN_FAILURE,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -169,6 +172,25 @@ export const userProfilesAction = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_PROFILE_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const userProfileByIdAction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_FULL_DETAILS_BY_ID_REQUEST });
+    const { data } = await axios.get(
+      `http://localhost:5000/api/user/profile/${id}`,
+    );
+
+    dispatch({ type: USER_FULL_DETAILS_BY_ID_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_FULL_DETAILS_BY_ID_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

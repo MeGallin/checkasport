@@ -1,5 +1,17 @@
 @import '../../index.scss';
 
-.full-profile {
-  background-color: $success;
+.full-profile-wrapper {
+  display: flex;
+
+  .item {
+    border: yellow 1px solid;
+    flex: 1; /*grow*/
+  }
+}
+
+@media (max-width: 768px) {
+  /*breakpoint*/
+  .full-profile-wrapper {
+    flex-direction: column;
+  }
 }
