@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './FullProfileView.scss';
 
-import { userProfileByIdAction } from '../../store/actions/userActions';
+import { profileByIdAction } from '../../store/actions/profileActions';
 
 import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
@@ -15,23 +15,24 @@ const FullProfileView = () => {
 
   useEffect(() => {
     // Dispatch action with id
-    dispatch(userProfileByIdAction(id));
+    dispatch(profileByIdAction(id));
     return () => {
       console.log('Full Profile cleanup');
     };
   }, [dispatch, id]);
 
-  const userProfiles = useSelector((state) => state.userProfileById);
-  const { loading, error, profile } = userProfiles;
+  const profileState = useSelector((state) => state.profileById);
+  const { loading, error, profile } = profileState;
 
   return (
     <div>
-      {error ? <Message message={error} /> : null}
       {loading ? (
         <LoadingSpinner />
       ) : (
         <>
-          {error ? null : (
+          {error ? (
+            <Message message={error} />
+          ) : (
             <>
               <LinkComp route="" routeName="GO BACK" />
               <div className="full-profile-wrapper">
@@ -41,6 +42,10 @@ const FullProfileView = () => {
                     src={`../uploads/profiles/${profile?.profileImage}`}
                     alt={profile?.name}
                   />
+                  <h3>{profile?.category}</h3>
+                  <h3>{profile?.rating} rating</h3>
+                  <h3>{profile?.numReviews} reviews</h3>
+                  <p>Profile last updated: {profile?.updatedAt}</p>
                 </div>
 
                 <div className="item">

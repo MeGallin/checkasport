@@ -19,8 +19,6 @@ const HomeView = () => {
   const profilesState = useSelector((state) => state.profiles);
   const { loading, error, profiles } = profilesState;
 
-  console.log('GGGG', profiles);
-
   const searchedProfiles = profiles.filter((profile) => {
     if (profile.name || profile.description || profile.location) {
       const name = profile.name;
