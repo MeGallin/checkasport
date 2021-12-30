@@ -73,8 +73,6 @@ const updateProfile = asyncHandler(async (req, res) => {
     }
   });
 
-  console.log(searchId[0]);
-
   if (searchId[0]) {
     searchId[0].user = req.params.id;
     searchId[0].name = name;
