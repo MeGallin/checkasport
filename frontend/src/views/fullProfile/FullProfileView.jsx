@@ -31,28 +31,32 @@ const FullProfileView = () => {
         <LoadingSpinner />
       ) : (
         <>
-          <LinkComp route="" routeName="GO BACK" />
-          <div className="full-profile-wrapper">
-            <div className="item">
-              <h1>{profile?.name}</h1>
-              <img
-                src={`../uploads/profiles/${profile?.profileImage}`}
-                alt={profile?.name}
-              />
-            </div>
+          {error ? null : (
+            <>
+              <LinkComp route="" routeName="GO BACK" />
+              <div className="full-profile-wrapper">
+                <div className="item">
+                  <h1>{profile?.name}</h1>
+                  <img
+                    src={`../uploads/profiles/${profile?.profileImage}`}
+                    alt={profile?.name}
+                  />
+                </div>
 
-            <div className="item">
-              <h1>A little about me</h1>
-              <p>{profile?.description}</p>
-            </div>
+                <div className="item">
+                  <h1>A little about me</h1>
+                  <p>{profile?.description}</p>
+                </div>
 
-            <div className="item">
-              <h1>Contact Details</h1>
-              <p>{profile?.location}</p>
-              <p>Mobile number: {profile?.telephoneNumber}</p>
-              <p>email: {profile?.email}</p>
-            </div>
-          </div>
+                <div className="item">
+                  <h1>Contact Details</h1>
+                  <p>{profile?.location}</p>
+                  <p>Mobile number: {profile?.telephoneNumber}</p>
+                  <p>email: {profile?.email}</p>
+                </div>
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

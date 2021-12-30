@@ -1,8 +1,12 @@
 import express from 'express';
-import { getAllProfiles } from '../controllers/profileController.js';
+import {
+  getAllProfiles,
+  getProfileById,
+} from '../controllers/profileController.js';
 
 const router = express.Router();
 
-router.route('/api/user/profiles').get(getAllProfiles);
+router.route('/api/profiles').get(getAllProfiles);
+router.route('/api/profile/:id').get(getProfileById);
 
 export default router;

@@ -11,7 +11,7 @@ export const profilesAction = () => async (dispatch, getState) => {
       type: PROFILE_REQUEST,
     });
 
-    const { data } = await axios.get(`http://localhost:5000/api/user/profiles`);
+    const { data } = await axios.get(`http://localhost:5000/api/profiles`);
     dispatch({ type: PROFILE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
