@@ -118,6 +118,7 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access: PRIVATE
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
+
   if (user) {
     res.json({
       _id: user._id,
@@ -125,6 +126,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       isConfirmed: user.isConfirmed,
+      profileImage: user.profileImage,
     });
   } else {
     res.status(404);
@@ -142,9 +144,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.profileImage = req.body.profileImage || user.profileImage;
-    user.description = req.body.description || user.description;
-    user.location = req.body.location || user.location;
-    user.telephoneNumber = req.body.telephoneNumber || user.telephoneNumber;
 
     if (req.body.password) {
       user.password = req.body.password;
@@ -157,9 +156,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       profileImage: updatedUser.profileImage,
       isAdmin: updatedUser.isAdmin,
-      description: updatedUser.description,
-      location: updatedUser.location,
-      telephoneNumber: updatedUser.telephoneNumber,
       token: generateToken(updatedUser._id),
     });
   } else {

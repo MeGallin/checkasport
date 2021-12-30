@@ -144,7 +144,6 @@ export const updateUserProfileAction = (user) => async (dispatch, getState) => {
     );
 
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
-
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
