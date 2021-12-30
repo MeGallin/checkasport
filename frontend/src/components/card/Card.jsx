@@ -11,6 +11,9 @@ const Card = ({
   location,
   email,
   telephoneNumber,
+  category,
+  rating,
+  reviews,
 }) => {
   return (
     <div className="card" name={name} src={src} alt={alt}>
@@ -19,14 +22,24 @@ const Card = ({
         <img className="card-profile-image" src={src} alt={alt} />
       </Link>
 
+      <h4>Category</h4>
+      {category}
+
       <h4>Description</h4>
       {description}
+
       <h4>Location</h4>
       {location}
-      <h4>Email address</h4>
+
+      <h4>Contact me</h4>
       <p>{email}</p>
-      <h4>Contact number</h4>
+
       <p>{telephoneNumber}</p>
+      <h4>Rating</h4>
+      <p>{rating}</p>
+
+      <h4>Number of Reviews</h4>
+      <p>{reviews}</p>
     </div>
   );
 };

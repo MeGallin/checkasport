@@ -10,9 +10,6 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
-  USER_PROFILE_FAILURE,
-  USER_PROFILE_REQUEST,
-  USER_PROFILE_SUCCESS,
   USER_REGISTER_FAILURE,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -147,31 +144,11 @@ export const updateUserProfileAction = (user) => async (dispatch, getState) => {
     );
 
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
-    dispatch(userProfilesAction());
 
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAILURE,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
-
-export const userProfilesAction = () => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: USER_PROFILE_REQUEST,
-    });
-
-    const { data } = await axios.get(`http://localhost:5000/api/users`);
-    dispatch({ type: USER_PROFILE_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: USER_PROFILE_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
