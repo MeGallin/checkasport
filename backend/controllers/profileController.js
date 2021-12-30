@@ -14,4 +14,17 @@ const getAllProfiles = asyncHandler(async (req, res) => {
   }
 });
 
-export { getAllProfiles };
+// @description: Fetch single Profile
+// @route: GET /api/profile/:id
+// @access: Public
+const getProfileById = asyncHandler(async (req, res) => {
+  const profile = await Profile.findById(req.params.id);
+  if (profile) {
+    res.json(profile);
+  } else {
+    res.status(404);
+    throw new Error('Profile not found');
+  }
+});
+
+export { getAllProfiles, getProfileById };
