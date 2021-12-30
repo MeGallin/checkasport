@@ -5,11 +5,11 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 import contactFormRoutes from './routes/contactFormRoutes.js';
-import servicesRoutes from './routes/servicesRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import confirmEmailRoutes from './routes/confirmEmailRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import uploaderRoutes from './routes/uploadRoutes.js';
+import profileRoutes from './routes/profileRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -24,9 +24,10 @@ app.use(express.json()); // This needed to accept json data
 //Routes
 app.use('/', confirmEmailRoutes);
 app.use('/', contactFormRoutes);
-app.use('/', servicesRoutes);
 app.use('/', userRoutes);
 app.use('/', uploaderRoutes);
+// Profiles Routes
+app.use('/', profileRoutes);
 
 //create static folder
 const __dirname = path.resolve();

@@ -8,7 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node backend/server",
     "data:import": "node backend/seeder",
-    "data:destroy": "node backend/seeder -d"
+    "data:destroy": "node backend/seeder -d",
+    "profile-data:import": "node backend/profileSeeder",
+    "profile-data:destroy": "node backend/profileSeeder -d"
   },
   "repository": {
     "type": "git",
