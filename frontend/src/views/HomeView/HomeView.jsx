@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userProfilesAction } from '../../store/actions/userActions';
+import { profilesAction } from '../../store/actions/profileActions';
 import './HomeView.scss';
 
 import SearchInput from '../../components/searchInput/SearchInput';
@@ -13,11 +13,13 @@ const HomeView = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userProfilesAction());
+    dispatch(profilesAction());
   }, [dispatch]);
 
-  const userProfiles = useSelector((state) => state.userProfiles);
-  const { loading, error, profiles } = userProfiles;
+  const profilesState = useSelector((state) => state.profiles);
+  const { loading, error, profiles } = profilesState;
+
+  console.log('GGGG', profiles);
 
   const searchedProfiles = profiles.filter((profile) => {
     if (profile.name || profile.description || profile.location) {
@@ -84,6 +86,7 @@ const HomeView = () => {
                         }}
                       ></span>
                     }
+                    category={profile.category}
                     location={
                       <span
                         dangerouslySetInnerHTML={{
@@ -93,6 +96,8 @@ const HomeView = () => {
                     }
                     email={profile.email}
                     telephoneNumber={profile.telephoneNumber}
+                    rating={profile.rating}
+                    reviews={profile.numReviews}
                   />
                 </div>
               ) : null;

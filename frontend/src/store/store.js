@@ -8,9 +8,10 @@ import {
   userRegistrationReducer,
   userDetailsReducer,
   userUpdateProfileReducer,
-  userProfilesReducer,
   userProfileByIdReducer,
 } from './reducers/userReducers';
+
+import { profilesReducer } from './reducers/profileReducers';
 
 const reducer = combineReducers({
   contactForm: contactFormReducer,
@@ -19,7 +20,7 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userProfileById: userProfileByIdReducer,
   userUpdateProfile: userUpdateProfileReducer,
-  userProfiles: userProfilesReducer,
+  profiles: profilesReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

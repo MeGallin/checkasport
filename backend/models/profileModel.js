@@ -10,6 +10,11 @@ const profileSchema = mongoose.Schema(
     name: {
       type: String,
     },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     profileImage: {
       type: String,
     },
