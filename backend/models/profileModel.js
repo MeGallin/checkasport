@@ -24,6 +24,9 @@ const profileSchema = mongoose.Schema(
     category: {
       type: String,
     },
+    qualifications: {
+      type: String,
+    },
     location: {
       type: String,
     },

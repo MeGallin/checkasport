@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import './UserProfileView.scss';
+import './UserProfileEditView.scss';
 
 import axios from 'axios';
 
@@ -16,7 +16,7 @@ import Button from '../../components/button/Button';
 import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 
-const UserProfileView = () => {
+const UserProfileEditView = () => {
   const nameRegEx = /^([\w])+\s+([\w\s])+$/i;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
@@ -256,4 +256,4 @@ const UserProfileView = () => {
   );
 };
 
-export default UserProfileView;
+export default UserProfileEditView;

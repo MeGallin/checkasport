@@ -40,7 +40,10 @@ const Header = () => {
                   style={{ fontSize: 20 + 'px', color: 'rgba(92, 184, 92, 1)' }}
                 ></i>
                 <span>
-                  <LinkComp route="user-profile" routeName={userInfo.name} />
+                  <LinkComp
+                    route="user-profile-edit"
+                    routeName={userInfo.name}
+                  />
                 </span>
               </div>
             </div>
