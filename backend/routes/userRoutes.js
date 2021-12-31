@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.post('/api/users/login', authUser);
 router
-  .route('/api/users/profile')
+  .route('/api/users/:id')
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
 
