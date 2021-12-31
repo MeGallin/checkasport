@@ -4,7 +4,7 @@ const profileSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      required: false,
       ref: 'User',
     },
     name: {
@@ -12,7 +12,7 @@ const profileSchema = mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
+      required: false,
       unique: true,
     },
     profileImage: {

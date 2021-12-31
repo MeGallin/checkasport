@@ -15,6 +15,7 @@ import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
 import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
+import LinkComp from '../../components/linkComp/LinkComp';
 
 const UserProfileEditView = () => {
   const nameRegEx = /^([\w])+\s+([\w\s])+$/i;
@@ -23,15 +24,13 @@ const UserProfileEditView = () => {
   const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
   const passwordConfirmRegEx =
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
-  //   const telephoneNumberRegEx = /^(07[\d]{8,12}|447[\d]{7,11})$/;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // Logged in user Details saved in local storage
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
-  console.log(userInfo);
 
   // User details in DB
   const userDetails = useSelector((state) => state.userDetails);
@@ -134,7 +133,7 @@ const UserProfileEditView = () => {
       ) : (
         <>
           <fieldset className="fieldSet item">
-            <legend>Update Profile form</legend>
+            <legend>Update USER form</legend>
             <form onSubmit={handleSubmit}>
               <InputField
                 label="Name"
@@ -250,6 +249,7 @@ const UserProfileEditView = () => {
             <p>Confirmed User: {user.isConfirmed ? 'YES' : 'Not confirmed'}</p>
             <p>Admin: {user.isAdmin ? 'YES' : 'NO'}</p>
           </div>
+          <LinkComp route="profile-edit" routeName="Edit your Profile" />
         </>
       )}
     </div>
