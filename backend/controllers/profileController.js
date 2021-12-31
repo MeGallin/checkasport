@@ -49,6 +49,19 @@ const createProfile = asyncHandler(async (req, res) => {
   res.status(210).json(createProfile);
 });
 
+// @description: User Profile
+// @route: GET /api/profile
+// @access: PRIVATE
+const getProfile = asyncHandler(async (req, res) => {
+  const profile = await Profile.find({ user: req.user._id.toString() });
+  if (profile) {
+    res.json(profile);
+  } else {
+    res.status(404);
+    throw new Error('Profile not found');
+  }
+});
+
 // @description: Update Profile
 // @route: PUT /api/profile
 // @access: PRIVATE
@@ -93,4 +106,10 @@ const updateProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { getAllProfiles, getProfileById, createProfile, updateProfile };
+export {
+  getAllProfiles,
+  getProfileById,
+  createProfile,
+  getProfile,
+  updateProfile,
+};

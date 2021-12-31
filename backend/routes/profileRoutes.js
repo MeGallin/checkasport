@@ -3,6 +3,7 @@ import {
   getAllProfiles,
   getProfileById,
   createProfile,
+  getProfile,
   updateProfile,
 } from '../controllers/profileController.js';
 
@@ -15,5 +16,7 @@ router
   .route('/api/profile/:id')
   .get(getProfileById)
   .put(protect, updateProfile);
+
+router.route('/api/profile').get(protect, getProfile);
 
 export default router;
