@@ -31,6 +31,8 @@ const UserProfileView = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  console.log(userInfo);
+
   // User details in DB
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
@@ -56,7 +58,7 @@ const UserProfileView = () => {
 
       if (!user || !user.name) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
-        dispatch(getUserDetailsAction('profile'));
+        dispatch(getUserDetailsAction(userInfo._id));
       } else {
         setName(user.name);
         setProfileImage(profileImage);
@@ -87,7 +89,6 @@ const UserProfileView = () => {
             password,
           }),
         );
-        dispatch(getUserDetailsAction('profile'));
       } else {
         setMessage(
           'You have not yet confirmed your email. Please check you emails.',
