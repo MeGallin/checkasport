@@ -38,6 +38,7 @@ const createProfile = asyncHandler(async (req, res) => {
     profileImage: 'sample.png',
     category: 'sample Category',
     location: 'Sample Location',
+    qualifications: 'Sample QUALIFICATIONS',
     telephoneNumber: '12345678901',
     rating: 0,
     description: 'Sample Description',
@@ -58,6 +59,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     email,
     profileImage,
     description,
+    qualifications,
     category,
     location,
     telephoneNumber,
@@ -79,6 +81,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     searchId[0].email = email;
     searchId[0].profileImage = profileImage;
     searchId[0].description = description;
+    searchId[0].qualifications = qualifications;
     searchId[0].category = category;
     searchId[0].location = location;
     searchId[0].telephoneNumber = telephoneNumber;

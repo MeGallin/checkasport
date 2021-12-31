@@ -9,7 +9,7 @@ import ErrorView from './views/errorView/ErrorView';
 import RegistrationView from './views/registrationView/RegistrationView';
 import ProfileView from './views/profileView/ProfileView';
 import FullProfileView from './views/fullProfile/FullProfileView';
-import UserProfileView from './views/userProfileView/UserProfileView';
+import UserProfileEditView from './views/userProfileEditView/UserProfileEditView';
 
 // Change the display width by removing the --fluid after the container class
 const App = () => {
@@ -21,7 +21,11 @@ const App = () => {
           <Routes>
             <Route path="/" element={<HomeView />} exact />
             <Route path="/profile" element={<ProfileView />} exact />
-            <Route path="/user-profile" element={<UserProfileView />} exact />
+            <Route
+              path="/user-profile-edit"
+              element={<UserProfileEditView />}
+              exact
+            />
             <Route
               path="/fullProfile/:id"
               element={<FullProfileView />}
