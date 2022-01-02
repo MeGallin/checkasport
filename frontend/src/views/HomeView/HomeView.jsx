@@ -20,11 +20,22 @@ const HomeView = () => {
   const { loading, error, profiles } = profilesState;
 
   const searchedProfiles = profiles.filter((profile) => {
-    if (profile.name || profile.description || profile.location) {
+    if (
+      profile.name ||
+      profile.description ||
+      profile.location ||
+      profile.specialisation
+    ) {
       const name = profile.name;
       const description = profile.description;
       const location = profile.location;
-      const search = description.concat(...location, ...name);
+      const specialisation = profile?.specialisation;
+      const search = description.concat(
+        ...location,
+        ...name,
+        ...specialisation,
+      );
+      console.log(search);
       return search.toLowerCase().includes(keyword.toLowerCase());
     }
     return false;
@@ -84,7 +95,13 @@ const HomeView = () => {
                         }}
                       ></span>
                     }
-                    specialisation={profile.specialisation}
+                    specialisation={
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: highlightKeywordMatch(profile.specialisation),
+                        }}
+                      ></span>
+                    }
                     qualifications={profile.qualifications}
                     isQualificationsVerified={
                       profile.isQualificationsVerified === true ? (

@@ -34,16 +34,14 @@ const ProfileEditView = () => {
   const profileState = useSelector((state) => state.profileOfLoggedInUser);
   const { loading, error, profile } = profileState;
 
-  const [name, setName] = useState(profile?.name);
-  const [email, setEmail] = useState(profile?.email);
-  const [profileImage, setProfileImage] = useState(profile?.profileImage);
-  const [description, setDescription] = useState(profile?.description);
-  const [specialisation, setSpecialisation] = useState(profile?.specialisation);
-  const [qualifications, setQualifications] = useState(profile?.qualifications);
-  const [location, setLocation] = useState(profile?.location);
-  const [telephoneNumber, setTelephoneNumber] = useState(
-    profile?.telephoneNumber,
-  );
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [profileImage, setProfileImage] = useState('');
+  const [description, setDescription] = useState('');
+  const [specialisation, setSpecialisation] = useState('');
+  const [qualifications, setQualifications] = useState('');
+  const [location, setLocation] = useState('');
+  const [telephoneNumber, setTelephoneNumber] = useState('');
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
@@ -53,6 +51,15 @@ const ProfileEditView = () => {
     if (!profile) {
       dispatch(profileOfLoggedInUserAction());
     }
+
+    setName(profile?.name);
+    setEmail(profile?.email);
+    setProfileImage(profile?.profileImage);
+    setDescription(profile?.description);
+    setSpecialisation(profile?.specialisation);
+    setQualifications(profile?.qualifications);
+    setLocation(profile?.location);
+    setTelephoneNumber(profile?.telephoneNumber);
 
     const abortConst = new AbortController();
     return () => {
