@@ -35,7 +35,7 @@ const HomeView = () => {
         ...name,
         ...specialisation,
       );
-      console.log(search);
+
       return search.toLowerCase().includes(keyword.toLowerCase());
     }
     return false;
