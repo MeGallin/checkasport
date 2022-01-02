@@ -36,9 +36,10 @@ const createProfile = asyncHandler(async (req, res) => {
     name: 'Sample name',
     email: 'sample@mail.com',
     profileImage: 'sample.png',
-    category: 'sample Category',
+    specialisation: 'sample Specialisation',
     location: 'Sample Location',
     qualifications: 'Sample QUALIFICATIONS',
+    isQualificationsVerified: false,
     telephoneNumber: '12345678901',
     rating: 0,
     description: 'Sample Description',
@@ -74,7 +75,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     profileImage,
     description,
     qualifications,
-    category,
+    specialisation,
     location,
     telephoneNumber,
   } = req.body;
@@ -96,7 +97,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     searchId[0].profileImage = profileImage;
     searchId[0].description = description;
     searchId[0].qualifications = qualifications;
-    searchId[0].category = category;
+    searchId[0].specialisation = specialisation;
     searchId[0].location = location;
     searchId[0].telephoneNumber = telephoneNumber;
     const updateProfile = await searchId[0].save();

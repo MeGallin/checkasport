@@ -11,7 +11,9 @@ const Card = ({
   location,
   email,
   telephoneNumber,
-  category,
+  specialisation,
+  qualifications,
+  isQualificationsVerified,
   rating,
   reviews,
 }) => {
@@ -22,14 +24,20 @@ const Card = ({
         <img className="card-profile-image" src={src} alt={alt} />
       </Link>
 
-      <h4>Category</h4>
-      {category}
+      <h4>Specialisation</h4>
+      {specialisation}
 
       <h4>Description</h4>
       {description}
 
       <h4>Location</h4>
       {location}
+
+      <h4>
+        Qualifications
+        {isQualificationsVerified}
+      </h4>
+      {qualifications}
 
       <h4>Contact me</h4>
       <p>{email}</p>

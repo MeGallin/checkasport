@@ -37,7 +37,7 @@ const ProfileEditView = () => {
   const [email, setEmail] = useState(profile?.email);
   const [profileImage, setProfileImage] = useState(profile?.profileImage);
   const [description, setDescription] = useState(profile?.description);
-  const [category, setCategory] = useState(profile?.category);
+  const [specialisation, setSpecialisation] = useState(profile?.specialisation);
   const [qualifications, setQualifications] = useState(profile?.qualifications);
   const [location, setLocation] = useState(profile?.location);
   const [telephoneNumber, setTelephoneNumber] = useState(
@@ -74,7 +74,7 @@ const ProfileEditView = () => {
         email,
         profileImage,
         description,
-        category,
+        specialisation,
         qualifications,
         location,
         telephoneNumber,
@@ -86,7 +86,7 @@ const ProfileEditView = () => {
     name?.length === 0 ||
     !emailRegEx.test(email) ||
     description?.length < 10 ||
-    category?.length <= 10 ||
+    specialisation?.length <= 10 ||
     location?.length <= 10 ||
     !telephoneNumberRegEx.test(telephoneNumber);
 
@@ -171,16 +171,16 @@ const ProfileEditView = () => {
               </div>
 
               <InputField
-                label="Category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                label="Specialisation"
+                value={specialisation}
+                onChange={(e) => setSpecialisation(e.target.value)}
                 type="text"
-                name="category"
+                name="specialisation"
                 required
-                className={category?.length <= 10 ? 'invalid' : 'entered'}
+                className={specialisation?.length <= 10 ? 'invalid' : 'entered'}
                 error={
-                  category?.length <= 10
-                    ? `Category field must contain at least 10 characters!`
+                  specialisation?.length <= 10
+                    ? `Specialisation field must contain at least 10 characters!`
                     : null
                 }
               />
