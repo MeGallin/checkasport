@@ -21,11 +21,16 @@ const profileSchema = mongoose.Schema(
     description: {
       type: String,
     },
-    category: {
+    specialisation: {
       type: String,
     },
     qualifications: {
       type: String,
+    },
+    isQualificationsVerified: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
     location: {
       type: String,

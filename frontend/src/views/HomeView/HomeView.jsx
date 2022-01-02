@@ -84,7 +84,24 @@ const HomeView = () => {
                         }}
                       ></span>
                     }
-                    category={profile.category}
+                    specialisation={profile.specialisation}
+                    qualifications={profile.qualifications}
+                    isQualificationsVerified={
+                      profile.isQualificationsVerified === true ? (
+                        <i
+                          className="fa fa-check"
+                          style={{
+                            fontSize: 20 + 'px',
+                            color: 'rgba(92, 184, 92, 1)',
+                          }}
+                        ></i>
+                      ) : (
+                        <i
+                          className="fa fa-times"
+                          style={{ fontSize: 20 + 'px', color: 'crimson' }}
+                        ></i>
+                      )
+                    }
                     location={
                       <span
                         dangerouslySetInnerHTML={{
