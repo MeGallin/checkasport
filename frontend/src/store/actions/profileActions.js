@@ -84,7 +84,6 @@ export const profileOfLoggedInUserAction = () => async (dispatch, getState) => {
 };
 // Update Profile action
 export const profileUpdateAction = (profile) => async (dispatch, getState) => {
-  console.log(profile);
   try {
     dispatch({
       type: PROFILE_UPDATE_REQUEST,

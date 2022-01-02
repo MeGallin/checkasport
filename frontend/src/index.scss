@@ -155,18 +155,8 @@ textarea.entered {
   min-height: 50px;
 }
 
-/* SCROLL-BAR CUSTOM STYLING */
-// ::-webkit-scrollbar {
-//   width: 10px;
-// }
-// ::-webkit-scrollbar-track {
-//   background: $main-bg-colour;
-// }
-// ::-webkit-scrollbar-thumb {
-//   background: $main-font-colour;
-//   border-radius: 10px;
-// }
-// ::-webkit-scrollbar-thumb:hover {
-//   background: $border-colour;
-// }
-/* SCROLL-BAR CUSTOM STYLING */
+.small-text {
+  font-size: 1em;
+  color: $danger;
+  font-weight: bold;
+}

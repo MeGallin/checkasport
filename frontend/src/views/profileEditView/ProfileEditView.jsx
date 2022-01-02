@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './ProfileEditView.scss';
 
-import {
-  profileOfLoggedInUserAction,
-  profileUpdateAction,
-} from '../../store/actions/profileActions';
+import { profileUpdateAction } from '../../store/actions/profileActions';
 
 import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
@@ -14,7 +11,6 @@ import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 
 const ProfileEditView = () => {
-  const nameRegEx = /^([\w])+\s+([\w\s])+$/i;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
@@ -27,12 +23,24 @@ const ProfileEditView = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // Profile details in DB
+  const profileState = useSelector((state) => state.profileOfLoggedInUser);
+  const { loading, error, profile } = profileState;
+
+  const [name, setName] = useState(profile?.name);
+  const [email, setEmail] = useState(profile?.email);
+  const [profileImage, setProfileImage] = useState(profile?.profileImage);
+  const [description, setDescription] = useState(profile?.description);
+  const [category, setCategory] = useState(profile?.category);
+  const [qualifications, setQualifications] = useState(profile?.qualifications);
+  const [location, setLocation] = useState(profile?.location);
+  const [telephoneNumber, setTelephoneNumber] = useState(
+    profile?.telephoneNumber,
+  );
+
   useEffect(() => {
     if (!userInfo) {
       navigate('/login');
-    } else {
-      // Dispatch action with id
-      dispatch(profileOfLoggedInUserAction());
     }
 
     const abortConst = new AbortController();
@@ -41,27 +49,6 @@ const ProfileEditView = () => {
       console.log('ProfileEditView useEffect cleaned');
     };
   }, [navigate, dispatch, userInfo]);
-
-  // Profile details in DB
-  const profileState = useSelector((state) => state.profileOfLoggedInUser);
-  const { loading, error, profile } = profileState;
-
-  const [name, setName] = useState(profile[0].name || '');
-  const [email, setEmail] = useState(profile[0].email || '');
-  const [profileImage, setProfileImage] = useState(
-    profile[0].profileImage || '',
-  );
-  const [description, setDescription] = useState(profile[0].description || '');
-  const [category, setCategory] = useState(profile[0].category || '');
-  const [qualifications, setQualifications] = useState(
-    profile[0].qualifications || '',
-  );
-  const [location, setLocation] = useState(profile[0].location || '');
-  const [telephoneNumber, setTelephoneNumber] = useState(
-    profile[0].telephoneNumber || '',
-  );
-
-  console.log(profile);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -80,10 +67,18 @@ const ProfileEditView = () => {
     );
   };
 
+  const isDisabled =
+    name.length === 0 ||
+    !emailRegEx.test(email) ||
+    description.length < 10 ||
+    category.length <= 10 ||
+    location.length <= 10 ||
+    !telephoneNumberRegEx.test(telephoneNumber);
+
   return (
     <div className="profile-edit-wrapper">
       {error ? <Message message={error} /> : null}
-      {profile === undefined || profile.length === 0 ? (
+      {!profile ? (
         <>Create profile button</>
       ) : loading ? (
         <LoadingSpinner />
@@ -99,12 +94,8 @@ const ProfileEditView = () => {
                 type="text"
                 name="name"
                 required
-                className={!nameRegEx.test(name) ? 'invalid' : 'entered'}
-                error={
-                  !nameRegEx.test(name) && name.length !== 0
-                    ? `Name field must start with an uppercase letter and contain at least 3 letters.`
-                    : null
-                }
+                className={name.length === 0 ? 'invalid' : 'entered'}
+                error={name.length === 0 ? `Name field cant be empty!` : null}
               />
               <InputField
                 label="Email"
@@ -114,9 +105,7 @@ const ProfileEditView = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
                 error={
-                  !emailRegEx.test(email) && email.length !== 0
-                    ? `Invalid email address.`
-                    : null
+                  !emailRegEx.test(email) ? `Invalid email address.` : null
                 }
               />
               <InputField
@@ -128,14 +117,24 @@ const ProfileEditView = () => {
               />
 
               <div>
-                <label for="description">Description</label>
+                <label>Description </label>
+                {description.length < 10 ? (
+                  <span className="small-text">
+                    must have at least {description.length} characters.
+                  </span>
+                ) : null}
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   type="text"
                   name="description"
                   required
-                  className={true ? 'invalid' : 'entered'}
+                  className={description.length <= 10 ? 'invalid' : 'entered'}
+                  error={
+                    description.length <= 10
+                      ? `Description field must contain at least 10 characters!`
+                      : null
+                  }
                 />
               </div>
 
@@ -146,31 +145,47 @@ const ProfileEditView = () => {
                 type="text"
                 name="category"
                 required
-                className={true ? 'invalid' : 'entered'}
+                className={category.length <= 10 ? 'invalid' : 'entered'}
+                error={
+                  category.length <= 10
+                    ? `Category field must contain at least 10 characters!`
+                    : null
+                }
               />
 
               <div>
-                <label for="Qualifications">Qualifications</label>
+                <label>Qualifications</label>
                 <textarea
                   value={qualifications}
                   onChange={(e) => setQualifications(e.target.value)}
                   type="text"
                   name="qualifications"
                   required
-                  className={true ? 'invalid' : 'entered'}
+                  className={
+                    qualifications.length <= 10 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    qualifications.length <= 10
+                      ? `Qualifications field must contain at least 10 characters!`
+                      : null
+                  }
                 />
               </div>
 
               <div>
-                <label for="Location">Location</label>
+                <label>Location</label>
                 <textarea
-                  value={location}
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   type="text"
                   name="location"
                   required
-                  className={true ? 'invalid' : 'entered'}
+                  className={location.length <= 10 ? 'invalid' : 'entered'}
+                  error={
+                    location.length <= 10
+                      ? `Location field must contain at least 10 characters!`
+                      : null
+                  }
                 />
               </div>
 
@@ -187,9 +202,9 @@ const ProfileEditView = () => {
                     : 'entered'
                 }
                 error={
-                  !telephoneNumberRegEx.test(telephoneNumber) &&
-                  telephoneNumber.length !== 0
-                    ? `Name field must start with an uppercase letter and contain at least 3 letters.`
+                  !telephoneNumberRegEx.test(telephoneNumber) ||
+                  telephoneNumber.length === 0
+                    ? `Invalid mobile number`
                     : null
                 }
               />
@@ -199,7 +214,7 @@ const ProfileEditView = () => {
                 text="submit"
                 className="btn"
                 title="Submit"
-                disabled={false}
+                disabled={isDisabled}
               ></Button>
             </form>
           </fieldset>

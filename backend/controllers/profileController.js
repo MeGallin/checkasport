@@ -54,8 +54,9 @@ const createProfile = asyncHandler(async (req, res) => {
 // @access: PRIVATE
 const getProfile = asyncHandler(async (req, res) => {
   const profile = await Profile.find({ user: req.user._id.toString() });
+
   if (profile) {
-    res.json(profile);
+    res.json(...profile);
   } else {
     res.status(404);
     throw new Error('Profile not found');
