@@ -1,5 +1,8 @@
 @import '../../index.scss';
 .home-view {
+  .keyword-length {
+    color: $light-orange;
+  }
   .card-wrapper {
     display: flex;
     flex-wrap: wrap;

@@ -70,6 +70,13 @@ const HomeView = () => {
           value={keyword}
           handleSearch={handleSearch}
         />
+        {keyword.length > 0 ? (
+          <div className="keyword-length">
+            We found {searchedProfiles.length} profiles that match your search
+            criteria.
+          </div>
+        ) : null}
+
         {loading ? <LoadingSpinner /> : null}
         {keyword.length > 0 ? (
           <div className="card-wrapper">
