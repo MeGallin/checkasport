@@ -10,6 +10,7 @@ import {
   updateUserProfileAction,
 } from '../../store/actions/userActions';
 import { USER_UPDATE_PROFILE_RESET } from '../../store/constants/userConstants';
+import { profileOfLoggedInUserAction } from '../../store/actions/profileActions';
 
 import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
@@ -36,6 +37,9 @@ const UserProfileEditView = () => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  // Profile details in DB
+  useSelector((state) => state.profileOfLoggedInUser);
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [profileImage, setProfileImage] = useState('');
@@ -58,6 +62,7 @@ const UserProfileEditView = () => {
       if (!user || !user.name) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetailsAction(userInfo._id));
+        dispatch(profileOfLoggedInUserAction());
       } else {
         setName(user.name);
         setProfileImage(profileImage);
