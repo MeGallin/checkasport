@@ -38,7 +38,9 @@ const UserProfileEditView = () => {
   const { loading, error, user } = userDetails;
 
   // Profile details in DB
-  useSelector((state) => state.profileOfLoggedInUser);
+  const foo = useSelector((state) => state.profileOfLoggedInUser);
+
+  console.log('XXXX', foo.profile);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -62,13 +64,13 @@ const UserProfileEditView = () => {
       if (!user || !user.name) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetailsAction(userInfo._id));
-        dispatch(profileOfLoggedInUserAction());
       } else {
         setName(user.name);
         setProfileImage(profileImage);
         setEmail(user.email);
       }
     }
+    dispatch(profileOfLoggedInUserAction());
     const abortConst = new AbortController();
     return () => {
       abortConst.abort();
@@ -254,7 +256,14 @@ const UserProfileEditView = () => {
             <p>Confirmed User: {user.isConfirmed ? 'YES' : 'Not confirmed'}</p>
             <p>Admin: {user.isAdmin ? 'YES' : 'NO'}</p>
           </div>
-          <LinkComp route="profile-edit" routeName="Edit your Profile" />
+          <hr />
+          <div>
+            <h3>EDIT PROFILE</h3>
+            <p>
+              Click <LinkComp route="profile-edit" routeName="here" /> to edit
+              your profile.
+            </p>
+          </div>
         </>
       )}
     </div>

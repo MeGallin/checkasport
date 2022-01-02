@@ -2,6 +2,10 @@ import {
   PROFILE_BY_ID_FAILURE,
   PROFILE_BY_ID_REQUEST,
   PROFILE_BY_ID_SUCCESS,
+  PROFILE_CREATE_FAILURE,
+  PROFILE_CREATE_REQUEST,
+  PROFILE_CREATE_RESET,
+  PROFILE_CREATE_SUCCESS,
   PROFILE_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_REQUEST,
@@ -60,6 +64,27 @@ export const profileOfLoggedInUserReducer = (state = {}, action) => {
       return { ...state };
   }
 };
+// Create a sample profile
+export const profileCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PROFILE_CREATE_REQUEST:
+      return { ...state, loading: true };
+    case PROFILE_CREATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        profile: action.payload,
+      };
+    case PROFILE_CREATE_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case PROFILE_CREATE_RESET:
+      return {};
+    default:
+      return { ...state };
+  }
+};
+
 // UPdate profile
 export const profileUpdateReducer = (state = {}, action) => {
   switch (action.type) {

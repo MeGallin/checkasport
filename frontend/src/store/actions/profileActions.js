@@ -3,6 +3,9 @@ import {
   PROFILE_BY_ID_FAILURE,
   PROFILE_BY_ID_REQUEST,
   PROFILE_BY_ID_SUCCESS,
+  PROFILE_CREATE_FAILURE,
+  PROFILE_CREATE_REQUEST,
+  PROFILE_CREATE_SUCCESS,
   PROFILE_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_REQUEST,
@@ -82,6 +85,41 @@ export const profileOfLoggedInUserAction = () => async (dispatch, getState) => {
     });
   }
 };
+// Create a profile
+export const createProfileAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PROFILE_CREATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.post(
+      `http://localhost:5000/api/profiles`,
+      {},
+      config,
+    );
+    dispatch({ type: PROFILE_CREATE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PROFILE_CREATE_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 // Update Profile action
 export const profileUpdateAction = (profile) => async (dispatch, getState) => {
   try {
