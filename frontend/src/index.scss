@@ -160,3 +160,14 @@ textarea.entered {
   color: $danger;
   font-weight: bold;
 }
+
+hr {
+  border: 0;
+  height: 4px;
+  background-image: linear-gradient(
+    to right,
+    rgba(250, 250, 250, 250),
+    rgba(250, 250, 250, 0.75),
+    rgba(250, 250, 250, 250)
+  );
+}

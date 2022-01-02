@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './ProfileEditView.scss';
 
-import { profileUpdateAction } from '../../store/actions/profileActions';
+import {
+  profileOfLoggedInUserAction,
+  createProfileAction,
+  profileUpdateAction,
+} from '../../store/actions/profileActions';
 
 import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
@@ -27,6 +31,8 @@ const ProfileEditView = () => {
   const profileState = useSelector((state) => state.profileOfLoggedInUser);
   const { loading, error, profile } = profileState;
 
+  console.log('cccccc', profile);
+
   const [name, setName] = useState(profile?.name);
   const [email, setEmail] = useState(profile?.email);
   const [profileImage, setProfileImage] = useState(profile?.profileImage);
@@ -42,13 +48,22 @@ const ProfileEditView = () => {
     if (!userInfo) {
       navigate('/login');
     }
+    if (!profile) {
+      dispatch(profileOfLoggedInUserAction());
+    }
 
     const abortConst = new AbortController();
     return () => {
       abortConst.abort();
       console.log('ProfileEditView useEffect cleaned');
     };
-  }, [navigate, dispatch, userInfo]);
+  }, [navigate, dispatch, userInfo, profile]);
+
+  const handleCreateProfile = () => {
+    // Dispatch create profile action
+    dispatch(createProfileAction());
+    navigate('/user-profile-edit');
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,24 +83,41 @@ const ProfileEditView = () => {
   };
 
   const isDisabled =
-    name.length === 0 ||
+    name?.length === 0 ||
     !emailRegEx.test(email) ||
-    description.length < 10 ||
-    category.length <= 10 ||
-    location.length <= 10 ||
+    description?.length < 10 ||
+    category?.length <= 10 ||
+    location?.length <= 10 ||
     !telephoneNumberRegEx.test(telephoneNumber);
 
   return (
     <div className="profile-edit-wrapper">
       {error ? <Message message={error} /> : null}
+      {!profile ? 'NOT PROFILE' : 'YES'}
       {!profile ? (
-        <>Create profile button</>
+        <>
+          <h3>Create a profile</h3>
+          <p>Please click the button below to create a sample profile.</p>
+          <p>You will then be re-directed to your USER profile page.</p>
+          <Button
+            colour="transparent"
+            text="Create your profile"
+            className="btn"
+            title="Create your profile"
+            disabled={false}
+            onClick={handleCreateProfile}
+          ></Button>
+        </>
       ) : loading ? (
         <LoadingSpinner />
       ) : (
         <>
           <fieldset className="fieldSet item">
             <legend>Update PROFILE form</legend>
+            <p>
+              Please note that the more complete your profile is the better it
+              will feature when it is searched....
+            </p>
             <form onSubmit={handleSubmit}>
               <InputField
                 label="Name"
@@ -94,8 +126,8 @@ const ProfileEditView = () => {
                 type="text"
                 name="name"
                 required
-                className={name.length === 0 ? 'invalid' : 'entered'}
-                error={name.length === 0 ? `Name field cant be empty!` : null}
+                className={name?.length === 0 ? 'invalid' : 'entered'}
+                error={name?.length === 0 ? `Name field cant be empty!` : null}
               />
               <InputField
                 label="Email"
@@ -118,7 +150,7 @@ const ProfileEditView = () => {
 
               <div>
                 <label>Description </label>
-                {description.length < 10 ? (
+                {description?.length < 10 ? (
                   <span className="small-text">
                     must have at least {description.length} characters.
                   </span>
@@ -129,9 +161,9 @@ const ProfileEditView = () => {
                   type="text"
                   name="description"
                   required
-                  className={description.length <= 10 ? 'invalid' : 'entered'}
+                  className={description?.length <= 10 ? 'invalid' : 'entered'}
                   error={
-                    description.length <= 10
+                    description?.length <= 10
                       ? `Description field must contain at least 10 characters!`
                       : null
                   }
@@ -145,9 +177,9 @@ const ProfileEditView = () => {
                 type="text"
                 name="category"
                 required
-                className={category.length <= 10 ? 'invalid' : 'entered'}
+                className={category?.length <= 10 ? 'invalid' : 'entered'}
                 error={
-                  category.length <= 10
+                  category?.length <= 10
                     ? `Category field must contain at least 10 characters!`
                     : null
                 }
@@ -162,10 +194,10 @@ const ProfileEditView = () => {
                   name="qualifications"
                   required
                   className={
-                    qualifications.length <= 10 ? 'invalid' : 'entered'
+                    qualifications?.length <= 10 ? 'invalid' : 'entered'
                   }
                   error={
-                    qualifications.length <= 10
+                    qualifications?.length <= 10
                       ? `Qualifications field must contain at least 10 characters!`
                       : null
                   }
@@ -180,9 +212,9 @@ const ProfileEditView = () => {
                   type="text"
                   name="location"
                   required
-                  className={location.length <= 10 ? 'invalid' : 'entered'}
+                  className={location?.length <= 10 ? 'invalid' : 'entered'}
                   error={
-                    location.length <= 10
+                    location?.length <= 10
                       ? `Location field must contain at least 10 characters!`
                       : null
                   }
@@ -203,7 +235,7 @@ const ProfileEditView = () => {
                 }
                 error={
                   !telephoneNumberRegEx.test(telephoneNumber) ||
-                  telephoneNumber.length === 0
+                  telephoneNumber?.length === 0
                     ? `Invalid mobile number`
                     : null
                 }

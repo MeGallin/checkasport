@@ -15,6 +15,7 @@ import {
   profilesReducer,
   profileByIdReducer,
   profileOfLoggedInUserReducer,
+  profileCreateReducer,
   profileUpdateReducer,
 } from './reducers/profileReducers';
 
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   profiles: profilesReducer,
   profileById: profileByIdReducer,
   profileOfLoggedInUser: profileOfLoggedInUserReducer,
+  profileCreate: profileCreateReducer,
   profileUpdate: profileUpdateReducer,
 });
 
