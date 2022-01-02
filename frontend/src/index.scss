@@ -128,6 +128,9 @@ fieldset.fieldSet {
   border: 1px solid $border-colour;
   background-color: rgba(51, 51, 51, 0.6);
 }
+fieldset legend {
+  text-transform: uppercase;
+}
 
 textarea {
   background: rgba(255, 255, 255, 0.1);

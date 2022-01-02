@@ -14,6 +14,8 @@ import Button from '../../components/button/Button';
 import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 
+import moment from 'moment';
+
 const ProfileEditView = () => {
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
@@ -30,8 +32,6 @@ const ProfileEditView = () => {
   // Profile details in DB
   const profileState = useSelector((state) => state.profileOfLoggedInUser);
   const { loading, error, profile } = profileState;
-
-  console.log('cccccc', profile);
 
   const [name, setName] = useState(profile?.name);
   const [email, setEmail] = useState(profile?.email);
@@ -93,7 +93,7 @@ const ProfileEditView = () => {
   return (
     <div className="profile-edit-wrapper">
       {error ? <Message message={error} /> : null}
-      {!profile ? 'NOT PROFILE' : 'YES'}
+
       {!profile ? (
         <>
           <h3>Create a profile</h3>
@@ -113,7 +113,7 @@ const ProfileEditView = () => {
       ) : (
         <>
           <fieldset className="fieldSet item">
-            <legend>Update PROFILE form</legend>
+            <legend>Update PROFILE</legend>
             <p>
               Please note that the more complete your profile is the better it
               will feature when it is searched....
@@ -249,6 +249,37 @@ const ProfileEditView = () => {
                 disabled={isDisabled}
               ></Button>
             </form>
+          </fieldset>
+          <fieldset className="fieldSet item">
+            <legend>PROFILE Summary</legend>
+            <p>Name: {name}</p>
+            <p>Email: {email}</p>
+            <p>Description: {description}</p>
+            <p>Location: {location}</p>
+            <p>Specialisation: {specialisation}</p>
+            <p>Qualifications: {qualifications}</p>
+            <p>
+              QualificationsVerified:{' '}
+              {profile.isQualificationsVerified === true ? (
+                <i
+                  className="fa fa-check"
+                  style={{
+                    fontSize: 20 + 'px',
+                    color: 'rgba(92, 184, 92, 1)',
+                  }}
+                ></i>
+              ) : (
+                <i
+                  className="fa fa-times"
+                  style={{ fontSize: 20 + 'px', color: 'crimson' }}
+                ></i>
+              )}
+            </p>
+            <p>Telephone: {telephoneNumber}</p>
+            <p>Rating: {profile?.rating}</p>
+            <p>Reviews: {profile?.numReviews}</p>
+            <p>Create: {moment(profile?.createdAt).fromNow()}</p>
+            <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
           </fieldset>
         </>
       )}

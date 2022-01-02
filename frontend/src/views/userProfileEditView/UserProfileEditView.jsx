@@ -38,9 +38,7 @@ const UserProfileEditView = () => {
   const { loading, error, user } = userDetails;
 
   // Profile details in DB
-  const foo = useSelector((state) => state.profileOfLoggedInUser);
-
-  console.log('XXXX', foo.profile);
+  useSelector((state) => state.profileOfLoggedInUser);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -242,7 +240,8 @@ const UserProfileEditView = () => {
               ></Button>
             </form>
           </fieldset>
-          <div className="item">
+          <fieldset className="fieldSet item">
+            <legend>USER Summary</legend>
             <h3>User Profile</h3>
             <span className="small-text">ID: {user._id}</span>
             <img
@@ -253,10 +252,42 @@ const UserProfileEditView = () => {
 
             <p>Name: {user.name}</p>
             <p>Email address: {user.email}</p>
-            <p>Confirmed User: {user.isConfirmed ? 'YES' : 'Not confirmed'}</p>
-            <p>Admin: {user.isAdmin ? 'YES' : 'NO'}</p>
-          </div>
-          <hr />
+            <p>
+              Confirmed User:{' '}
+              {user.isConfirmed === true ? (
+                <i
+                  className="fa fa-check"
+                  style={{
+                    fontSize: 20 + 'px',
+                    color: 'rgba(92, 184, 92, 1)',
+                  }}
+                ></i>
+              ) : (
+                <i
+                  className="fa fa-times"
+                  style={{ fontSize: 20 + 'px', color: 'crimson' }}
+                ></i>
+              )}
+            </p>
+            <p>
+              Admin:{' '}
+              {user.isAdmin === true ? (
+                <i
+                  className="fa fa-check"
+                  style={{
+                    fontSize: 20 + 'px',
+                    color: 'rgba(92, 184, 92, 1)',
+                  }}
+                ></i>
+              ) : (
+                <i
+                  className="fa fa-times"
+                  style={{ fontSize: 20 + 'px', color: 'crimson' }}
+                ></i>
+              )}
+            </p>
+          </fieldset>
+
           <div>
             <h3>EDIT PROFILE</h3>
             <p>

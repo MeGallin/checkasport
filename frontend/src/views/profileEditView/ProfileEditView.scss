@@ -2,4 +2,22 @@
 @import '../../scssMixIn.scss';
 
 .profile-edit-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+
+  .item {
+    width: calc(50% - #{10px}); /* and this */
+  }
+}
+
+/* Responsive layout - makes a one column layout (100%) instead of a two-column layout (50%) */
+@media (max-width: 812px) {
+  .profile-edit-wrapper {
+    flex-wrap: wrap;
+    .item {
+      width: 100vw; /* and this */
+    }
+  }
 }

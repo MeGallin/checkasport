@@ -9,6 +9,8 @@ import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import LinkComp from '../../components/linkComp/LinkComp';
 
+import moment from 'moment';
+
 const FullProfileView = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -45,7 +47,10 @@ const FullProfileView = () => {
                   <h3>{profile?.category}</h3>
                   <h3>{profile?.rating} rating</h3>
                   <h3>{profile?.numReviews} reviews</h3>
-                  <p>Profile last updated: {profile?.updatedAt}</p>
+                  <p>Create: {moment(profile?.createdAt).fromNow()}</p>
+                  <p>
+                    Profile last updated: {moment(profile?.updatedAt).fromNow()}
+                  </p>
                 </div>
 
                 <div className="item">

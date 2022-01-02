@@ -4,15 +4,15 @@
 .user-profile-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 10px;
+  justify-content: center;
 
   .small-text {
     font-size: 0.7em;
   }
 
   .item {
-    width: 48%; /* and this */
+    width: calc(50% - #{10px}); /* and this */
   }
   .image {
     width: 120px;
