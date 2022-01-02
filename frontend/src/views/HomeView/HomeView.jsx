@@ -109,7 +109,15 @@ const HomeView = () => {
                         }}
                       ></span>
                     }
-                    email={profile.email}
+                    email={
+                      <a
+                        href={`mailto: ${profile?.email}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {profile?.email}
+                      </a>
+                    }
                     telephoneNumber={profile.telephoneNumber}
                     rating={profile.rating}
                     reviews={profile.numReviews}
