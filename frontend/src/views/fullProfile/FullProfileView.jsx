@@ -62,7 +62,16 @@ const FullProfileView = () => {
                   <h1>Contact Details</h1>
                   <p>{profile?.location}</p>
                   <p>Mobile number: {profile?.telephoneNumber}</p>
-                  <p>email: {profile?.email}</p>
+                  <p>
+                    email:{' '}
+                    <a
+                      href={`mailto: ${profile?.email}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {profile?.email}
+                    </a>
+                  </p>
                 </div>
               </div>
             </>

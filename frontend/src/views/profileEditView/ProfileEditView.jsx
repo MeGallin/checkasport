@@ -15,6 +15,7 @@ import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 
 import moment from 'moment';
+import axios from 'axios';
 
 const ProfileEditView = () => {
   const emailRegEx =
@@ -43,6 +44,7 @@ const ProfileEditView = () => {
   const [telephoneNumber, setTelephoneNumber] = useState(
     profile?.telephoneNumber,
   );
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (!userInfo) {
@@ -89,6 +91,33 @@ const ProfileEditView = () => {
     specialisation?.length <= 10 ||
     location?.length <= 10 ||
     !telephoneNumberRegEx.test(telephoneNumber);
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('profileImage', file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post(
+        'http://localhost:5000/api/profileUpload',
+        formData,
+        config,
+      );
+
+      setProfileImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.log(error);
+      setUploading(false);
+    }
+  };
 
   return (
     <div className="profile-edit-wrapper">
@@ -140,12 +169,19 @@ const ProfileEditView = () => {
                   !emailRegEx.test(email) ? `Invalid email address.` : null
                 }
               />
+
               <InputField
                 label="Profile Image"
                 type="text"
                 name="profileImage"
-                value={profileImage}
+                value={profileImage ? profileImage : 'sample.jpg'}
                 onChange={(e) => setProfileImage(e.target.value)}
+              />
+              {uploading ? <LoadingSpinner /> : null}
+              <InputField
+                type="file"
+                name="files"
+                onChange={uploadFileHandler}
               />
 
               <div>
@@ -253,7 +289,17 @@ const ProfileEditView = () => {
           <fieldset className="fieldSet item">
             <legend>PROFILE Summary</legend>
             <p>Name: {name}</p>
-            <p>Email: {email}</p>
+            <img
+              src={`../uploads/profiles/${profileImage}`}
+              alt={name}
+              className="image"
+            />
+            <p>
+              Email:{' '}
+              <a href={`mailto: ${email}`} target="_blank" rel="noreferrer">
+                {email}
+              </a>
+            </p>
             <p>Description: {description}</p>
             <p>Location: {location}</p>
             <p>Specialisation: {specialisation}</p>

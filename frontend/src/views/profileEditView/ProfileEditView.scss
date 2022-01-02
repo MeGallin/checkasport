@@ -10,6 +10,11 @@
   .item {
     width: calc(50% - #{10px}); /* and this */
   }
+
+  .image {
+    width: 120px;
+    height: 120px;
+  }
 }
 
 /* Responsive layout - makes a one column layout (100%) instead of a two-column layout (50%) */
