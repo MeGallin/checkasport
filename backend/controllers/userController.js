@@ -5,7 +5,7 @@ import nodemailer from 'nodemailer';
 
 // @description: Get All the users Profiles
 // @route: GET /api/users
-// @access: Public
+// @access: Admin
 const getAllUsersProfile = asyncHandler(async (req, res) => {
   const users = await User.find({});
   if (users) {
