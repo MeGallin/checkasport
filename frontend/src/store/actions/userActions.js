@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  USERS_FAILURE,
+  USERS_REQUEST,
+  USERS_SUCCESS,
   USER_DETAILS_FAILURE,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
@@ -17,6 +20,37 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
 } from '../constants/userConstants';
+
+// Get all USERS for admin only
+export const usersAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USERS_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`http://localhost:5000/api/users`, config);
+    dispatch({ type: USERS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USERS_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 export const loginAction = (email, password) => async (dispatch) => {
   try {

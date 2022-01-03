@@ -131,27 +131,29 @@ const ProfileEditView = () => {
   };
 
   return (
-    <div className="profile-edit-wrapper">
+    <>
       {error ? <Message message={error} /> : null}
 
       {!profile ? (
         <>
-          <h3>Create a profile</h3>
-          <p>Please click the button below to create a sample profile.</p>
-          <p>You will then be re-directed to your USER profile page.</p>
-          <Button
-            colour="transparent"
-            text="Create your profile"
-            className="btn"
-            title="Create your profile"
-            disabled={false}
-            onClick={handleCreateProfile}
-          ></Button>
+          <fieldset className="fieldSet item">
+            <legend>Create a profile</legend>
+            <p>Please click the button below to create a sample profile.</p>
+            <p>You will then be re-directed to your USER profile page.</p>
+            <Button
+              colour="transparent"
+              text="Create your profile"
+              className="btn"
+              title="Create your profile"
+              disabled={false}
+              onClick={handleCreateProfile}
+            ></Button>
+          </fieldset>
         </>
       ) : loading ? (
         <LoadingSpinner />
       ) : (
-        <>
+        <div className="profile-edit-wrapper">
           <fieldset className="fieldSet item">
             <legend>Update PROFILE</legend>
             <p>
@@ -218,7 +220,7 @@ const ProfileEditView = () => {
               </div>
 
               <div>
-                <label>keyWordSearch </label>
+                <label>keywords (Search) </label>
                 {keyWordSearch?.length < 10 ? (
                   <span className="small-text">
                     must have at least {keyWordSearch.length} characters.
@@ -362,9 +364,9 @@ const ProfileEditView = () => {
             <p>Create: {moment(profile?.createdAt).fromNow()}</p>
             <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
           </fieldset>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,8 @@
 import {
+  USERS_FAILURE,
+  USERS_REQUEST,
+  USERS_RESET,
+  USERS_SUCCESS,
   USER_DETAILS_FAILURE,
   USER_DETAILS_REQUEST,
   USER_DETAILS_RESET,
@@ -18,6 +22,26 @@ import {
   USER_UPDATE_PROFILE_RESET,
   USER_UPDATE_PROFILE_SUCCESS,
 } from '../constants/userConstants';
+
+//Get all user details
+export const usersReducer = (state = { userProfiles: [] }, action) => {
+  switch (action.type) {
+    case USERS_REQUEST:
+      return { ...state, loading: true };
+    case USERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        userProfiles: action.payload,
+      };
+    case USERS_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case USERS_RESET:
+      return { userProfiles: [] };
+    default:
+      return { ...state };
+  }
+};
 
 export const userLoginReducer = (state = {}, action) => {
   switch (action.type) {

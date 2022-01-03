@@ -240,9 +240,10 @@ const UserProfileEditView = () => {
               ></Button>
             </form>
           </fieldset>
+
           <fieldset className="fieldSet item">
-            <legend>USER Summary</legend>
-            <h3>User Profile</h3>
+            <legend>{user.name} Profile</legend>
+
             <span className="small-text">ID: {user._id}</span>
             <img
               src={`../uploads/profiles/${user.profileImage}`}
@@ -288,13 +289,25 @@ const UserProfileEditView = () => {
             </p>
           </fieldset>
 
-          <div>
-            <h3>EDIT PROFILE</h3>
+          {user.isAdmin ? (
+            <fieldset className="fieldSet item">
+              <legend>{user.name} Options</legend>
+              <h3>Admin Options</h3>
+              <p>
+                List all <LinkComp route="admin-users" routeName="users" /> with
+                a option to edit or delete a user.{' '}
+              </p>
+              <p>Verify qualification</p>
+            </fieldset>
+          ) : null}
+
+          <fieldset className="fieldSet item">
+            <legend>{user.name} PROFILE</legend>
             <p>
               Click <LinkComp route="profile-edit" routeName="here" /> to edit
               your profile.
             </p>
-          </div>
+          </fieldset>
         </>
       )}
     </div>

@@ -20,6 +20,9 @@ router
 
 router.route('/api/user/profile/:id').get(getUserProfileById);
 
-router.route('/api/users').post(registerUser).get(getAllUsersProfile);
+router
+  .route('/api/users')
+  .post(registerUser)
+  .get(protect, admin, getAllUsersProfile);
 
 export default router;
