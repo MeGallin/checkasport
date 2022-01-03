@@ -24,19 +24,28 @@ const HomeView = () => {
       profile.name ||
       profile.description ||
       profile.location ||
-      profile.specialisation
+      profile.specialisation ||
+      profile.keyWordSearch
     ) {
-      const name = profile.name;
       const description = profile.description;
+      const name = profile.name;
       const location = profile.location;
       const specialisation = profile?.specialisation;
+      const keyWordSearch = profile?.keyWordSearch;
+
       const search = description.concat(
         ...location,
         ...name,
         ...specialisation,
       );
 
-      return search.toLowerCase().includes(keyword.toLowerCase());
+      const found =
+        search.toLowerCase().includes(keyword.toLowerCase()) ||
+        keyWordSearch.toLowerCase().includes(keyword.toLowerCase());
+
+      if (found) {
+        return found;
+      }
     }
     return false;
   });
@@ -52,7 +61,7 @@ const HomeView = () => {
       ? current
       : current.replace(
           reggie,
-          '<span style="color:rgba(92, 184, 92, 1); text-decoration:underline" >' +
+          '<span style="color:rgba(92, 184, 92, 1); text-decoration:underline;" >' +
             keyword +
             '</span>',
         );

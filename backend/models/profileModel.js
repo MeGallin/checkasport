@@ -38,6 +38,9 @@ const profileSchema = mongoose.Schema(
     telephoneNumber: {
       type: String,
     },
+    keyWordSearch: {
+      type: String,
+    },
     rating: {
       type: Number,
       default: 0,
