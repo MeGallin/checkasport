@@ -41,6 +41,7 @@ const createProfile = asyncHandler(async (req, res) => {
     qualifications: 'Sample QUALIFICATIONS',
     isQualificationsVerified: false,
     telephoneNumber: '12345678901',
+    keyWordSearch: 'Sample, fitness,massage,London, sports massage, etc',
     rating: 0,
     description: 'Sample Description',
     numReviews: 0,
@@ -78,6 +79,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     specialisation,
     location,
     telephoneNumber,
+    keyWordSearch,
   } = req.body;
 
   // Find all profiles
@@ -100,6 +102,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     searchId[0].specialisation = specialisation;
     searchId[0].location = location;
     searchId[0].telephoneNumber = telephoneNumber;
+    searchId[0].keyWordSearch = keyWordSearch;
     const updateProfile = await searchId[0].save();
     res.json(updateProfile);
   } else {

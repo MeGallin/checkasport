@@ -42,6 +42,7 @@ const ProfileEditView = () => {
   const [qualifications, setQualifications] = useState('');
   const [location, setLocation] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
+  const [keyWordSearch, setKeyWordSearch] = useState('');
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
@@ -60,6 +61,7 @@ const ProfileEditView = () => {
     setQualifications(profile?.qualifications);
     setLocation(profile?.location);
     setTelephoneNumber(profile?.telephoneNumber);
+    setKeyWordSearch(profile?.keyWordSearch);
 
     const abortConst = new AbortController();
     return () => {
@@ -87,6 +89,7 @@ const ProfileEditView = () => {
         qualifications,
         location,
         telephoneNumber,
+        keyWordSearch,
       }),
     );
   };
@@ -97,7 +100,8 @@ const ProfileEditView = () => {
     description?.length < 10 ||
     specialisation?.length <= 10 ||
     location?.length <= 10 ||
-    !telephoneNumberRegEx.test(telephoneNumber);
+    !telephoneNumberRegEx.test(telephoneNumber) ||
+    keyWordSearch?.length <= 10;
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -208,6 +212,30 @@ const ProfileEditView = () => {
                   error={
                     description?.length <= 10
                       ? `Description field must contain at least 10 characters!`
+                      : null
+                  }
+                />
+              </div>
+
+              <div>
+                <label>keyWordSearch </label>
+                {keyWordSearch?.length < 10 ? (
+                  <span className="small-text">
+                    must have at least {keyWordSearch.length} characters.
+                  </span>
+                ) : null}
+                <textarea
+                  value={keyWordSearch}
+                  onChange={(e) => setKeyWordSearch(e.target.value)}
+                  type="text"
+                  name="keyWordSearch"
+                  required
+                  className={
+                    keyWordSearch?.length <= 10 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    keyWordSearch?.length <= 10
+                      ? `KeyWordSearch field must contain at least 10 characters!`
                       : null
                   }
                 />

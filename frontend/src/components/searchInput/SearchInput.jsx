@@ -20,6 +20,7 @@ const SearchInput = ({
           placeholder={placeholder}
           onChange={handleSearch}
           value={value}
+          multiple
         ></input>
       </label>
     </div>
