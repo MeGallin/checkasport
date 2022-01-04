@@ -124,6 +124,20 @@ const updateProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: Delete a single user
+// @route: DELETE /api/profiles/admin/:id
+// @access: PRIVATE/Admin
+const deleteProfile = asyncHandler(async (req, res) => {
+  const profile = await Profile.findById(req.params.id);
+  if (profile) {
+    await profile.remove();
+    res.json({ message: 'Profile successfully removed' });
+  } else {
+    res.status(404);
+    throw new Error('Profile Not Found');
+  }
+});
+
 export {
   getAllProfiles,
   getAllProfilesAdmin,
@@ -131,4 +145,5 @@ export {
   createProfile,
   getProfile,
   updateProfile,
+  deleteProfile,
 };

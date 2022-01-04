@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './AdminProfileView.scss';
 
-import { profilesAdminAction } from '../../store/actions/profileActions';
+import {
+  profilesAdminAction,
+  deleteProfileAction,
+} from '../../store/actions/profileActions';
 
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import Message from '../../components/message/Message';
@@ -27,21 +30,30 @@ const AdminProfileView = () => {
   }, [dispatch, navigate, userInfo]);
 
   const profilesState = useSelector((state) => state.profilesAdmin);
-  const { loading, error, profilesAdmin } = profilesState;
+  const { loading, error, success, profilesAdmin } = profilesState;
 
-  console.log('GGGG', profilesAdmin);
+  const handleDeleteProfile = (id) => {
+    // Dispatch user delete action
+    if (window.confirm(`Are you sure you want to delete ${id}`)) {
+      dispatch(deleteProfileAction(id));
+    }
+  };
 
   return (
     <>
       {error ? <Message message={error} /> : null}
+      {success ? (
+        <Message message="Profile has been successfully deleted" />
+      ) : null}
       {loading ? (
         <LoadingSpinner />
       ) : (
         <div className="admin-profile-view-wrapper">
+          <p>There currently {profilesAdmin.length} profiles.</p>
           <div className="heading admin-profile-inner-wrapper">
             <div className="item">NAME</div>
             <div className="item">Qualifications</div>
-            <div className="item">Description</div>
+            <div className="item wider-item">Description</div>
             <div className="item">Rating</div>
             <div className="item">Reviews</div>
             <div className="item">CREATED</div>
@@ -50,6 +62,14 @@ const AdminProfileView = () => {
           {profilesAdmin.map((profile) => (
             <div key={profile._id} className="admin-profile-inner-wrapper">
               <div className="item">
+                <Button
+                  colour="transparent"
+                  text="Delete Profile"
+                  className="btn"
+                  title="Delete Profile"
+                  onClick={() => handleDeleteProfile(profile._id)}
+                  disabled={!profile._id}
+                ></Button>
                 <p>{profile.name}</p>
                 <img
                   className="image"
@@ -57,7 +77,7 @@ const AdminProfileView = () => {
                   alt={profile.name}
                 />
                 <p>{profile.email}</p>
-                <p>Contact number:{profile.telephoneNumber}</p>
+                <p>{profile.telephoneNumber}</p>
               </div>
 
               <div className="item">
@@ -77,7 +97,7 @@ const AdminProfileView = () => {
                 )}
               </div>
 
-              <div className="item">
+              <div className="item wider-item">
                 <h6>Description</h6>
                 {profile.description}
                 <h6>Location</h6>

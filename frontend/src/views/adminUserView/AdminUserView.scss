@@ -6,23 +6,47 @@
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    background-color: $secondary-bg-colour;
+    background-color: $main-bg-colour;
     z-index: 100;
   }
   .image {
+    margin: 0 auto;
     width: 120px;
     height: 120px;
   }
   .admin-view-inner-wrapper {
-    border: green 1px solid;
+    border: black 2px solid;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0.75rem;
+  }
+
+  Button {
+    margin: 0 auto;
   }
 
   .item {
     width: 100%;
     height: auto;
     text-align: center;
+  }
+}
+
+/* Responsive layout - makes a one column layout (100%) instead of a two-column layout (50%) */
+@media (max-width: 812px) {
+  .admin-view-wrapper {
+    .heading {
+      display: none;
+    }
+    .admin-view-inner-wrapper {
+      flex-direction: column;
+    }
+    .item {
+      width: 100% !important;
+    }
+    .item + .wider-item {
+      width: 100% !important;
+    }
   }
 }
