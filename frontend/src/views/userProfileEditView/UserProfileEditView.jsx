@@ -294,8 +294,13 @@ const UserProfileEditView = () => {
               <legend>{user.name} Options</legend>
               <h3>Admin Options</h3>
               <p>
-                List all <LinkComp route="admin-users" routeName="users" /> with
+                List all <LinkComp route="admin-users" routeName="USERS" /> with
                 a option to edit or delete a user.{' '}
+              </p>
+              <p>
+                List all{' '}
+                <LinkComp route="admin-profiles" routeName="PROFILES" /> with a
+                option to edit or delete a user.{' '}
               </p>
               <p>Verify qualification</p>
             </fieldset>

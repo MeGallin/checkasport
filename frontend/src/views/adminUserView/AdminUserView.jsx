@@ -46,7 +46,7 @@ const AdminView = () => {
       ) : (
         <>
           <div div className="admin-view-wrapper">
-            <div className=" admin-view-inner-wrapper">
+            <div className=" heading admin-view-inner-wrapper">
               <div className="item">NAME</div>
               <div className="item">ADMIN</div>
               <div className="item">CONFIRMED</div>

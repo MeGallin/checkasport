@@ -15,6 +15,7 @@ import {
 
 import {
   profilesReducer,
+  profilesAdminReducer,
   profileByIdReducer,
   profileOfLoggedInUserReducer,
   profileCreateReducer,
@@ -31,6 +32,7 @@ const reducer = combineReducers({
   userUpdateProfile: userUpdateProfileReducer,
   userDelete: userDeleteReducer,
   profiles: profilesReducer,
+  profilesAdmin: profilesAdminReducer,
   profileById: profileByIdReducer,
   profileOfLoggedInUser: profileOfLoggedInUserReducer,
   profileCreate: profileCreateReducer,
