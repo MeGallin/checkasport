@@ -3,6 +3,9 @@ import {
   USERS_FAILURE,
   USERS_REQUEST,
   USERS_SUCCESS,
+  USER_DELETE_FAILURE,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
   USER_DETAILS_FAILURE,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
@@ -202,6 +205,35 @@ export const userProfileByIdAction = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_FULL_DETAILS_BY_ID_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+// Delete user profile
+export const deleteUserAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`http://localhost:5000/api/users/${id}`, config);
+    dispatch({ type: USER_DELETE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: USER_DELETE_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

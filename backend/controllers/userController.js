@@ -177,6 +177,20 @@ const getUserProfileById = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: Delete a single user
+// @route: DELETE /api/users/:id
+// @access: PRIVATE/Admin
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    await user.remove();
+    res.json({ message: 'User successfully removed' });
+  } else {
+    res.status(404);
+    throw new Error('User Not Found');
+  }
+});
+
 export {
   authUser,
   getUserProfile,
@@ -184,4 +198,5 @@ export {
   updateUserProfile,
   getAllUsersProfile,
   getUserProfileById,
+  deleteUser,
 };
