@@ -10,6 +10,9 @@ import {
   PROFILE_CREATE_REQUEST,
   PROFILE_CREATE_RESET,
   PROFILE_CREATE_SUCCESS,
+  PROFILE_DELETE_FAILURE,
+  PROFILE_DELETE_REQUEST,
+  PROFILE_DELETE_SUCCESS,
   PROFILE_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_REQUEST,
@@ -124,6 +127,24 @@ export const profileUpdateReducer = (state = {}, action) => {
       return { ...state, loading: false, error: action.payload };
     case PROFILE_UPDATE_RESET:
       return { profile: {} };
+
+    default:
+      return { ...state };
+  }
+};
+//Delete User
+export const profileDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PROFILE_DELETE_REQUEST:
+      return { ...state, loading: true };
+    case PROFILE_DELETE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case PROFILE_DELETE_FAILURE:
+      return { ...state, loading: false, error: action.payload };
 
     default:
       return { ...state };

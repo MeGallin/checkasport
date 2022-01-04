@@ -6,6 +6,7 @@ import {
   createProfile,
   getProfile,
   updateProfile,
+  deleteProfile,
 } from '../controllers/profileController.js';
 
 import { protect, admin } from '../middleware/authMiddleware.js';
@@ -21,6 +22,9 @@ router
 
 router.route('/api/profile').get(protect, getProfile);
 //Get all profiles ADMIN route
-router.route('/api/profiles/admin').get(protect, admin, getAllProfilesAdmin);
+router
+  .route('/api/profiles/admin/:id')
+  .get(protect, admin, getAllProfilesAdmin)
+  .delete(protect, admin, deleteProfile);
 
 export default router;

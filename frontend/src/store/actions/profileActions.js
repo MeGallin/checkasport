@@ -9,6 +9,9 @@ import {
   PROFILE_CREATE_FAILURE,
   PROFILE_CREATE_REQUEST,
   PROFILE_CREATE_SUCCESS,
+  PROFILE_DELETE_FAILURE,
+  PROFILE_DELETE_REQUEST,
+  PROFILE_DELETE_SUCCESS,
   PROFILE_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_REQUEST,
@@ -58,7 +61,7 @@ export const profilesAdminAction = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/profiles/admin`,
+      `http://localhost:5000/api/profiles/admin/:id`,
       config,
     );
     dispatch({ type: PROFILE_ADMIN_SUCCESS, payload: data });
@@ -186,6 +189,39 @@ export const profileUpdateAction = (profile) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PROFILE_UPDATE_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+// Delete profile ADMIN
+export const deleteProfileAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PROFILE_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(
+      `http://localhost:5000/api/profiles/admin/${id}`,
+      config,
+    );
+    dispatch({ type: PROFILE_DELETE_SUCCESS });
+    dispatch(profilesAdminAction());
+  } catch (error) {
+    dispatch({
+      type: PROFILE_DELETE_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

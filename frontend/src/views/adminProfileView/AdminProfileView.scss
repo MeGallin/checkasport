@@ -2,31 +2,60 @@
 @import '../../scssMixIn.scss';
 
 .admin-profile-view-wrapper {
+  $description-width: 60%;
   .heading {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    background-color: $secondary-bg-colour;
+    background-color: $main-bg-colour;
     z-index: 100;
   }
   .image {
+    margin: 0 auto;
     width: 120px;
     height: 120px;
   }
   .admin-profile-inner-wrapper {
-    border: green 1px solid;
+    border: black 2px solid;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0.75rem;
+  }
+
+  Button {
+    margin: 0 auto;
   }
 
   .item {
-    width: 100%;
     height: auto;
     text-align: center;
+    width: (100% / 6);
+  }
+  .item + .wider-item {
+    text-align: left;
+    width: $description-width;
   }
 
   h6 {
     margin: 0;
+  }
+}
+
+/* Responsive layout */
+@media (max-width: 812px) {
+  .admin-profile-view-wrapper {
+    .heading {
+      display: none;
+    }
+    .admin-profile-inner-wrapper {
+      flex-direction: column;
+    }
+    .item {
+      width: 100% !important;
+    }
+    .item + .wider-item {
+      width: 100% !important;
+    }
   }
 }
