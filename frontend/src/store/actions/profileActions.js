@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  PROFILE_ADMIN_FAILURE,
+  PROFILE_ADMIN_REQUEST,
+  PROFILE_ADMIN_SUCCESS,
   PROFILE_BY_ID_FAILURE,
   PROFILE_BY_ID_REQUEST,
   PROFILE_BY_ID_SUCCESS,
@@ -17,7 +20,7 @@ import {
   PROFILE_UPDATE_SUCCESS,
 } from '../constants/profileConstants';
 
-// Get all profiles
+// Get all profiles public
 export const profilesAction = () => async (dispatch, getState) => {
   try {
     dispatch({
@@ -29,6 +32,39 @@ export const profilesAction = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PROFILE_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+// Get all profiles ADMIN
+export const profilesAdminAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PROFILE_ADMIN_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(
+      `http://localhost:5000/api/profiles/admin`,
+      config,
+    );
+    dispatch({ type: PROFILE_ADMIN_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PROFILE_ADMIN_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

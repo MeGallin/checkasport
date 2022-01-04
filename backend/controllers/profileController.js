@@ -14,6 +14,19 @@ const getAllProfiles = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: Get All the users Profiles
+// @route: GET /api/profiles
+// @access: Admin
+const getAllProfilesAdmin = asyncHandler(async (req, res) => {
+  const profiles = await Profile.find({});
+  if (profiles) {
+    res.json(profiles);
+  } else {
+    res.status(404);
+    throw new Error('No users found');
+  }
+});
+
 // @description: Fetch single Profile
 // @route: GET /api/profile/:id
 // @access: Public
@@ -113,6 +126,7 @@ const updateProfile = asyncHandler(async (req, res) => {
 
 export {
   getAllProfiles,
+  getAllProfilesAdmin,
   getProfileById,
   createProfile,
   getProfile,

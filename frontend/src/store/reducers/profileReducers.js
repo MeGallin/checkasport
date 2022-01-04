@@ -1,4 +1,8 @@
 import {
+  PROFILE_ADMIN_FAILURE,
+  PROFILE_ADMIN_REQUEST,
+  PROFILE_ADMIN_RESET,
+  PROFILE_ADMIN_SUCCESS,
   PROFILE_BY_ID_FAILURE,
   PROFILE_BY_ID_REQUEST,
   PROFILE_BY_ID_SUCCESS,
@@ -34,6 +38,25 @@ export const profilesReducer = (state = { profiles: [] }, action) => {
       return { ...state, loading: false, error: action.payload };
     case PROFILE_RESET:
       return { profiles: [] };
+    default:
+      return { ...state };
+  }
+};
+// Get all profiles
+export const profilesAdminReducer = (state = { profilesAdmin: [] }, action) => {
+  switch (action.type) {
+    case PROFILE_ADMIN_REQUEST:
+      return { ...state, loading: true };
+    case PROFILE_ADMIN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        profilesAdmin: action.payload,
+      };
+    case PROFILE_ADMIN_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case PROFILE_ADMIN_RESET:
+      return { profilesAdmin: [] };
     default:
       return { ...state };
   }
