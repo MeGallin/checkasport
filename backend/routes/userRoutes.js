@@ -6,6 +6,7 @@ import {
   updateUserProfile,
   getAllUsersProfile,
   getUserProfileById,
+  deleteUser,
 } from '../controllers/userController.js';
 
 import { protect, admin } from '../middleware/authMiddleware.js';
@@ -16,7 +17,8 @@ router.post('/api/users/login', authUser);
 router
   .route('/api/users/:id')
   .get(protect, getUserProfile)
-  .put(protect, updateUserProfile);
+  .put(protect, updateUserProfile)
+  .delete(protect, admin, deleteUser);
 
 router.route('/api/user/profile/:id').get(getUserProfileById);
 

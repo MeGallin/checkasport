@@ -1,23 +1,41 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import './AdminUserView.scss';
 
-import { usersAction } from '../../store/actions/userActions';
+import { usersAction, deleteUserAction } from '../../store/actions/userActions';
 
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import Message from '../../components/message/Message';
+import Button from '../../components/button/Button';
 
 import moment from 'moment';
 
 const AdminView = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Logged in user Details saved in local storage
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
+    if (!userInfo) {
+      navigate('/');
+    }
     dispatch(usersAction());
-  }, [dispatch]);
+  }, [dispatch, navigate, userInfo]);
 
   const usersState = useSelector((state) => state.users);
   const { loading, error, userProfiles } = usersState;
+
+  const handleDeleteUser = (id) => {
+    // Dispatch user delete action
+    if (window.confirm(`Are you sure you want to delete ${id}`)) {
+      dispatch(deleteUserAction(id));
+      dispatch(usersAction());
+    }
+  };
 
   return (
     <>
@@ -45,6 +63,14 @@ const AdminView = () => {
                     alt={userProfile.name}
                   />
                   <p>{userProfile.email}</p>
+                  <Button
+                    colour="transparent"
+                    text="Delete User"
+                    className="btn"
+                    title="Delete Profile"
+                    onClick={() => handleDeleteUser(userProfile._id)}
+                    disabled={!userProfile.isConfirmed}
+                  ></Button>
                 </div>
 
                 <div className="item">

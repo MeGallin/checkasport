@@ -3,6 +3,9 @@ import {
   USERS_REQUEST,
   USERS_RESET,
   USERS_SUCCESS,
+  USER_DELETE_FAILURE,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
   USER_DETAILS_FAILURE,
   USER_DETAILS_REQUEST,
   USER_DETAILS_RESET,
@@ -121,6 +124,24 @@ export const userProfileByIdReducer = (state = { user: {} }, action) => {
     case USER_FULL_DETAILS_BY_ID_SUCCESS:
       return { ...state, loading: false, profile: action.payload };
     case USER_FULL_DETAILS_BY_ID_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+
+    default:
+      return { ...state };
+  }
+};
+//Delete User
+export const userDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_DELETE_REQUEST:
+      return { ...state, loading: true };
+    case USER_DELETE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case USER_DELETE_FAILURE:
       return { ...state, loading: false, error: action.payload };
 
     default:
