@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './AdminUserView.scss';
@@ -12,6 +12,7 @@ import Button from '../../components/button/Button';
 import moment from 'moment';
 
 const AdminView = () => {
+  const [showAdmin, setShowAdmin] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,6 +38,10 @@ const AdminView = () => {
     }
   };
 
+  const handleShowAdmin = () => {
+    setShowAdmin(!showAdmin);
+  };
+
   return (
     <>
       {error ? <Message message={error} /> : null}
@@ -45,7 +50,15 @@ const AdminView = () => {
         <LoadingSpinner />
       ) : (
         <>
-          <div div className="admin-view-wrapper">
+          <Button
+            colour="transparent"
+            text={!showAdmin ? 'Show Admin' : 'Hide Admin'}
+            className="btn"
+            title="Show Admin"
+            onClick={handleShowAdmin}
+            disabled={false}
+          ></Button>
+          <div className="admin-view-wrapper">
             <div className=" heading admin-view-inner-wrapper">
               <div className="item">NAME</div>
               <div className="item">ADMIN</div>
@@ -53,9 +66,19 @@ const AdminView = () => {
               <div className="item">CREATED</div>
               <div className="item">UPDATED</div>
             </div>
+
             {userProfiles.map((userProfile) => (
-              <div key={userProfile._id} className="admin-view-inner-wrapper">
-                <div className="item">
+              <div
+                key={userProfile._id}
+                className={
+                  !showAdmin && userProfile.isAdmin
+                    ? 'admin-view-inner-wrapper isAdmin'
+                    : 'admin-view-inner-wrapper'
+                }
+              >
+                <div
+                  className={userProfile.isAdmin ? 'item showIsAdmin' : 'item'}
+                >
                   <p>{userProfile.name}</p>
                   <img
                     className="image"
@@ -67,9 +90,13 @@ const AdminView = () => {
                     colour="transparent"
                     text="Delete User"
                     className="btn"
-                    title="Delete Profile"
+                    title={
+                      userProfile.isAdmin
+                        ? 'You CANT delete ADMIN'
+                        : 'Delete User'
+                    }
                     onClick={() => handleDeleteUser(userProfile._id)}
-                    disabled={!userProfile.isConfirmed}
+                    disabled={!userProfile.isConfirmed || userProfile.isAdmin}
                   ></Button>
                 </div>
 

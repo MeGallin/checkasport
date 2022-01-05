@@ -2,7 +2,7 @@
 @import '../../scssMixIn.scss';
 
 .admin-profile-view-wrapper {
-  $description-width: 60%;
+  $description-width: 52%;
   .heading {
     position: -webkit-sticky;
     position: sticky;
@@ -12,8 +12,9 @@
   }
   .image {
     margin: 0 auto;
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
   }
   .admin-profile-inner-wrapper {
     border: black 2px solid;
@@ -29,8 +30,10 @@
 
   .item {
     height: auto;
+    overflow-y: auto;
     text-align: center;
     width: (100% / 6);
+    font-size: 0.8em;
   }
   .item + .wider-item {
     text-align: left;
