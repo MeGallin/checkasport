@@ -16,10 +16,12 @@
     display: flex;
     justify-content: space-between;
     background-color: $success;
+    color: $main-bg-colour;
     width: 100%;
     padding: inherit;
     border-radius: 4px;
   }
+
   .warning {
     display: flex;
     justify-content: space-between;

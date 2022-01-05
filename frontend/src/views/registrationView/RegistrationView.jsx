@@ -21,17 +21,23 @@ const RegistrationView = () => {
   const dispatch = useDispatch();
 
   const userRegistration = useSelector((state) => state.userRegistration);
-  const { loading, error, userInfo } = userRegistration;
+  const { loading, error, success, userInfo } = userRegistration;
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
+  const [registrationConfirmation, setRegistrationConfirmation] = useState('');
 
   useEffect(() => {
     if (userInfo && userInfo !== undefined) {
-      navigate('/');
+      const warn =
+        userInfo.name +
+        ' your profile is created.' +
+        ' You should have received an email with a link asking to confirm your email address.' +
+        ' Please do this before logging in, in order to give you full functionality.';
+      setRegistrationConfirmation(warn);
     }
   }, [userInfo, navigate]);
 
@@ -54,6 +60,8 @@ const RegistrationView = () => {
     <div className="registrationView-wrapper">
       {error ? <Message message={error} /> : null}
       {message ? <Message message={message} /> : null}
+      {success ? <Message message={registrationConfirmation} success /> : null}
+
       {!userInfo && loading ? (
         <LoadingSpinner />
       ) : (
