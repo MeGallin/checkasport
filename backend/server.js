@@ -10,6 +10,7 @@ import confirmEmailRoutes from './routes/confirmEmailRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import uploaderRoutes from './routes/uploadRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
+import authUserReview from './routes/userReviewRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -28,6 +29,8 @@ app.use('/', userRoutes);
 app.use('/', uploaderRoutes);
 // Profiles Routes
 app.use('/', profileRoutes);
+// User Review routes
+app.use('/', authUserReview);
 
 //create static folder
 const __dirname = path.resolve();

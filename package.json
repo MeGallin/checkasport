@@ -10,7 +10,9 @@
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
     "profile-data:import": "node backend/profileSeeder",
-    "profile-data:destroy": "node backend/profileSeeder -d"
+    "profile-data:destroy": "node backend/profileSeeder -d",
+    "userReview-data:import": "node backend/userReviewerSeeder",
+    "userReview-data:destroy": "node backend/userReviewerSeeder -d"
   },
   "repository": {
     "type": "git",
