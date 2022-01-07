@@ -1,5 +1,30 @@
 import mongoose from 'mongoose';
 
+const reviewsSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    rating: {
+      type: Number,
+      required: true,
+    },
+    comment: {
+      type: String,
+      required: true,
+    },
+    userReviewer: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'UserReviewer',
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
+
 const profileSchema = mongoose.Schema(
   {
     user: {
@@ -53,6 +78,7 @@ const profileSchema = mongoose.Schema(
     keyWordSearchFour: {
       type: String,
     },
+    reviews: [reviewsSchema],
     rating: {
       type: Number,
       default: 0,

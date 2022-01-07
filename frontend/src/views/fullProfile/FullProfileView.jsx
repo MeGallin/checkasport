@@ -72,6 +72,8 @@ const FullProfileView = () => {
                       {profile?.email}
                     </a>
                   </p>
+                  <h2>Link to reviewer user login page</h2>
+                  <LinkComp route="reviewer-login" routeName="REVIEWER LOGIN" />
                 </div>
               </div>
             </>
