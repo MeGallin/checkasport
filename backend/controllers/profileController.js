@@ -47,7 +47,7 @@ const createProfile = asyncHandler(async (req, res) => {
   const profile = new Profile({
     user: req.user._id,
     name: 'Sample name',
-    email: 'sample@mail.com',
+    email: 'sample1@mail.com',
     profileImage: 'sample.png',
     specialisation: 'sample Specialisation',
     location: 'Sample Location',
@@ -55,6 +55,10 @@ const createProfile = asyncHandler(async (req, res) => {
     isQualificationsVerified: false,
     telephoneNumber: '12345678901',
     keyWordSearch: 'Sample, fitness,massage,London, sports massage, etc',
+    keyWordSearchOne: 'one',
+    keyWordSearchTwo: 'two',
+    keyWordSearchThree: 'three',
+    keyWordSearchFour: 'four',
     rating: 0,
     description: 'Sample Description',
     numReviews: 0,
@@ -93,6 +97,10 @@ const updateProfile = asyncHandler(async (req, res) => {
     location,
     telephoneNumber,
     keyWordSearch,
+    keyWordSearchOne,
+    keyWordSearchTwo,
+    keyWordSearchThree,
+    keyWordSearchFour,
   } = req.body;
 
   // Find all profiles
@@ -116,6 +124,11 @@ const updateProfile = asyncHandler(async (req, res) => {
     searchId[0].location = location;
     searchId[0].telephoneNumber = telephoneNumber;
     searchId[0].keyWordSearch = keyWordSearch;
+    searchId[0].keyWordSearchOne = keyWordSearchOne;
+    searchId[0].keyWordSearchTwo = keyWordSearchTwo;
+    searchId[0].keyWordSearchThree = keyWordSearchThree;
+    searchId[0].keyWordSearchFour = keyWordSearchFour;
+
     const updateProfile = await searchId[0].save();
     res.json(updateProfile);
   } else {

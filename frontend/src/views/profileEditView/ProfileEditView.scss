@@ -14,6 +14,13 @@
     width: 120px;
     height: 120px;
   }
+  .input-wrapper {
+    border: 1px solid $border-colour;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5em;
+    justify-content: space-between;
+  }
 }
 
 /* Responsive layout - makes a one column layout (100%) instead of a two-column layout (50%) */

@@ -41,6 +41,18 @@ const profileSchema = mongoose.Schema(
     keyWordSearch: {
       type: String,
     },
+    keyWordSearchOne: {
+      type: String,
+    },
+    keyWordSearchTwo: {
+      type: String,
+    },
+    keyWordSearchThree: {
+      type: String,
+    },
+    keyWordSearchFour: {
+      type: String,
+    },
     rating: {
       type: Number,
       default: 0,

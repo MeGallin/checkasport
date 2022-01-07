@@ -42,8 +42,13 @@ const ProfileEditView = () => {
   const [qualifications, setQualifications] = useState('');
   const [location, setLocation] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
-  const [keyWordSearch, setKeyWordSearch] = useState('');
+  const [keyWordSearch, setkeyWordSearch] = useState('');
   const [uploading, setUploading] = useState(false);
+
+  const [keyWordSearchOne, setkeyWordSearchOne] = useState('');
+  const [keyWordSearchTwo, setkeyWordSearchTwo] = useState('');
+  const [keyWordSearchThree, setkeyWordSearchThree] = useState('');
+  const [keyWordSearchFour, setkeyWordSearchFour] = useState('');
 
   useEffect(() => {
     if (!userInfo) {
@@ -61,7 +66,11 @@ const ProfileEditView = () => {
     setQualifications(profile?.qualifications);
     setLocation(profile?.location);
     setTelephoneNumber(profile?.telephoneNumber);
-    setKeyWordSearch(profile?.keyWordSearch);
+    setkeyWordSearch(profile?.keyWordSearch);
+    setkeyWordSearchOne(profile?.keyWordSearchOne);
+    setkeyWordSearchTwo(profile?.keyWordSearchTwo);
+    setkeyWordSearchThree(profile?.keyWordSearchThree);
+    setkeyWordSearchFour(profile?.keyWordSearchFour);
 
     const abortConst = new AbortController();
     return () => {
@@ -78,6 +87,50 @@ const ProfileEditView = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const arr = [
+      keyWordSearchOne.trim() + ' ',
+      keyWordSearchTwo.trim() + ' ',
+      keyWordSearchThree.trim() + ' ',
+      keyWordSearchFour.trim() + ' ',
+    ];
+    const permutations = (len, val, existing) => {
+      if (len === 0) {
+        res.push(val);
+        return;
+      }
+      for (let i = 0; i < arr.length; i++) {
+        // so that we do not repeat the item, using an array here makes it
+
+        if (!existing[i]) {
+          existing[i] = true;
+          permutations(len - 1, val + arr[i], existing);
+          existing[i] = false;
+        }
+      }
+    };
+    let res = [];
+    const buildPermuations = (arr = []) => {
+      for (let i = 0; i < arr.length; i++) {
+        permutations(arr.length - i, ' ', []);
+      }
+    };
+    buildPermuations(arr);
+
+    const purekeyWordSearch = description.concat(
+      name,
+      location,
+      specialisation,
+    );
+    const pure = purekeyWordSearch.replace(
+      /\b(?:and|'|"|""|this|must|just|something|any|anything|say|help|can|can't|cant|path|during|after|by|however|is|we| we'll|to|you|your|ll|highly|from|our|the|in|for|of|an|or|i|am|me|my|other|have|if|you|are|come|with|through|going|over|past|years|year|cater|getting|currently|current|have|having|people|worked|work|. |)\b/gi,
+      '',
+    );
+
+    // Add this to remove duplicates
+    // const removeDuplicates = Array.from(new Set(pure.split(' '))).toString();
+    // console.log(removeDuplicates.toString());
+
     // Dispatch UPDATE PROFILE Action
     dispatch(
       profileUpdateAction({
@@ -89,7 +142,11 @@ const ProfileEditView = () => {
         qualifications,
         location,
         telephoneNumber,
-        keyWordSearch,
+        keyWordSearch: res.join('').concat(pure),
+        keyWordSearchOne,
+        keyWordSearchTwo,
+        keyWordSearchThree,
+        keyWordSearchFour,
       }),
     );
   };
@@ -171,6 +228,7 @@ const ProfileEditView = () => {
                 className={name?.length === 0 ? 'invalid' : 'entered'}
                 error={name?.length === 0 ? `Name field cant be empty!` : null}
               />
+
               <InputField
                 label="Email"
                 type="email"
@@ -220,7 +278,7 @@ const ProfileEditView = () => {
               </div>
 
               <div>
-                <label>keywords (Search) </label>
+                <label>keyWords (Search) </label>
                 {keyWordSearch?.length < 10 ? (
                   <span className="small-text">
                     must have at least {keyWordSearch.length} characters.
@@ -228,7 +286,7 @@ const ProfileEditView = () => {
                 ) : null}
                 <textarea
                   value={keyWordSearch}
-                  onChange={(e) => setKeyWordSearch(e.target.value)}
+                  onChange={(e) => setkeyWordSearch(e.target.value)}
                   type="text"
                   name="keyWordSearch"
                   required
@@ -237,7 +295,74 @@ const ProfileEditView = () => {
                   }
                   error={
                     keyWordSearch?.length <= 10
-                      ? `KeyWordSearch field must contain at least 10 characters!`
+                      ? `keyWord Search field must contain at least 10 characters!`
+                      : null
+                  }
+                />
+              </div>
+
+              <div className="input-wrapper">
+                <InputField
+                  label="keyword Search One"
+                  value={keyWordSearchOne}
+                  onChange={(e) => setkeyWordSearchOne(e.target.value)}
+                  type="text"
+                  name="keyWordSearchOne"
+                  required
+                  className={
+                    keyWordSearchOne?.length <= 3 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    keyWordSearchOne?.length <= 3
+                      ? `keyWord Search field must contain at least 3 characters!`
+                      : null
+                  }
+                />
+                <InputField
+                  label="keyword Search Two"
+                  value={keyWordSearchTwo}
+                  onChange={(e) => setkeyWordSearchTwo(e.target.value)}
+                  type="text"
+                  name="keyWordSearchTwo"
+                  required
+                  className={
+                    keyWordSearchTwo?.length <= 3 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    keyWordSearchTwo?.length <= 3
+                      ? `keyWord Search field must contain at least 3 characters!`
+                      : null
+                  }
+                />
+                <InputField
+                  label="keyword Search Three"
+                  value={keyWordSearchThree}
+                  onChange={(e) => setkeyWordSearchThree(e.target.value)}
+                  type="text"
+                  name="keyWordSearchThree"
+                  required
+                  className={
+                    keyWordSearchThree?.length <= 3 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    keyWordSearchThree?.length <= 3
+                      ? `keyWord Search field must contain at least 3 characters!`
+                      : null
+                  }
+                />
+                <InputField
+                  label="keyword Search Four"
+                  value={keyWordSearchFour}
+                  onChange={(e) => setkeyWordSearchFour(e.target.value)}
+                  type="text"
+                  name="keyWordSearchFour"
+                  required
+                  className={
+                    keyWordSearchFour?.length <= 3 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    keyWordSearchFour?.length <= 3
+                      ? `keyWord Search field must contain at least 3 characters!`
                       : null
                   }
                 />
@@ -363,6 +488,12 @@ const ProfileEditView = () => {
             <p>Reviews: {profile?.numReviews}</p>
             <p>Create: {moment(profile?.createdAt).fromNow()}</p>
             <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
+            <h4>Keyword Summary</h4>
+            <p>Search algorithm: {profile?.keyWordSearch}</p>
+            <p>Keyword search One: {profile?.keyWordSearchOne}</p>
+            <p>Keyword search Two: {profile?.keyWordSearchTwo}</p>
+            <p>Keyword search Three: {profile?.keyWordSearchThree}</p>
+            <p>Keyword search Four: {profile?.Four}</p>
           </fieldset>
         </div>
       )}
