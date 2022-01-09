@@ -73,8 +73,24 @@ const FullProfileView = () => {
                       {profile?.email}
                     </a>
                   </p>
-                  <h2>Link to reviewer user login page</h2>
-                  <LinkComp route="reviewer-login" routeName="REVIEWER LOGIN" />
+
+                  {profile.reviews.length > 0 ? (
+                    <div className="review-wrapper">
+                      <h3>Reviews</h3>
+                      {profile.reviews.map((review) => (
+                        <div key={review._id}>
+                          <p>By:{review.name}</p>
+                          <p>Review:{review.comment}</p>
+                          <p>Reviewed: {moment(review.createdAt).fromNow()}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  <LinkComp
+                    route="reviewer-login"
+                    routeName="Want to review this person"
+                  />
                 </div>
               </div>
             </>
