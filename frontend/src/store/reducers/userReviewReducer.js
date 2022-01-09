@@ -13,7 +13,7 @@ export const userReviewLoginReducer = (state = {}, action) => {
     case USER_REVIEW_LOGIN_REQUEST:
       return { ...state, loading: true };
     case USER_REVIEW_LOGIN_SUCCESS:
-      return { ...state, loading: false, user_reviewInfo: action.payload };
+      return { ...state, loading: false, userReviewInfo: action.payload };
     case USER_REVIEW_LOGIN_FAILURE:
       return { ...state, loading: false, error: action.payload };
     case USER_REVIEW_LOGOUT:

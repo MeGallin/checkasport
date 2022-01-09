@@ -5,14 +5,22 @@ import './Header.scss';
 import LinkComp from '../linkComp/LinkComp';
 import Button from '../../components/button/Button';
 import { logoutAction } from '../../store/actions/userActions';
+import { reviewLogoutAction } from '../../store/actions/userReviewActions';
 
 const Header = () => {
   const dispatch = useDispatch();
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userReviewLogin = useSelector((state) => state.userReviewLogin);
+  const { userReviewInfo } = userReviewLogin;
+
   const handleLogout = () => {
     dispatch(logoutAction());
+  };
+  const handleReviewerLogout = () => {
+    dispatch(reviewLogoutAction());
   };
 
   return (
@@ -24,6 +32,16 @@ const Header = () => {
         </div>
 
         <div>
+          {userReviewInfo ? (
+            <Button
+              colour="primary"
+              text="Reviewer Logout"
+              className="btn"
+              onClick={handleReviewerLogout}
+              disabled={false}
+            />
+          ) : null}
+
           {userInfo ? (
             <div className="user-info-wrapper">
               <Button
