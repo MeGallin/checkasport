@@ -31,7 +31,7 @@ const Header = () => {
           <Link to="/contact">Contact</Link>
         </div>
 
-        <div>
+        <div className="nav-wrapper">
           {userReviewInfo ? (
             <Button
               colour="primary"

@@ -25,9 +25,6 @@ const ReviewerLoginView = () => {
   const userId = useSelector((state) => state.userReviewId);
   const { userReviewId } = userId;
 
-  // console.log(user_reviewInfo);
-  console.log(userReviewId);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Dispatch login
@@ -85,12 +82,10 @@ const ReviewerLoginView = () => {
 
       <div>
         <p>
-          New to our platform ?{' '}
           <LinkComp
-            route="registration-review"
-            routeName="Register to review"
-          />{' '}
-          here.
+            route="reviewer-register"
+            routeName="Register here to review"
+          />
         </p>
       </div>
     </div>
