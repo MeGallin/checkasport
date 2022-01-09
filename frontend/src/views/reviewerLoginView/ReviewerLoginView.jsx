@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
-import './UserReviewLoginView.scss';
+import './ReviewerLoginView.scss';
 
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import Message from '../../components/message/Message';
@@ -11,9 +10,7 @@ import Button from '../../components/button/Button';
 import LinkComp from '../../components/linkComp/LinkComp';
 import { userReviewLoginAction } from '../../store/actions/userReviewActions';
 
-const UserReviewLoginView = () => {
-  const navigate = useNavigate();
-
+const ReviewerLoginView = () => {
   const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
@@ -23,14 +20,18 @@ const UserReviewLoginView = () => {
   const dispatch = useDispatch();
 
   const userReviewLogin = useSelector((state) => state.userReviewLogin);
-  const { loading, error, user_reviewInfo } = userReviewLogin;
+  const { loading, error } = userReviewLogin;
 
-  console.log(user_reviewInfo);
+  const userId = useSelector((state) => state.userReviewId);
+  const { userReviewId } = userId;
+
+  // console.log(user_reviewInfo);
+  console.log(userReviewId);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Dispatch login
-    dispatch(userReviewLoginAction(email, password));
+    dispatch(userReviewLoginAction(email, password, userReviewId));
   };
 
   return (
@@ -85,11 +86,15 @@ const UserReviewLoginView = () => {
       <div>
         <p>
           New to our platform ?{' '}
-          <LinkComp route="registration" routeName="Register" /> here.
+          <LinkComp
+            route="registration-review"
+            routeName="Register to review"
+          />{' '}
+          here.
         </p>
       </div>
     </div>
   );
 };
 
-export default UserReviewLoginView;
+export default ReviewerLoginView;

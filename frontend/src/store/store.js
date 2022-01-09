@@ -23,7 +23,10 @@ import {
   profileDeleteReducer,
 } from './reducers/profileReducers';
 
-import { userReviewLoginReducer } from './reducers/userReviewReducer';
+import {
+  userReviewLoginReducer,
+  userReviewIdReducer,
+} from './reducers/userReviewReducer';
 
 const reducer = combineReducers({
   contactForm: contactFormReducer,
@@ -42,6 +45,7 @@ const reducer = combineReducers({
   profileUpdate: profileUpdateReducer,
   profileDelete: profileDeleteReducer,
   userReviewLogin: userReviewLoginReducer,
+  userReviewId: userReviewIdReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

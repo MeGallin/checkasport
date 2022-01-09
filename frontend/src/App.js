@@ -12,7 +12,7 @@ import UserProfileEditView from './views/userProfileEditView/UserProfileEditView
 import ProfileEditView from './views/profileEditView/ProfileEditView';
 import AdminUserView from './views/adminUserView/AdminUserView';
 import AdminProfileView from './views/adminProfileView/AdminProfileView';
-import UserReviewLoginView from './views/userReviewLoginView/UserReviewLoginView';
+import ReviewerLoginView from './views/reviewerLoginView/ReviewerLoginView';
 
 // Change the display width by removing the --fluid after the container class
 const App = () => {
@@ -41,7 +41,7 @@ const App = () => {
 
             <Route path="/admin-users" element={<AdminUserView />} />
             <Route path="/admin-profiles" element={<AdminProfileView />} />
-            <Route path="/reviewer-login" element={<UserReviewLoginView />} />
+            <Route path="/reviewer-login" element={<ReviewerLoginView />} />
             <Route path="*" element={<ErrorView />} />
           </Routes>
         </div>

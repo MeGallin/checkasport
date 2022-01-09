@@ -3,11 +3,6 @@ import bcrypt from 'bcryptjs';
 
 const userReviewerSchema = mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: false,
-      ref: 'User',
-    },
     name: {
       type: String,
       required: true,
@@ -18,6 +13,10 @@ const userReviewerSchema = mongoose.Schema(
       unique: true,
     },
     password: {
+      type: String,
+      required: true,
+    },
+    userProfileId: {
       type: String,
       required: true,
     },

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './FullProfileView.scss';
 
 import { profileByIdAction } from '../../store/actions/profileActions';
+import { userReviewIdAction } from '../../store/actions/userReviewActions';
 
 import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
@@ -15,16 +16,16 @@ const FullProfileView = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  const profileState = useSelector((state) => state.profileById);
+  const { loading, error, profile } = profileState;
+
   useEffect(() => {
-    // Dispatch action with id
     dispatch(profileByIdAction(id));
+    dispatch(userReviewIdAction(profile?.user));
     return () => {
       console.log('Full Profile cleanup');
     };
-  }, [dispatch, id]);
-
-  const profileState = useSelector((state) => state.profileById);
-  const { loading, error, profile } = profileState;
+  }, [dispatch, id, profile?.user]);
 
   return (
     <div>
