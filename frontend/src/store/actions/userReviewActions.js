@@ -7,8 +7,10 @@ import {
   USER_REVIEW_LOGIN_FAILURE,
   USER_REVIEW_LOGIN_REQUEST,
   USER_REVIEW_LOGIN_SUCCESS,
+  USER_REVIEW_LOGOUT,
 } from '../constants/userReviewConstants';
 
+// User REVIEWER LOGIN
 export const userReviewLoginAction =
   (email, password, userProfileId) => async (dispatch) => {
     console.log('ACTION', userProfileId);
@@ -41,6 +43,12 @@ export const userReviewLoginAction =
       });
     }
   };
+
+export const reviewLogoutAction = () => (dispatch) => {
+  localStorage.removeItem('userReviewInfo');
+  dispatch({ type: USER_REVIEW_LOGOUT });
+};
+
 // Grabbing the USER/TRAINER ID
 export const userReviewIdAction = (userProfileId) => async (dispatch) => {
   console.log('action ====>', userProfileId);
