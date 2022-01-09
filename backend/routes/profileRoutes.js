@@ -7,6 +7,7 @@ import {
   getProfile,
   updateProfile,
   deleteProfile,
+  createProfileReview,
 } from '../controllers/profileController.js';
 
 import { protect, admin } from '../middleware/authMiddleware.js';
@@ -14,6 +15,7 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 router.route('/api/profiles').get(getAllProfiles).post(protect, createProfile);
+router.route('/api/profiles/:id/reviews').post(protect, createProfileReview);
 
 router
   .route('/api/profile/:id')

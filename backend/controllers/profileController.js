@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import Profile from '../models/profileModel.js';
+import UserReviewer from '../models/userReviewerModel.js';
 
 // @description: Get All the Profiles
 // @route: GET /api/profiles
@@ -151,6 +152,43 @@ const deleteProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: CREATE a new review
+// @route: POST /api/profiles/:id/reviews
+// @access: Private
+const createProfileReview = asyncHandler(async (req, res) => {
+  const { rating, comment } = req.body;
+  const reviewerProfile = await UserReviewer.findById(req.params.id);
+  const profile = await Profile.find({ user: reviewerProfile.userProfileId });
+
+  // check if review exists
+  const arrayOfId = profile[0].reviews.map((review) => review.user.toString());
+  const allReadyReviewed = arrayOfId.includes(req.params.id);
+
+  if (reviewerProfile && !allReadyReviewed) {
+    const review = {
+      user: req.params.id,
+      name: reviewerProfile.name,
+      rating: Number(rating),
+      comment,
+      userProfileId: reviewerProfile.userProfileId,
+    };
+
+    profile[0].reviews.push(review);
+    profile[0].numReviews = profile[0].reviews.length;
+    profile[0].rating =
+      profile[0].reviews.reduce((acc, item) => item.rating + acc, 0) /
+      profile[0].reviews.length;
+
+    await profile[0].save();
+    res.status(201).json({ message: 'Review added successfully' });
+  } else {
+    res.status(404);
+    throw new Error(
+      'Profile not found or this profile has already been reviewed by you.',
+    );
+  }
+});
+
 export {
   getAllProfiles,
   getAllProfilesAdmin,
@@ -159,4 +197,5 @@ export {
   getProfile,
   updateProfile,
   deleteProfile,
+  createProfileReview,
 };
