@@ -7,6 +7,9 @@
     border: yellow 1px solid;
     flex: 1; /*grow*/
   }
+  .review-wrapper {
+    background-color: $danger;
+  }
 }
 
 @media (max-width: 768px) {
