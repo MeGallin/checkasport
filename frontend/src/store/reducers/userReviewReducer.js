@@ -2,6 +2,10 @@ import {
   USER_REVIEWER_REGISTER_FAILURE,
   USER_REVIEWER_REGISTER_REQUEST,
   USER_REVIEWER_REGISTER_SUCCESS,
+  USER_REVIEW_CREATE_COMMENT_FAILURE,
+  USER_REVIEW_CREATE_COMMENT_REQUEST,
+  USER_REVIEW_CREATE_COMMENT_RESET,
+  USER_REVIEW_CREATE_COMMENT_SUCCESS,
   USER_REVIEW_ID_FAILURE,
   USER_REVIEW_ID_REQUEST,
   USER_REVIEW_ID_SUCCESS,
@@ -11,6 +15,7 @@ import {
   USER_REVIEW_LOGOUT,
 } from '../constants/userReviewConstants';
 
+//Reviewer login
 export const userReviewLoginReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_REVIEW_LOGIN_REQUEST:
@@ -26,7 +31,7 @@ export const userReviewLoginReducer = (state = {}, action) => {
       return { ...state };
   }
 };
-
+//Reviewer Register
 export const userReviewerRegistrationReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_REVIEWER_REGISTER_REQUEST:
@@ -46,15 +51,36 @@ export const userReviewerRegistrationReducer = (state = {}, action) => {
       return { ...state };
   }
 };
-
+//Get ID of trainer to review
 export const userReviewIdReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_REVIEW_ID_REQUEST:
       return { ...state, loading: true };
     case USER_REVIEW_ID_SUCCESS:
-      return { ...state, loading: false, userReviewId: action.payload };
+      return { ...state, loading: false, userProfileId: action.payload };
     case USER_REVIEW_ID_FAILURE:
       return { ...state, loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+// Post reviews
+export const createReviewReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_REVIEW_CREATE_COMMENT_REQUEST:
+      return { ...state, loading: true };
+    case USER_REVIEW_CREATE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case USER_REVIEW_CREATE_COMMENT_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+
+    case USER_REVIEW_CREATE_COMMENT_RESET:
+      return { userReviewerInfo: {} };
+
     default:
       return { ...state };
   }

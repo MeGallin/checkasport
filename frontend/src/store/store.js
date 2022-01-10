@@ -27,6 +27,7 @@ import {
   userReviewLoginReducer,
   userReviewIdReducer,
   userReviewerRegistrationReducer,
+  createReviewReducer,
 } from './reducers/userReviewReducer';
 
 const reducer = combineReducers({
@@ -48,6 +49,7 @@ const reducer = combineReducers({
   userReviewLogin: userReviewLoginReducer,
   userReviewId: userReviewIdReducer,
   userReviewerRegistration: userReviewerRegistrationReducer,
+  createReview: createReviewReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

@@ -16,10 +16,6 @@ const userReviewerSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    userProfileId: {
-      type: String,
-      required: true,
-    },
   },
   {
     timestamps: true,

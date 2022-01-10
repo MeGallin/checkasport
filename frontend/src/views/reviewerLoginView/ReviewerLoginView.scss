@@ -2,4 +2,26 @@
 @import '../../scssMixIn.scss';
 
 .user-review-login-wrapper {
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: $main-font-colour;
+    border-radius: 4px;
+    width: 25%;
+    margin: 0.4em 0.4em 0.4em 0;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+  select > option {
+    background-color: $main-font-colour;
+    border-radius: 4px;
+  }
+  @media screen and (min-width: 0\0) {
+    select {
+      background-image: none\9;
+      padding: 5px\9;
+    }
+  }
 }
