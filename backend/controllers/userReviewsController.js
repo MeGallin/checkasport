@@ -15,6 +15,19 @@ const getAllUsersReviews = asyncHandler(async (req, res) => {
     throw new Error('No reviewers found');
   }
 });
+// @description: Delete a single reviewer
+// @route: DELETE /api/reviewer/admin/:id
+// @access: PRIVATE/Admin
+const deleteReviewer = asyncHandler(async (req, res) => {
+  const reviewer = await UserReviewer.findById(req.params.id);
+  if (reviewer) {
+    await reviewer.remove();
+    res.json({ message: 'Reviewer successfully removed' });
+  } else {
+    res.status(404);
+    throw new Error('Reviewer Not Found');
+  }
+});
 
 // @description: Authenticate a user for a REVIEW and get a token
 // @route: POST /api/user-reviews/login
@@ -68,4 +81,9 @@ const registerUserReviewer = asyncHandler(async (req, res) => {
   }
 });
 
-export { getAllUsersReviews, authUserReview, registerUserReviewer };
+export {
+  getAllUsersReviews,
+  deleteReviewer,
+  authUserReview,
+  registerUserReviewer,
+};
