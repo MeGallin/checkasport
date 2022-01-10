@@ -8,86 +8,162 @@ import Message from '../../components/message/Message';
 import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
 import LinkComp from '../../components/linkComp/LinkComp';
-import { userReviewLoginAction } from '../../store/actions/userReviewActions';
+import {
+  userReviewLoginAction,
+  createUserReviewAction,
+} from '../../store/actions/userReviewActions';
 
 const ReviewerLoginView = () => {
+  const dispatch = useDispatch();
   const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
+  const [rating, setRating] = useState(5);
+  const [comment, setComment] = useState('');
 
   const userReviewLogin = useSelector((state) => state.userReviewLogin);
-  const { loading, error } = userReviewLogin;
+  const { loading, error, userReviewInfo } = userReviewLogin;
 
+  const createReview = useSelector((state) => state.createReview);
+  const { success, error: reviewError } = createReview;
+
+  //This is the profile id of the person that you are going to review
   const userId = useSelector((state) => state.userReviewId);
-  const { userReviewId } = userId;
+  const { userProfileId } = userId;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Dispatch login
-    dispatch(userReviewLoginAction(email, password, userReviewId));
+    dispatch(userReviewLoginAction(email, password, userProfileId));
+  };
+
+  const handleReviewSubmit = (e) => {
+    e.preventDefault();
+    // Dispatch reviewer comment of trainer
+
+    dispatch(
+      createUserReviewAction(userReviewInfo._id, {
+        rating,
+        comment,
+        userProfileId,
+      }),
+    );
+    setRating(5);
+    setComment('');
   };
 
   return (
     <div className="user-review-login-wrapper">
       {error ? <Message message={error} /> : null}
-      {loading ? (
-        <LoadingSpinner />
+
+      {!userReviewInfo ? (
+        loading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            <fieldset className="fieldSet">
+              <legend>Review a Trainer Login form</legend>
+              <form onSubmit={handleSubmit}>
+                <InputField
+                  label="Email"
+                  type="email"
+                  name={email}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
+                  error={
+                    !emailRegEx.test(email) && email.length !== 0
+                      ? `Invalid email address.`
+                      : null
+                  }
+                />
+                <InputField
+                  label="Password"
+                  type="password"
+                  name={password}
+                  value={password}
+                  required
+                  className={
+                    !passwordRegEx.test(password) ? 'invalid' : 'entered'
+                  }
+                  error={
+                    !passwordRegEx.test(password) && password.length !== 0
+                      ? `Password must contain at least 1 uppercase letter and a number`
+                      : null
+                  }
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <Button
+                  colour="transparent"
+                  text="submit"
+                  className="btn"
+                  disabled={
+                    !passwordRegEx.test(password) || !emailRegEx.test(email)
+                  }
+                ></Button>
+              </form>
+            </fieldset>
+            <div>
+              <p>
+                <LinkComp
+                  route="reviewer-register"
+                  routeName="Register here to review"
+                />
+              </p>
+            </div>
+          </>
+        )
       ) : (
-        <fieldset className="fieldSet">
-          <legend>Review a Trainer Login form</legend>
-          <form onSubmit={handleSubmit}>
-            <InputField
-              label="Email"
-              type="email"
-              name={email}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
-              error={
-                !emailRegEx.test(email) && email.length !== 0
-                  ? `Invalid email address.`
-                  : null
-              }
-            />
-            <InputField
-              label="Password"
-              type="password"
-              name={password}
-              value={password}
-              required
-              className={!passwordRegEx.test(password) ? 'invalid' : 'entered'}
-              error={
-                !passwordRegEx.test(password) && password.length !== 0
-                  ? `Password must contain at least 1 uppercase letter and a number`
-                  : null
-              }
-              onChange={(e) => setPassword(e.target.value)}
-            />
+        <>
+          {reviewError ? <Message message={reviewError} /> : null}
+          {success ? (
+            <Message message="Your review has been sent." success />
+          ) : null}
 
-            <Button
-              colour="transparent"
-              text="submit"
-              className="btn"
-              disabled={
-                !passwordRegEx.test(password) || !emailRegEx.test(email)
-              }
-            ></Button>
-          </form>
-        </fieldset>
+          <fieldset className="fieldSet">
+            <legend>Review a Trainer</legend>
+            <div>
+              <h3>Warning</h3>
+              <p>Warning to info reviewer that this is a once off...</p>
+            </div>
+            <form onSubmit={handleReviewSubmit}>
+              <select
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+              >
+                <option value="5">five</option>
+                <option value="4">four</option>
+                <option value="3">three</option>
+                <option value="2">two</option>
+                <option value="1">one</option>
+              </select>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                type="text"
+                name="comment"
+                required
+                className={comment?.length <= 10 ? 'invalid' : 'entered'}
+                error={
+                  comment?.length <= 10
+                    ? `comment field must contain at least 10 characters!`
+                    : null
+                }
+              />
+              <Button
+                colour="transparent"
+                text="submit"
+                className="btn"
+                disabled={!rating || (comment.length <= 10 && success)}
+              ></Button>
+            </form>
+          </fieldset>
+        </>
       )}
-
-      <div>
-        <p>
-          <LinkComp
-            route="reviewer-register"
-            routeName="Register here to review"
-          />
-        </p>
-      </div>
     </div>
   );
 };

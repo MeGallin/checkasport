@@ -2,10 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './Header.scss';
+
 import LinkComp from '../linkComp/LinkComp';
 import Button from '../../components/button/Button';
+
 import { logoutAction } from '../../store/actions/userActions';
 import { reviewLogoutAction } from '../../store/actions/userReviewActions';
+import { USER_REVIEW_CREATE_COMMENT_RESET } from '../../store/constants/userReviewConstants';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -20,6 +23,7 @@ const Header = () => {
     dispatch(logoutAction());
   };
   const handleReviewerLogout = () => {
+    dispatch({ type: USER_REVIEW_CREATE_COMMENT_RESET });
     dispatch(reviewLogoutAction());
   };
 

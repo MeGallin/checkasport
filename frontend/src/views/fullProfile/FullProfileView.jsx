@@ -74,7 +74,7 @@ const FullProfileView = () => {
                     </a>
                   </p>
 
-                  {profile.reviews.length > 0 ? (
+                  {profile?.reviews.length > 0 ? (
                     <div className="review-wrapper">
                       <h3>Reviews</h3>
                       {profile.reviews.map((review) => (

@@ -4,6 +4,9 @@ import {
   USER_REVIEWER_REGISTER_FAILURE,
   USER_REVIEWER_REGISTER_REQUEST,
   USER_REVIEWER_REGISTER_SUCCESS,
+  USER_REVIEW_CREATE_COMMENT_FAILURE,
+  USER_REVIEW_CREATE_COMMENT_REQUEST,
+  USER_REVIEW_CREATE_COMMENT_SUCCESS,
   USER_REVIEW_ID_FAILURE,
   USER_REVIEW_ID_REQUEST,
   USER_REVIEW_ID_SUCCESS,
@@ -109,3 +112,39 @@ export const userReviewIdAction = (userProfileId) => async (dispatch) => {
     });
   }
 };
+//Create review actions
+export const createUserReviewAction =
+  (userReviewerId, review) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: USER_REVIEW_CREATE_COMMENT_REQUEST,
+      });
+
+      const {
+        userReviewLogin: { userReviewInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userReviewInfo.token}`,
+        },
+      };
+
+      await axios.post(
+        `http://localhost:5000/api/profiles/${userReviewerId}/reviews`,
+        review,
+        config,
+      );
+
+      dispatch({ type: USER_REVIEW_CREATE_COMMENT_SUCCESS });
+    } catch (error) {
+      dispatch({
+        type: USER_REVIEW_CREATE_COMMENT_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

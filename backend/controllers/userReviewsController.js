@@ -29,7 +29,7 @@ const authUserReview = asyncHandler(async (req, res) => {
 // @route: POST /api/user-reviews
 // @access: Public
 const registerUserReviewer = asyncHandler(async (req, res) => {
-  const { name, email, password, userProfileId } = req.body;
+  const { name, email, password } = req.body;
   const userExists = await UserReviewer.findOne({ email: email });
 
   if (userExists) {
@@ -40,7 +40,6 @@ const registerUserReviewer = asyncHandler(async (req, res) => {
     name: name,
     email: email,
     password: password,
-    userProfileId,
   });
 
   if (userReviewer) {
@@ -48,7 +47,6 @@ const registerUserReviewer = asyncHandler(async (req, res) => {
       _id: userReviewer._id,
       name: userReviewer.name,
       email: userReviewer.email,
-      userProfileId,
       token: generateToken(userReviewer._id),
     });
   } else {

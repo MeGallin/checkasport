@@ -156,9 +156,10 @@ const deleteProfile = asyncHandler(async (req, res) => {
 // @route: POST /api/profiles/:id/reviews
 // @access: Private
 const createProfileReview = asyncHandler(async (req, res) => {
-  const { rating, comment } = req.body;
+  const { rating, comment, userProfileId } = req.body;
+
   const reviewerProfile = await UserReviewer.findById(req.params.id);
-  const profile = await Profile.find({ user: reviewerProfile.userProfileId });
+  const profile = await Profile.find({ user: userProfileId });
 
   // check if review exists
   const arrayOfId = profile[0].reviews.map((review) => review.user.toString());
