@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import './AdminReviewersView.scss';
 
-import { userAdminReviewersDetailsAction } from '../../store/actions/userReviewActions';
+import {
+  userAdminReviewersDetailsAction,
+  deleteReviewerAdminAction,
+} from '../../store/actions/userReviewActions';
 
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import Message from '../../components/message/Message';
@@ -32,11 +35,17 @@ const AdminReviewersView = () => {
   );
   const { loading, error, reviewers } = userAdminReviewersDetails;
 
-  console.log('DDDD', reviewers);
+  const handleDeleteUser = (id) => {
+    // Dispatch user delete action
+    if (window.confirm(`Are you sure you want to delete ${id}`)) {
+      dispatch(deleteReviewerAdminAction(id));
+    }
+  };
 
   return (
     <>
       {error ? <Message message={error} /> : null}
+      {reviewers.length === 0 ? 'NONE' : null}
 
       {loading ? (
         <LoadingSpinner />
@@ -53,6 +62,16 @@ const AdminReviewersView = () => {
               <div key={reviewer._id} className="admin-reviewer-inner-wrapper">
                 <div className="item">
                   <p>{reviewer.name}</p>
+                  <Button
+                    colour="transparent"
+                    text="Delete User"
+                    className="btn"
+                    title={
+                      userInfo.isAdmin ? 'You CANT delete ADMIN' : 'Delete User'
+                    }
+                    onClick={() => handleDeleteUser(reviewer._id)}
+                    disabled={!userInfo.isAdmin}
+                  ></Button>
                 </div>
                 <div className="item">
                   <p>{reviewer.email}</p>

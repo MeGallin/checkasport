@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 import {
+  USER_ADMIN_DELETE_FAILURE,
+  USER_ADMIN_DELETE_REQUEST,
+  USER_ADMIN_DELETE_SUCCESS,
   USER_ADMIN_REVIEWER_DETAILS_FAILURE,
   USER_ADMIN_REVIEWER_DETAILS_REQUEST,
   USER_ADMIN_REVIEWER_DETAILS_SUCCESS,
@@ -53,6 +56,39 @@ export const userAdminReviewersDetailsAction =
       });
     }
   };
+// Delete user REVIEWER ADMIN only
+export const deleteReviewerAdminAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_ADMIN_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(
+      `http://localhost:5000/api/reviewer/admin/${id}`,
+      config,
+    );
+    dispatch({ type: USER_ADMIN_DELETE_SUCCESS });
+    dispatch(userAdminReviewersDetailsAction());
+  } catch (error) {
+    dispatch({
+      type: USER_ADMIN_DELETE_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 // User REVIEWER LOGIN
 export const userReviewLoginAction =
