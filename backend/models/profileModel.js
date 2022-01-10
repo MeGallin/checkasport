@@ -81,6 +81,12 @@ const profileSchema = mongoose.Schema(
     keyWordSearchFour: {
       type: String,
     },
+    keyWordSearchFive: {
+      type: String,
+    },
+    keyWordSearchSix: {
+      type: String,
+    },
     reviews: [reviewsSchema],
     rating: {
       type: Number,

@@ -21,6 +21,14 @@
     padding: 0.5em;
     justify-content: space-between;
   }
+  .search-algorithm {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .fieldSet.item textarea {
+    height: 100px;
+  }
 }
 
 /* Responsive layout - makes a one column layout (100%) instead of a two-column layout (50%) */

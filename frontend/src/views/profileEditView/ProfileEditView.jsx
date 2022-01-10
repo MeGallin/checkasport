@@ -49,6 +49,8 @@ const ProfileEditView = () => {
   const [keyWordSearchTwo, setkeyWordSearchTwo] = useState('');
   const [keyWordSearchThree, setkeyWordSearchThree] = useState('');
   const [keyWordSearchFour, setkeyWordSearchFour] = useState('');
+  const [keyWordSearchFive, setkeyWordSearchFive] = useState('');
+  const [keyWordSearchSix, setkeyWordSearchSix] = useState('');
 
   useEffect(() => {
     if (!userInfo) {
@@ -71,6 +73,8 @@ const ProfileEditView = () => {
     setkeyWordSearchTwo(profile?.keyWordSearchTwo);
     setkeyWordSearchThree(profile?.keyWordSearchThree);
     setkeyWordSearchFour(profile?.keyWordSearchFour);
+    setkeyWordSearchFive(profile?.keyWordSearchFive);
+    setkeyWordSearchSix(profile?.keyWordSearchSix);
 
     const abortConst = new AbortController();
     return () => {
@@ -93,6 +97,8 @@ const ProfileEditView = () => {
       keyWordSearchTwo.trim() + ' ',
       keyWordSearchThree.trim() + ' ',
       keyWordSearchFour.trim() + ' ',
+      keyWordSearchFive.trim() + ' ',
+      keyWordSearchSix.trim() + ' ',
     ];
     const permutations = (len, val, existing) => {
       if (len === 0) {
@@ -123,7 +129,7 @@ const ProfileEditView = () => {
       specialisation,
     );
     const pure = purekeyWordSearch.replace(
-      /\b(?:and|'|"|""|this|must|just|something|any|anything|say|help|can|can't|cant|path|during|after|by|however|is|we| we'll|to|you|your|ll|highly|from|our|the|in|for|of|an|or|i|am|me|my|other|have|if|you|are|come|with|through|going|over|past|years|year|cater|getting|currently|current|have|having|people|worked|work|. |)\b/gi,
+      /\b(?:and|'|"|""|from|for|this|must|just|something|any|anything|say|help|can|can't|cant|path|during|after|by|however|is|we| we'll|to|you|your|ll|highly|from|our|the|in|for|of|an|or|i|am|me|my|other|have|if|you|are|come|with|through|going|over|past|years|year|cater|getting|currently|current|have|having|people|worked|work|. |)\b/gi,
       '',
     );
 
@@ -147,6 +153,8 @@ const ProfileEditView = () => {
         keyWordSearchTwo,
         keyWordSearchThree,
         keyWordSearchFour,
+        keyWordSearchFive,
+        keyWordSearchSix,
       }),
     );
   };
@@ -366,6 +374,38 @@ const ProfileEditView = () => {
                       : null
                   }
                 />
+                <InputField
+                  label="keyword Search Five"
+                  value={keyWordSearchFive}
+                  onChange={(e) => setkeyWordSearchFive(e.target.value)}
+                  type="text"
+                  name="keyWordSearchFive"
+                  required
+                  className={
+                    keyWordSearchFive?.length <= 3 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    keyWordSearchFive?.length <= 3
+                      ? `keyWord Search field must contain at least 3 characters!`
+                      : null
+                  }
+                />
+                <InputField
+                  label="keyword Search Six"
+                  value={keyWordSearchSix}
+                  onChange={(e) => setkeyWordSearchSix(e.target.value)}
+                  type="text"
+                  name="keyWordSearchSix"
+                  required
+                  className={
+                    keyWordSearchSix?.length <= 3 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    keyWordSearchSix?.length <= 3
+                      ? `keyWord Search field must contain at least 3 characters!`
+                      : null
+                  }
+                />
               </div>
 
               <InputField
@@ -489,11 +529,15 @@ const ProfileEditView = () => {
             <p>Create: {moment(profile?.createdAt).fromNow()}</p>
             <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
             <h4>Keyword Summary</h4>
-            <p>Search algorithm: {profile?.keyWordSearch}</p>
+            <p className="search-algorithm">
+              Search algorithm: {profile?.keyWordSearch}
+            </p>
             <p>Keyword search One: {profile?.keyWordSearchOne}</p>
             <p>Keyword search Two: {profile?.keyWordSearchTwo}</p>
             <p>Keyword search Three: {profile?.keyWordSearchThree}</p>
             <p>Keyword search Four: {profile?.Four}</p>
+            <p>Keyword search Five: {profile?.five}</p>
+            <p>Keyword search Six: {profile?.six}</p>
           </fieldset>
         </div>
       )}
