@@ -1,4 +1,8 @@
 import {
+  USER_ADMIN_REVIEWER_DETAILS_FAILURE,
+  USER_ADMIN_REVIEWER_DETAILS_REQUEST,
+  USER_ADMIN_REVIEWER_DETAILS_RESET,
+  USER_ADMIN_REVIEWER_DETAILS_SUCCESS,
   USER_REVIEWER_REGISTER_FAILURE,
   USER_REVIEWER_REGISTER_REQUEST,
   USER_REVIEWER_REGISTER_SUCCESS,
@@ -14,6 +18,29 @@ import {
   USER_REVIEW_LOGIN_SUCCESS,
   USER_REVIEW_LOGOUT,
 } from '../constants/userReviewConstants';
+
+// Get all the reviewers user details
+export const userAdminReviewersDetailsReducer = (
+  state = { reviewers: [] },
+  action,
+) => {
+  switch (action.type) {
+    case USER_ADMIN_REVIEWER_DETAILS_REQUEST:
+      return { ...state, loading: true };
+    case USER_ADMIN_REVIEWER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        reviewers: action.payload,
+      };
+    case USER_ADMIN_REVIEWER_DETAILS_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case USER_ADMIN_REVIEWER_DETAILS_RESET:
+      return { reviewers: [] };
+    default:
+      return { ...state };
+  }
+};
 
 //Reviewer login
 export const userReviewLoginReducer = (state = {}, action) => {

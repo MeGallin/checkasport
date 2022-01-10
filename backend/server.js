@@ -11,6 +11,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import uploaderRoutes from './routes/uploadRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
 import authUserReview from './routes/userReviewRoutes.js';
+import userReviewRoutes from './routes/userReviewRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -31,6 +32,8 @@ app.use('/', uploaderRoutes);
 app.use('/', profileRoutes);
 // User Review routes
 app.use('/', authUserReview);
+// User REVIEWER routes
+app.use('/', userReviewRoutes);
 
 //create static folder
 const __dirname = path.resolve();
