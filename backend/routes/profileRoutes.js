@@ -23,6 +23,7 @@ router
   .put(protect, updateProfile);
 
 router.route('/api/profile').get(protect, getProfile);
+
 //Get all profiles ADMIN route
 router
   .route('/api/profiles/admin/:id')

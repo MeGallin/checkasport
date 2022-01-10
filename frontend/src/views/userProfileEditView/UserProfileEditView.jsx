@@ -302,6 +302,11 @@ const UserProfileEditView = () => {
                 <LinkComp route="admin-profiles" routeName="PROFILES" /> with a
                 option to edit or delete a user.{' '}
               </p>
+              <p>
+                List all{' '}
+                <LinkComp route="admin-reviewers" routeName="REVIEWERS" /> with
+                a option to edit or delete a user.{' '}
+              </p>
               <p>Verify qualification</p>
             </fieldset>
           ) : null}

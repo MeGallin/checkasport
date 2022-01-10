@@ -24,6 +24,7 @@ import {
 } from './reducers/profileReducers';
 
 import {
+  userAdminReviewersDetailsReducer,
   userReviewLoginReducer,
   userReviewIdReducer,
   userReviewerRegistrationReducer,
@@ -49,6 +50,7 @@ const reducer = combineReducers({
   userReviewLogin: userReviewLoginReducer,
   userReviewId: userReviewIdReducer,
   userReviewerRegistration: userReviewerRegistrationReducer,
+  userAdminReviewersDetails: userAdminReviewersDetailsReducer,
   createReview: createReviewReducer,
 });
 

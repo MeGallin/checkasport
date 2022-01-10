@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 import {
+  USER_ADMIN_REVIEWER_DETAILS_FAILURE,
+  USER_ADMIN_REVIEWER_DETAILS_REQUEST,
+  USER_ADMIN_REVIEWER_DETAILS_SUCCESS,
   USER_REVIEWER_REGISTER_FAILURE,
   USER_REVIEWER_REGISTER_REQUEST,
   USER_REVIEWER_REGISTER_SUCCESS,
@@ -15,6 +18,41 @@ import {
   USER_REVIEW_LOGIN_SUCCESS,
   USER_REVIEW_LOGOUT,
 } from '../constants/userReviewConstants';
+
+// Get all reviewers details ADMIN
+export const userAdminReviewersDetailsAction =
+  () => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: USER_ADMIN_REVIEWER_DETAILS_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.get(
+        `http://localhost:5000/api/reviewers/admin/:id`,
+        config,
+      );
+      dispatch({ type: USER_ADMIN_REVIEWER_DETAILS_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: USER_ADMIN_REVIEWER_DETAILS_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 // User REVIEWER LOGIN
 export const userReviewLoginAction =

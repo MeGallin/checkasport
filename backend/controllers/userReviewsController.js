@@ -3,6 +3,19 @@ import generateToken from '../utils/generateToken.js';
 import UserReviewer from '../models/userReviewerModel.js';
 import nodemailer from 'nodemailer';
 
+// @description: Get All the user REVIEWS
+// @route: GET /api/reviewers/admin
+// @access: Admin
+const getAllUsersReviews = asyncHandler(async (req, res) => {
+  const reviewers = await UserReviewer.find({});
+  if (reviewers) {
+    res.json(reviewers);
+  } else {
+    res.status(404);
+    throw new Error('No reviewers found');
+  }
+});
+
 // @description: Authenticate a user for a REVIEW and get a token
 // @route: POST /api/user-reviews/login
 // @access: Public
@@ -55,4 +68,4 @@ const registerUserReviewer = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUserReview, registerUserReviewer };
+export { getAllUsersReviews, authUserReview, registerUserReviewer };
