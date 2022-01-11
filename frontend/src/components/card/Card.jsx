@@ -19,19 +19,32 @@ const Card = ({
   reviews,
 }) => {
   return (
-    <div className="card" name={name} src={src} alt={alt}>
-      <Rating value={rating} text={`  from ${reviews} reviews`} />
-      {name}
-      <Link to={`/fullProfile/${id}`}>
+    <div className="card-inner-wrapper">
+      <div className="item">
+        <div className="specialisation">DES1</div>
+        <div className="specialisation">DES2</div>
+        <div className="specialisation">DES3</div>
+        <div className="specialisation">DES4</div>
+      </div>
+      <div className="item">
         <img className="card-profile-image" src={src} alt={alt} />
-      </Link>
-      {specialisation}
-      {description}
-      {location}
-      {isQualificationsVerified}
-      {qualifications}
-      {email}
-      {telephoneNumber}
+        <div>
+          <div className="card-name">{name}</div>
+          <Rating value={rating} text={`  from ${reviews} reviews`} />
+
+          {specialisation}
+          {description}
+          {location}
+          {isQualificationsVerified}
+          {qualifications}
+          {email}
+          {telephoneNumber}
+        </div>
+      </div>
+
+      <div className="item">
+        <Link to={`/fullProfile/${id}`}>VIEW FULL PROFILE</Link>
+      </div>
     </div>
   );
 };
