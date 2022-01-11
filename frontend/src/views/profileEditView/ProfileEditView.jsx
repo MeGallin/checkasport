@@ -50,7 +50,6 @@ const ProfileEditView = () => {
   const [keyWordSearchThree, setkeyWordSearchThree] = useState('');
   const [keyWordSearchFour, setkeyWordSearchFour] = useState('');
   const [keyWordSearchFive, setkeyWordSearchFive] = useState('');
-  const [keyWordSearchSix, setkeyWordSearchSix] = useState('');
 
   useEffect(() => {
     if (!userInfo) {
@@ -74,7 +73,6 @@ const ProfileEditView = () => {
     setkeyWordSearchThree(profile?.keyWordSearchThree);
     setkeyWordSearchFour(profile?.keyWordSearchFour);
     setkeyWordSearchFive(profile?.keyWordSearchFive);
-    setkeyWordSearchSix(profile?.keyWordSearchSix);
 
     const abortConst = new AbortController();
     return () => {
@@ -98,7 +96,6 @@ const ProfileEditView = () => {
       keyWordSearchThree.trim() + ' ',
       keyWordSearchFour.trim() + ' ',
       keyWordSearchFive.trim() + ' ',
-      keyWordSearchSix.trim() + ' ',
     ];
     const permutations = (len, val, existing) => {
       if (len === 0) {
@@ -154,7 +151,6 @@ const ProfileEditView = () => {
         keyWordSearchThree,
         keyWordSearchFour,
         keyWordSearchFive,
-        keyWordSearchSix,
       }),
     );
   };
@@ -386,22 +382,6 @@ const ProfileEditView = () => {
                   }
                   error={
                     keyWordSearchFive?.length <= 3
-                      ? `keyWord Search field must contain at least 3 characters!`
-                      : null
-                  }
-                />
-                <InputField
-                  label="keyword Search Six"
-                  value={keyWordSearchSix}
-                  onChange={(e) => setkeyWordSearchSix(e.target.value)}
-                  type="text"
-                  name="keyWordSearchSix"
-                  required
-                  className={
-                    keyWordSearchSix?.length <= 3 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    keyWordSearchSix?.length <= 3
                       ? `keyWord Search field must contain at least 3 characters!`
                       : null
                   }
