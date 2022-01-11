@@ -111,48 +111,9 @@ const HomeView = () => {
                         }}
                       ></span>
                     }
-                    specialisation={
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: highlightKeywordMatch(profile.specialisation),
-                        }}
-                      ></span>
-                    }
-                    qualifications={profile.qualifications}
-                    isQualificationsVerified={
-                      profile.isQualificationsVerified === true ? (
-                        <i
-                          className="fa fa-check"
-                          style={{
-                            fontSize: 20 + 'px',
-                            color: 'rgba(92, 184, 92, 1)',
-                          }}
-                        ></i>
-                      ) : (
-                        <i
-                          className="fa fa-times"
-                          style={{ fontSize: 20 + 'px', color: 'crimson' }}
-                        ></i>
-                      )
-                    }
-                    location={
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: highlightKeywordMatch(profile.location),
-                        }}
-                      ></span>
-                    }
-                    email={
-                      <a
-                        href={`mailto: ${profile?.email}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {profile?.email}
-                      </a>
-                    }
-                    telephoneNumber={profile.telephoneNumber}
                     rating={profile.rating}
+                    number
+                    of
                     reviews={profile.numReviews}
                   />
                 </div>

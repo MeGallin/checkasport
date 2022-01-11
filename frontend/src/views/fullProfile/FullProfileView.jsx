@@ -9,6 +9,7 @@ import { userReviewIdAction } from '../../store/actions/userReviewActions';
 import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import LinkComp from '../../components/linkComp/LinkComp';
+import Rating from '../../components/rating/Rating';
 
 import moment from 'moment';
 
@@ -46,8 +47,11 @@ const FullProfileView = () => {
                     alt={profile?.name}
                   />
                   <h3>{profile?.category}</h3>
-                  <h3>{profile?.rating} rating</h3>
-                  <h3>{profile?.numReviews} reviews</h3>
+
+                  <Rating
+                    value={profile?.rating}
+                    text={`  from ${profile?.numReviews} reviews`}
+                  />
                   <p>Create: {moment(profile?.createdAt).fromNow()}</p>
                   <p>
                     Profile last updated: {moment(profile?.updatedAt).fromNow()}

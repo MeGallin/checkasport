@@ -1,6 +1,7 @@
 import React from 'react';
 import './Card.scss';
 import { Link } from 'react-router-dom';
+import Rating from '../rating/Rating';
 
 const Card = ({
   id,
@@ -19,35 +20,18 @@ const Card = ({
 }) => {
   return (
     <div className="card" name={name} src={src} alt={alt}>
-      <h4>{name}</h4>
+      <Rating value={rating} text={`  from ${reviews} reviews`} />
+      {name}
       <Link to={`/fullProfile/${id}`}>
         <img className="card-profile-image" src={src} alt={alt} />
       </Link>
-
-      <h4>Specialisation</h4>
       {specialisation}
-
-      <h4>Description</h4>
       {description}
-
-      <h4>Location</h4>
       {location}
-
-      <h4>
-        Qualifications
-        {isQualificationsVerified}
-      </h4>
+      {isQualificationsVerified}
       {qualifications}
-
-      <h4>Contact me</h4>
-      <p>{email}</p>
-
-      <p>{telephoneNumber}</p>
-      <h4>Rating</h4>
-      <p>{rating}</p>
-
-      <h4>Number of Reviews</h4>
-      <p>{reviews}</p>
+      {email}
+      {telephoneNumber}
     </div>
   );
 };
