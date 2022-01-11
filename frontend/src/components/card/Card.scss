@@ -2,11 +2,15 @@
 @import '../../scssMixIn.scss';
 
 .card {
-  @include border-all(1px, solid, $light-orange);
+  // @include border-all(1px, solid, $border-colour);
+  background-color: rgba(24, 24, 24, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .card-profile-image {
-    width: 120px;
-    height: 120px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
   }
 }
