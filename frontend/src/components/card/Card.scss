@@ -6,10 +6,9 @@
   padding: 0.4em;
   // @include border-all(1px, solid, $border-colour);
   background-color: rgba(24, 24, 24, 1);
-  flex-basis: 24%;
-  flex-grow: 1;
-  max-width: 25%;
+  width: 600px;
   border-left: 4px solid $secondary-bg-colour;
+  margin-bottom: 1rem;
 
   .item {
     display: flex;
@@ -36,8 +35,16 @@
   }
 }
 /* Responsive layout */
-@media (max-width: 812px) {
+@media (max-width: 1024px) {
   .card-inner-wrapper {
     flex-wrap: wrap;
+    width: 100%;
+    .item {
+      .card-profile-image {
+        width: 140px;
+        height: 120px;
+        margin: 0.2em;
+      }
+    }
   }
 }

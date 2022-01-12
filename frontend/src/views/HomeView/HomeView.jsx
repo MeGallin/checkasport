@@ -61,7 +61,7 @@ const HomeView = () => {
       ? current
       : current.replace(
           reggie,
-          '<span style="color:rgba(92, 184, 92, 1); text-decoration:underline;" >' +
+          '<span style="color:rgba(255, 255, 255, .6); text-decoration:underline;" >' +
             keyword +
             '</span>',
         );
@@ -101,13 +101,6 @@ const HomeView = () => {
                 }
                 src={`uploads/profiles/${profile.profileImage}`}
                 alt={profile.name}
-                specialisation={
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: highlightKeywordMatch(profile.specialisation),
-                    }}
-                  ></span>
-                }
                 description={
                   <span
                     dangerouslySetInnerHTML={{
