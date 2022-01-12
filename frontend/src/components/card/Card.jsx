@@ -30,6 +30,7 @@ const Card = ({
         <div className="specialisation">{specialisationThree}</div>
         <div className="specialisation">{specialisationFour}</div>
       </div>
+
       <div className="item">
         <img className="card-profile-image" src={src} alt={alt} />
         <div>
@@ -46,7 +47,7 @@ const Card = ({
         </div>
       </div>
 
-      <div className="item">
+      <div className="item link">
         <Link to={`/fullProfile/${id}`}>VIEW FULL PROFILE</Link>
       </div>
     </div>

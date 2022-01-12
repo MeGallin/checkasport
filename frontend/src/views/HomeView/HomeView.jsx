@@ -73,9 +73,8 @@ const HomeView = () => {
 
       <div className="home-view ">
         <SearchInput
-          label="Check-a-Sport"
           type="search"
-          placeholder="sports massage post-code"
+          placeholder="search a discipline and location"
           value={keyword}
           handleSearch={handleSearch}
         />

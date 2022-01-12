@@ -4,8 +4,7 @@
 
 .card-inner-wrapper {
   padding: 0.4em;
-  // @include border-all(1px, solid, $border-colour);
-  background-color: rgba(24, 24, 24, 1);
+  background-color: rgba(0, 0, 0, 1);
   width: 600px;
   border-left: 1px solid $rating-colour;
   margin-bottom: 1rem;
@@ -13,14 +12,14 @@
   .item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 
     .specialisation {
       font-size: 0.75em;
       width: (100% / 3);
       margin-left: 0.2em;
       text-align: center;
-      background-color: rgba(0, 0, 0, 1);
+      background-color: $main-bg-colour;
       text-transform: uppercase;
     }
     .card-profile-image {
