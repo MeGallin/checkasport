@@ -91,6 +91,10 @@ const HomeView = () => {
           <div className="card-wrapper">
             {searchedProfiles.map((profile) => (
               <Card
+                specialisationOne={profile.specialisationOne}
+                specialisationTwo={profile.specialisationTwo}
+                specialisationThree={profile.specialisationThree}
+                specialisationFour={profile.specialisationFour}
                 id={profile._id}
                 name={
                   <span

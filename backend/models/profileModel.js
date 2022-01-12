@@ -84,6 +84,18 @@ const profileSchema = mongoose.Schema(
     keyWordSearchFive: {
       type: String,
     },
+    specialisationOne: {
+      type: String,
+    },
+    specialisationTwo: {
+      type: String,
+    },
+    specialisationThree: {
+      type: String,
+    },
+    specialisationFour: {
+      type: String,
+    },
     reviews: [reviewsSchema],
     rating: {
       type: Number,

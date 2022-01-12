@@ -61,6 +61,10 @@ const createProfile = asyncHandler(async (req, res) => {
     keyWordSearchThree: 'three',
     keyWordSearchFour: 'four',
     keyWordSearchFive: 'five',
+    specialisationOne: 'Specialisation One',
+    specialisationTwo: 'Specialisation Two',
+    specialisationThree: 'Specialisation Three',
+    specialisationFour: 'Specialisation Four',
     rating: 0,
     description: 'Sample Description',
     numReviews: 0,
@@ -104,6 +108,10 @@ const updateProfile = asyncHandler(async (req, res) => {
     keyWordSearchThree,
     keyWordSearchFour,
     keyWordSearchFive,
+    specialisationOne,
+    specialisationTwo,
+    specialisationThree,
+    specialisationFour,
   } = req.body;
 
   // Find all profiles
@@ -132,6 +140,10 @@ const updateProfile = asyncHandler(async (req, res) => {
     searchId[0].keyWordSearchThree = keyWordSearchThree;
     searchId[0].keyWordSearchFour = keyWordSearchFour;
     searchId[0].keyWordSearchFive = keyWordSearchFive;
+    searchId[0].specialisationOne = specialisationOne;
+    searchId[0].specialisationTwo = specialisationTwo;
+    searchId[0].specialisationThree = specialisationThree;
+    searchId[0].specialisationFour = specialisationFour;
 
     const updateProfile = await searchId[0].save();
     res.json(updateProfile);

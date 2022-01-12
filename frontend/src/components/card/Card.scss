@@ -7,7 +7,7 @@
   // @include border-all(1px, solid, $border-colour);
   background-color: rgba(24, 24, 24, 1);
   width: 600px;
-  border-left: 4px solid $secondary-bg-colour;
+  border-left: 1px solid $rating-colour;
   margin-bottom: 1rem;
 
   .item {
@@ -21,6 +21,7 @@
       margin-left: 0.2em;
       text-align: center;
       background-color: rgba(0, 0, 0, 1);
+      text-transform: uppercase;
     }
     .card-profile-image {
       width: 260px;

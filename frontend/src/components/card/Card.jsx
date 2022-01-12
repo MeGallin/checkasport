@@ -17,14 +17,18 @@ const Card = ({
   isQualificationsVerified,
   rating,
   reviews,
+  specialisationOne,
+  specialisationTwo,
+  specialisationThree,
+  specialisationFour,
 }) => {
   return (
     <div className="card-inner-wrapper">
       <div className="item">
-        <div className="specialisation">DES1</div>
-        <div className="specialisation">DES2</div>
-        <div className="specialisation">DES3</div>
-        <div className="specialisation">DES4</div>
+        <div className="specialisation">{specialisationOne}</div>
+        <div className="specialisation">{specialisationTwo}</div>
+        <div className="specialisation">{specialisationThree}</div>
+        <div className="specialisation">{specialisationFour}</div>
       </div>
       <div className="item">
         <img className="card-profile-image" src={src} alt={alt} />
