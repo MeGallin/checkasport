@@ -51,6 +51,11 @@ const ProfileEditView = () => {
   const [keyWordSearchFour, setkeyWordSearchFour] = useState('');
   const [keyWordSearchFive, setkeyWordSearchFive] = useState('');
 
+  const [specialisationOne, setSpecialisationOne] = useState('');
+  const [specialisationTwo, setSpecialisationTwo] = useState('');
+  const [specialisationThree, setSpecialisationThree] = useState('');
+  const [specialisationFour, setSpecialisationFour] = useState('');
+
   useEffect(() => {
     if (!userInfo) {
       navigate('/login');
@@ -68,11 +73,17 @@ const ProfileEditView = () => {
     setLocation(profile?.location);
     setTelephoneNumber(profile?.telephoneNumber);
     setkeyWordSearch(profile?.keyWordSearch);
+
     setkeyWordSearchOne(profile?.keyWordSearchOne);
     setkeyWordSearchTwo(profile?.keyWordSearchTwo);
     setkeyWordSearchThree(profile?.keyWordSearchThree);
     setkeyWordSearchFour(profile?.keyWordSearchFour);
     setkeyWordSearchFive(profile?.keyWordSearchFive);
+
+    setSpecialisationOne(profile?.specialisationOne);
+    setSpecialisationTwo(profile?.specialisationTwo);
+    setSpecialisationThree(profile?.specialisationThree);
+    setSpecialisationFour(profile?.specialisationFour);
 
     const abortConst = new AbortController();
     return () => {
@@ -151,6 +162,10 @@ const ProfileEditView = () => {
         keyWordSearchThree,
         keyWordSearchFour,
         keyWordSearchFive,
+        specialisationOne,
+        specialisationTwo,
+        specialisationThree,
+        specialisationFour,
       }),
     );
   };
@@ -383,6 +398,76 @@ const ProfileEditView = () => {
                   error={
                     keyWordSearchFive?.length <= 3
                       ? `keyWord Search field must contain at least 3 characters!`
+                      : null
+                  }
+                />
+              </div>
+
+              <div className="input-wrapper">
+                <InputField
+                  label="specialisation"
+                  value={specialisationOne}
+                  onChange={(e) => setSpecialisationOne(e.target.value)}
+                  type="text"
+                  name="specialisationOne"
+                  required
+                  className={
+                    specialisationOne?.length <= 3 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    specialisationOne?.length <= 3
+                      ? `Specialisation field must contain at least 3 characters!`
+                      : null
+                  }
+                />
+
+                <InputField
+                  label="specialisation"
+                  value={specialisationTwo}
+                  onChange={(e) => setSpecialisationTwo(e.target.value)}
+                  type="text"
+                  name="specialisationTwo"
+                  required
+                  className={
+                    specialisationTwo?.length <= 3 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    specialisationTwo?.length <= 3
+                      ? `Specialisation field must contain at least 3 characters!`
+                      : null
+                  }
+                />
+
+                <InputField
+                  label="specialisation"
+                  value={specialisationThree}
+                  onChange={(e) => setSpecialisationThree(e.target.value)}
+                  type="text"
+                  name="specialisationThree"
+                  required
+                  className={
+                    specialisationThree?.length <= 3 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    specialisationThree?.length <= 3
+                      ? `Specialisation field must contain at least 3 characters!`
+                      : null
+                  }
+                />
+
+                <InputField
+                  label="specialisation"
+                  value={specialisationFour}
+                  onChange={(e) => setSpecialisationFour(e.target.value)}
+                  type="text"
+                  name="specialisationFour"
+                  required
+                  className={
+                    specialisationFour?.length <= 3 ? 'invalid' : 'entered'
+                  }
+                  error={
+                    specialisationFour?.length <= 3
+                      ? `Specialisation field must contain at least 3 characters!`
                       : null
                   }
                 />
