@@ -1,14 +1,48 @@
 @import '../../index.scss';
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 .full-profile-wrapper {
   display: flex;
 
   .item {
-    border: yellow 1px solid;
     flex: 1; /*grow*/
+    padding: 0.5em;
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+    }
+
+    .specialisation-wrapper {
+      display: flex;
+      .specialisation {
+        font-size: 0.75em;
+        width: (100% / 3);
+        margin-left: 0.2em;
+        text-align: center;
+        background-color: $main-bg-colour;
+        text-transform: uppercase;
+      }
+    }
+
+    .full-profile-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2.6em;
+      text-transform: uppercase;
+    }
+    .full-profile-time {
+      position: relative;
+      justify-content: flex-end;
+      font-size: 0.7em;
+    }
   }
   .review-wrapper {
-    background-color: $danger;
+  }
+  .bg-image {
+    border: 1px solid $border-colour;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
 

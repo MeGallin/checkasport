@@ -108,7 +108,7 @@ const HomeView = () => {
                   <span
                     dangerouslySetInnerHTML={{
                       __html: highlightKeywordMatch(
-                        profile.description.slice(0, 120) + '...',
+                        profile.description.slice(0, 180) + '...',
                       ),
                     }}
                   ></span>
