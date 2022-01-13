@@ -72,18 +72,18 @@ const HomeView = () => {
       {error ? <Message message={error} /> : null}
 
       <div className="home-view ">
-        <SearchInput
-          type="search"
-          placeholder="search a discipline and location"
-          value={keyword}
-          handleSearch={handleSearch}
-        />
         {keyword.length > 0 ? (
           <div className="keyword-length">
             We found {searchedProfiles.length} profiles that match your search
             criteria.
           </div>
         ) : null}
+        <SearchInput
+          type="search"
+          placeholder="search a discipline and location"
+          value={keyword}
+          handleSearch={handleSearch}
+        />
 
         {loading ? <LoadingSpinner /> : null}
         {keyword.length > 0 ? (

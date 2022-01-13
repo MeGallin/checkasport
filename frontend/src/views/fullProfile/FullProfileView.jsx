@@ -10,6 +10,7 @@ import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import LinkComp from '../../components/linkComp/LinkComp';
 import Rating from '../../components/rating/Rating';
+import Review from '../../components/review/Review';
 
 import moment from 'moment';
 
@@ -55,6 +56,20 @@ const FullProfileView = () => {
                     backgroundImage: `url(../uploads/profiles/${profile?.profileImage})`,
                   }}
                 >
+                  <div className="specialisation-wrapper">
+                    <div className="specialisation">
+                      {profile?.specialisationOne}
+                    </div>
+                    <div className="specialisation">
+                      {profile?.specialisationTwo}
+                    </div>
+                    <div className="specialisation">
+                      {profile?.specialisationThree}
+                    </div>
+                    <div className="specialisation">
+                      {profile?.specialisationFour}
+                    </div>
+                  </div>
                   <div ref={refName}>
                     <div className="full-profile-name">{profile?.name}</div>
                     <Rating
@@ -90,29 +105,47 @@ const FullProfileView = () => {
                       {profile?.specialisationFour}
                     </div>
                   </div>
+
                   <h1>My BIO</h1>
                   <p>{profile?.description}</p>
                   <h1>Specialisation</h1>
                   <p>{profile?.specialisation}</p>
-                  <div>
-                    {profile?.reviews.length > 0 ? (
-                      <div className="review-wrapper">
-                        <h1>Here's what people are saying</h1>
-                        {profile.reviews.map((review) => (
-                          <div key={review._id}>
-                            <p>By:{review.name}</p>
-                            <p>Review:{review.comment}</p>
-                            <p>
-                              Reviewed: {moment(review.createdAt).fromNow()}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    ) : null}
+
+                  <div className="verified">
+                    <h1>Qualifications Verified</h1>
+
+                    {profile?.isQualificationsVerified === true ? (
+                      <i
+                        className="fa fa-check"
+                        style={{
+                          fontSize: 40 + 'px',
+                          color: 'rgba(92, 184, 92, 1)',
+                        }}
+                      ></i>
+                    ) : (
+                      <i
+                        className="fa fa-times"
+                        style={{ fontSize: 40 + 'px', color: 'crimson' }}
+                      ></i>
+                    )}
                   </div>
                 </div>
 
                 <div className="item">
+                  <div className="specialisation-wrapper">
+                    <div className="specialisation">
+                      {profile?.specialisationOne}
+                    </div>
+                    <div className="specialisation">
+                      {profile?.specialisationTwo}
+                    </div>
+                    <div className="specialisation">
+                      {profile?.specialisationThree}
+                    </div>
+                    <div className="specialisation">
+                      {profile?.specialisationFour}
+                    </div>
+                  </div>
                   <h1>Contact Details</h1>
                   <p>{profile?.location}</p>
                   <p>Mobile number: {profile?.telephoneNumber}</p>
@@ -126,12 +159,33 @@ const FullProfileView = () => {
                       {profile?.email}
                     </a>
                   </p>
+
+                  <div>
+                    {profile?.reviews.length > 0 ? (
+                      <>
+                        <h1>Reviews</h1>
+                        {profile.reviews.map((review) => (
+                          <div key={review._id}>
+                            <Review
+                              reviewer={review.name}
+                              review={review.comment}
+                              reviewedOn={moment(review.createdAt).fromNow()}
+                            />
+                          </div>
+                        ))}
+                        <Rating
+                          value={profile?.rating}
+                          text={`  from ${profile?.numReviews} reviews`}
+                        />
+                        <LinkComp
+                          route="reviewer-login"
+                          routeName={`Write a review about ${profile.name}`}
+                        />
+                      </>
+                    ) : null}
+                  </div>
                 </div>
               </div>
-              <LinkComp
-                route="reviewer-login"
-                routeName="Want to review this person"
-              />
             </>
           )}
         </>
