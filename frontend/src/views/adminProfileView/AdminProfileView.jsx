@@ -98,12 +98,10 @@ const AdminProfileView = () => {
               </div>
 
               <div className="item wider-item">
-                <h6>Description</h6>
+                <h3>Description</h3>
                 {profile.description}
-                <h6>Location</h6>
-                {profile.description}
-                <h6>Key Words</h6>
-                {profile.keyWordSearch}
+                <h3>Location</h3>
+                {profile.location}
               </div>
 
               <div className="item">{profile.rating}</div>

@@ -3,6 +3,7 @@
 .link-comp {
   opacity: 0.8;
   color: $link-colour;
+  text-transform: uppercase;
 
   &.link-comp:hover {
     opacity: 1;

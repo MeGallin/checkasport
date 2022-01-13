@@ -17,7 +17,7 @@ const Button = ({ colour, text, disabled, title, onClick }) => {
 };
 
 Button.defaultProps = {
-  color: 'yellow',
+  colour: 'yellow',
   disabled: true,
 };
 

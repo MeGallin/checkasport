@@ -2,6 +2,7 @@ import React from 'react';
 import './Card.scss';
 import { Link } from 'react-router-dom';
 import Rating from '../rating/Rating';
+import Button from '../button/Button';
 
 const Card = ({
   id,
@@ -44,11 +45,16 @@ const Card = ({
           {qualifications}
           {email}
           {telephoneNumber}
-        </div>
-      </div>
 
-      <div className="item link">
-        <Link to={`/fullProfile/${id}`}>VIEW FULL PROFILE</Link>
+          <Link className="link" to={`/fullProfile/${id}`}>
+            <Button
+              colour="transparent"
+              text="VIEW FULL PROFILE"
+              className="btn link"
+              disabled={false}
+            ></Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
