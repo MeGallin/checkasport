@@ -131,7 +131,7 @@ const ReviewerLoginView = () => {
             <legend>Review a Trainer</legend>
 
             <div>
-              // NOTE:Cant bring in the card here You are about to review:{' '}
+              NOTE:Cant bring in the card here You are about to review:{' '}
               <h4>{profile.name}</h4>
               <p>
                 {profile.email}
