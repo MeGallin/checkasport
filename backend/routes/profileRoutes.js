@@ -8,6 +8,7 @@ import {
   updateProfile,
   deleteProfile,
   createProfileReview,
+  updateProfileQualificationToTrue,
 } from '../controllers/profileController.js';
 
 import { protect, admin } from '../middleware/authMiddleware.js';
@@ -28,6 +29,7 @@ router.route('/api/profile').get(protect, getProfile);
 router
   .route('/api/profiles/admin/:id')
   .get(protect, admin, getAllProfilesAdmin)
-  .delete(protect, admin, deleteProfile);
+  .delete(protect, admin, deleteProfile)
+  .put(protect, admin, updateProfileQualificationToTrue);
 
 export default router;

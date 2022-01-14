@@ -205,6 +205,22 @@ const createProfileReview = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: Update Qualification to true/false
+// @route: PUT /api/profiles/:id/verified
+// @access: Private/Admin
+const updateProfileQualificationToTrue = asyncHandler(async (req, res) => {
+  const profile = await Profile.findById(req.params.id);
+
+  if (profile) {
+    profile.isQualificationsVerified = true;
+    const updateProfile = await profile.save();
+    res.json(updateProfile);
+  } else {
+    res.status(404);
+    throw new Error('Order not found');
+  }
+});
+
 export {
   getAllProfiles,
   getAllProfilesAdmin,
@@ -214,4 +230,5 @@ export {
   updateProfile,
   deleteProfile,
   createProfileReview,
+  updateProfileQualificationToTrue,
 };

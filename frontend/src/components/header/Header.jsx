@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import './Header.scss';
 
 import LinkComp from '../linkComp/LinkComp';
@@ -12,6 +13,7 @@ import { USER_REVIEW_CREATE_COMMENT_RESET } from '../../store/constants/userRevi
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -21,6 +23,7 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logoutAction());
+    navigate('/');
   };
   const handleReviewerLogout = () => {
     dispatch({ type: USER_REVIEW_CREATE_COMMENT_RESET });
