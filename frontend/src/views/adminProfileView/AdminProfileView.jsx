@@ -6,6 +6,7 @@ import './AdminProfileView.scss';
 import {
   profilesAdminAction,
   deleteProfileAction,
+  profileVerifyQualificationAction,
 } from '../../store/actions/profileActions';
 
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
@@ -39,6 +40,13 @@ const AdminProfileView = () => {
     }
   };
 
+  const handleVerify = (id) => {
+    // Dispatch verify qualification
+    if (window.confirm(`Are you sure you want to update this ${id}`)) {
+      dispatch(profileVerifyQualificationAction(id));
+    }
+  };
+
   return (
     <>
       {error ? <Message message={error} /> : null}
@@ -52,7 +60,7 @@ const AdminProfileView = () => {
           <p>There currently {profilesAdmin.length} profiles.</p>
           <div className="heading admin-profile-inner-wrapper">
             <div className="item">NAME</div>
-            <div className="item">Qualifications</div>
+            <div className="item">Qualifications Verified</div>
             <div className="item wider-item">Description</div>
             <div className="item">Rating</div>
             <div className="item">Reviews</div>
@@ -81,20 +89,31 @@ const AdminProfileView = () => {
               </div>
 
               <div className="item">
-                {profile.isQualificationsVerified === true ? (
-                  <i
-                    className="fa fa-check"
-                    style={{
-                      fontSize: 20 + 'px',
-                      color: 'rgba(92, 184, 92, 1)',
-                    }}
-                  ></i>
-                ) : (
-                  <i
-                    className="fa fa-times"
-                    style={{ fontSize: 20 + 'px', color: 'crimson' }}
-                  ></i>
-                )}
+                <>
+                  <Button
+                    colour="transparent"
+                    text="Verify Qualifications"
+                    className="btn"
+                    title="Verify Qualifications"
+                    onClick={() => handleVerify(profile._id)}
+                    disabled={!profile._id}
+                  ></Button>
+
+                  {profile.isQualificationsVerified === true ? (
+                    <i
+                      className="fa fa-check"
+                      style={{
+                        fontSize: 20 + 'px',
+                        color: 'rgba(92, 184, 92, 1)',
+                      }}
+                    ></i>
+                  ) : (
+                    <i
+                      className="fa fa-times"
+                      style={{ fontSize: 20 + 'px', color: 'crimson' }}
+                    ></i>
+                  )}
+                </>
               </div>
 
               <div className="item wider-item">

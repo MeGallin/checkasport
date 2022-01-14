@@ -25,8 +25,6 @@ const FullProfileView = () => {
   const profileState = useSelector((state) => state.profileById);
   const { loading, error, profile } = profileState;
 
-  console.log('DDD', profile);
-
   useEffect(() => {
     dispatch(profileByIdAction(id));
     dispatch(userReviewIdAction(profile?.user));
@@ -47,7 +45,6 @@ const FullProfileView = () => {
             <Message message={error} />
           ) : (
             <>
-              <LinkComp route="" routeName="GO BACK" />
               <div className="full-profile-wrapper">
                 <div
                   ref={ref}
@@ -110,6 +107,8 @@ const FullProfileView = () => {
                   <p>{profile?.description}</p>
                   <h1>Specialisation</h1>
                   <p>{profile?.specialisation}</p>
+                  <h1>Qualifications</h1>
+                  <p>{profile?.qualifications}</p>
 
                   <div className="verified">
                     <h1>Qualifications Verified</h1>
@@ -179,15 +178,30 @@ const FullProfileView = () => {
                         />
                         <LinkComp
                           route="reviewer-login"
-                          routeName={`Write a review about ${profile.name}`}
+                          routeName={`Write a review about ${profile?.name}`}
                         />
                       </>
-                    ) : null}
+                    ) : (
+                      <>
+                        <h1>Reviews</h1>
+                        <p>
+                          There is currently no reviews for {profile?.name}.
+                        </p>
+                        <p>
+                          Be the first to review {profile?.name} by
+                          <LinkComp
+                            route="reviewer-login"
+                            routeName={` clicking here`}
+                          />
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
             </>
           )}
+          <LinkComp route="" routeName="GO BACK" />
         </>
       )}
     </div>

@@ -24,6 +24,9 @@ import {
   PROFILE_UPDATE_REQUEST,
   PROFILE_UPDATE_RESET,
   PROFILE_UPDATE_SUCCESS,
+  PROFILE_VERIFY_QUALIFICATION_FAILURE,
+  PROFILE_VERIFY_QUALIFICATION_REQUEST,
+  PROFILE_VERIFY_QUALIFICATION_SUCCESS,
 } from '../constants/profileConstants';
 
 // Get all profiles
@@ -146,6 +149,23 @@ export const profileDeleteReducer = (state = {}, action) => {
     case PROFILE_DELETE_FAILURE:
       return { ...state, loading: false, error: action.payload };
 
+    default:
+      return { ...state };
+  }
+};
+// Verify profile qualifications
+export const profileVerifyQualificationReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PROFILE_VERIFY_QUALIFICATION_REQUEST:
+      return { ...state, loading: true };
+    case PROFILE_VERIFY_QUALIFICATION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case PROFILE_VERIFY_QUALIFICATION_FAILURE:
+      return { ...state, loading: false, error: action.payload };
     default:
       return { ...state };
   }

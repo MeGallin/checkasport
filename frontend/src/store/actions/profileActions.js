@@ -21,6 +21,9 @@ import {
   PROFILE_UPDATE_FAILURE,
   PROFILE_UPDATE_REQUEST,
   PROFILE_UPDATE_SUCCESS,
+  PROFILE_VERIFY_QUALIFICATION_FAILURE,
+  PROFILE_VERIFY_QUALIFICATION_REQUEST,
+  PROFILE_VERIFY_QUALIFICATION_SUCCESS,
 } from '../constants/profileConstants';
 
 // Get all profiles public
@@ -215,6 +218,7 @@ export const deleteProfileAction = (id) => async (dispatch, getState) => {
 
     await axios.delete(
       `http://localhost:5000/api/profiles/admin/${id}`,
+      {},
       config,
     );
     dispatch({ type: PROFILE_DELETE_SUCCESS });
@@ -229,3 +233,41 @@ export const deleteProfileAction = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+// Verify Profile qualification action
+export const profileVerifyQualificationAction =
+  (id) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: PROFILE_VERIFY_QUALIFICATION_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      await axios.put(
+        `http://localhost:5000/api/profiles/admin/${id}`,
+        {},
+        config,
+      );
+
+      dispatch({ type: PROFILE_VERIFY_QUALIFICATION_SUCCESS });
+      dispatch(profilesAdminAction());
+    } catch (error) {
+      dispatch({
+        type: PROFILE_VERIFY_QUALIFICATION_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
