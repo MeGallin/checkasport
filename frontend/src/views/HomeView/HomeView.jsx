@@ -89,35 +89,37 @@ const HomeView = () => {
         {keyword.length > 0 ? (
           <div className="card-wrapper">
             {searchedProfiles.map((profile) => (
-              <Card
-                specialisationOne={profile.specialisationOne}
-                specialisationTwo={profile.specialisationTwo}
-                specialisationThree={profile.specialisationThree}
-                specialisationFour={profile.specialisationFour}
-                id={profile._id}
-                name={
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: highlightKeywordMatch(profile.name),
-                    }}
-                  ></span>
-                }
-                src={`uploads/profiles/${profile.profileImage}`}
-                alt={profile.name}
-                description={
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: highlightKeywordMatch(
-                        profile.description.slice(0, 180) + '...',
-                      ),
-                    }}
-                  ></span>
-                }
-                rating={profile.rating}
-                number
-                of
-                reviews={profile.numReviews}
-              />
+              <div key={profile?._id}>
+                <Card
+                  specialisationOne={profile.specialisationOne}
+                  specialisationTwo={profile.specialisationTwo}
+                  specialisationThree={profile.specialisationThree}
+                  specialisationFour={profile.specialisationFour}
+                  id={profile._id}
+                  name={
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: highlightKeywordMatch(profile.name),
+                      }}
+                    ></span>
+                  }
+                  src={`uploads/profiles/${profile.profileImage}`}
+                  alt={profile.name}
+                  description={
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: highlightKeywordMatch(
+                          profile.description.slice(0, 180) + '...',
+                        ),
+                      }}
+                    ></span>
+                  }
+                  rating={profile.rating}
+                  number
+                  of
+                  reviews={profile.numReviews}
+                />
+              </div>
             ))}
           </div>
         ) : null}
