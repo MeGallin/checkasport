@@ -13,9 +13,11 @@ import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
 import Message from '../../components/message/Message';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
+import Rating from '../../components/rating/Rating';
 
 import moment from 'moment';
 import axios from 'axios';
+import QuillEditor from '../../components/quillEditor/QuillEditor';
 
 const ProfileEditView = () => {
   const emailRegEx =
@@ -44,6 +46,7 @@ const ProfileEditView = () => {
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [keyWordSearch, setkeyWordSearch] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [show, setShow] = useState(false);
 
   const [keyWordSearchOne, setkeyWordSearchOne] = useState('');
   const [keyWordSearchTwo, setkeyWordSearchTwo] = useState('');
@@ -131,6 +134,8 @@ const ProfileEditView = () => {
     };
     buildPermuations(arr);
 
+    console.log(res);
+
     const purekeyWordSearch = description.concat(
       name,
       location,
@@ -206,6 +211,10 @@ const ProfileEditView = () => {
     }
   };
 
+  const handleShowCombinations = () => {
+    setShow(!show);
+  };
+
   return (
     <>
       {error ? <Message message={error} /> : null}
@@ -217,6 +226,7 @@ const ProfileEditView = () => {
             <p>Please click the button below to create a sample profile.</p>
             <p>You will then be re-directed to your USER profile page.</p>
             <Button
+              type="submit"
               colour="transparent"
               text="Create your profile"
               className="btn"
@@ -275,54 +285,27 @@ const ProfileEditView = () => {
               />
 
               <div>
-                <label>Description </label>
                 {description?.length < 10 ? (
                   <span className="small-text">
                     must have at least {description.length} characters.
                   </span>
                 ) : null}
-                <textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  type="text"
-                  name="description"
-                  required
-                  className={description?.length <= 10 ? 'invalid' : 'entered'}
-                  error={
-                    description?.length <= 10
-                      ? `Description field must contain at least 10 characters!`
-                      : null
-                  }
-                />
+
+                <h3>Description </h3>
+                <div className="input-wrapper">
+                  <label>Brief Description of yourself </label>
+                  <QuillEditor
+                    value={description}
+                    onChange={setDescription}
+                    className={description?.length < 10 ? 'invalid' : 'entered'}
+                  />
+                </div>
               </div>
 
-              <div>
-                <label>keyWords (Search) </label>
-                {keyWordSearch?.length < 10 ? (
-                  <span className="small-text">
-                    must have at least {keyWordSearch.length} characters.
-                  </span>
-                ) : null}
-                <textarea
-                  value={keyWordSearch}
-                  onChange={(e) => setkeyWordSearch(e.target.value)}
-                  type="text"
-                  name="keyWordSearch"
-                  required
-                  className={
-                    keyWordSearch?.length <= 10 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    keyWordSearch?.length <= 10
-                      ? `keyWord Search field must contain at least 10 characters!`
-                      : null
-                  }
-                />
-              </div>
-
+              <h3>Search Keyword(s)</h3>
               <div className="input-wrapper">
                 <InputField
-                  label="keyword Search One"
+                  placeholder="keyword"
                   value={keyWordSearchOne}
                   onChange={(e) => setkeyWordSearchOne(e.target.value)}
                   type="text"
@@ -338,7 +321,7 @@ const ProfileEditView = () => {
                   }
                 />
                 <InputField
-                  label="keyword Search Two"
+                  placeholder="keyword"
                   value={keyWordSearchTwo}
                   onChange={(e) => setkeyWordSearchTwo(e.target.value)}
                   type="text"
@@ -354,7 +337,7 @@ const ProfileEditView = () => {
                   }
                 />
                 <InputField
-                  label="keyword Search Three"
+                  placeholder="keyword"
                   value={keyWordSearchThree}
                   onChange={(e) => setkeyWordSearchThree(e.target.value)}
                   type="text"
@@ -370,7 +353,7 @@ const ProfileEditView = () => {
                   }
                 />
                 <InputField
-                  label="keyword Search Four"
+                  placeholder="keyword"
                   value={keyWordSearchFour}
                   onChange={(e) => setkeyWordSearchFour(e.target.value)}
                   type="text"
@@ -386,7 +369,7 @@ const ProfileEditView = () => {
                   }
                 />
                 <InputField
-                  label="keyword Search Five"
+                  placeholder="keyword"
                   value={keyWordSearchFive}
                   onChange={(e) => setkeyWordSearchFive(e.target.value)}
                   type="text"
@@ -401,11 +384,59 @@ const ProfileEditView = () => {
                       : null
                   }
                 />
+
+                <div>
+                  <hr className="style-one" />
+
+                  <h3>keywords search (Generated)</h3>
+                  <div>
+                    {keyWordSearch?.length < 10 ? (
+                      <span className="small-text">
+                        must have at least {keyWordSearch.length} characters.
+                      </span>
+                    ) : null}
+                    Our Algorithm has generated {Number(keyWordSearch?.length)}{' '}
+                    words with {Math.floor(keyWordSearch?.length / 5)}{' '}
+                    combinations. This includes keywords that have been taken
+                    from your description and including your name.
+                    <Button
+                      type="button"
+                      colour="transparent"
+                      text={show ? 'Hide Combinations' : 'View Combinations'}
+                      className="btn"
+                      title="View Combinations"
+                      disabled={false}
+                      onClick={handleShowCombinations}
+                    ></Button>
+                    {show ? (
+                      <>
+                        <label>READ ONLY: </label>
+                        <textarea
+                          readOnly
+                          value={keyWordSearch}
+                          onChange={(e) => setkeyWordSearch(e.target.value)}
+                          type="text"
+                          name="keyWordSearch"
+                          required
+                          className={
+                            keyWordSearch?.length <= 10 ? 'invalid' : 'entered'
+                          }
+                          error={
+                            keyWordSearch?.length <= 10
+                              ? `keyWord Search field must contain at least 10 characters!`
+                              : null
+                          }
+                        />
+                      </>
+                    ) : null}
+                  </div>
+                </div>
               </div>
 
+              <h3>Specialisation Keyword(s)</h3>
               <div className="input-wrapper">
                 <InputField
-                  label="specialisation"
+                  placeholder="Specialisation"
                   value={specialisationOne}
                   onChange={(e) => setSpecialisationOne(e.target.value)}
                   type="text"
@@ -422,7 +453,7 @@ const ProfileEditView = () => {
                 />
 
                 <InputField
-                  label="specialisation"
+                  placeholder="Specialisation"
                   value={specialisationTwo}
                   onChange={(e) => setSpecialisationTwo(e.target.value)}
                   type="text"
@@ -439,7 +470,7 @@ const ProfileEditView = () => {
                 />
 
                 <InputField
-                  label="specialisation"
+                  placeholder="Specialisation"
                   value={specialisationThree}
                   onChange={(e) => setSpecialisationThree(e.target.value)}
                   type="text"
@@ -456,7 +487,7 @@ const ProfileEditView = () => {
                 />
 
                 <InputField
-                  label="specialisation"
+                  placeholder="Specialisation"
                   value={specialisationFour}
                   onChange={(e) => setSpecialisationFour(e.target.value)}
                   type="text"
@@ -473,41 +504,32 @@ const ProfileEditView = () => {
                 />
               </div>
 
-              <InputField
-                label="Specialisation"
-                value={specialisation}
-                onChange={(e) => setSpecialisation(e.target.value)}
-                type="text"
-                name="specialisation"
-                required
-                className={specialisation?.length <= 10 ? 'invalid' : 'entered'}
-                error={
-                  specialisation?.length <= 10
-                    ? `Specialisation field must contain at least 10 characters!`
-                    : null
-                }
-              />
-
-              <div>
-                <label>Qualifications</label>
-                <textarea
-                  value={qualifications}
-                  onChange={(e) => setQualifications(e.target.value)}
-                  type="text"
-                  name="qualifications"
-                  required
+              <h3>Specialisation</h3>
+              <div className="input-border">
+                <label>Specialisation</label>
+                <QuillEditor
+                  value={specialisation}
+                  onChange={setSpecialisation}
                   className={
-                    qualifications?.length <= 10 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    qualifications?.length <= 10
-                      ? `Qualifications field must contain at least 10 characters!`
-                      : null
+                    specialisation?.length < 10 ? 'invalid' : 'entered'
                   }
                 />
               </div>
 
-              <div>
+              <h3>Qualifications</h3>
+              <div className="input-border">
+                <label>Qualifications</label>
+                <QuillEditor
+                  value={qualifications}
+                  onChange={setQualifications}
+                  className={
+                    qualifications?.length < 10 ? 'invalid' : 'entered'
+                  }
+                />
+              </div>
+
+              <h3>Location</h3>
+              <div className="input-border">
                 <label>Location</label>
                 <textarea
                   value={location}
@@ -545,6 +567,7 @@ const ProfileEditView = () => {
               />
 
               <Button
+                type="submit"
                 colour="transparent"
                 text="submit"
                 className="btn"
@@ -553,56 +576,99 @@ const ProfileEditView = () => {
               ></Button>
             </form>
           </fieldset>
+
+          {/* This is the display */}
+
           <fieldset className="fieldSet item">
-            <legend>PROFILE Summary</legend>
-            <p>Name: {name}</p>
-            <img
-              src={`../uploads/profiles/${profileImage}`}
-              alt={name}
-              className="image"
-            />
-            <p>
-              Email:{' '}
-              <a href={`mailto: ${email}`} target="_blank" rel="noreferrer">
-                {email}
-              </a>
-            </p>
-            <p>Description: {description}</p>
-            <p>Location: {location}</p>
-            <p>Specialisation: {specialisation}</p>
-            <p>Qualifications: {qualifications}</p>
-            <p>
-              QualificationsVerified:{' '}
-              {profile.isQualificationsVerified === true ? (
-                <i
-                  className="fa fa-check"
-                  style={{
-                    fontSize: 20 + 'px',
-                    color: 'rgba(92, 184, 92, 1)',
-                  }}
-                ></i>
-              ) : (
-                <i
-                  className="fa fa-times"
-                  style={{ fontSize: 20 + 'px', color: 'crimson' }}
-                ></i>
-              )}
-            </p>
-            <p>Telephone: {telephoneNumber}</p>
-            <p>Rating: {profile?.rating}</p>
-            <p>Reviews: {profile?.numReviews}</p>
-            <p>Create: {moment(profile?.createdAt).fromNow()}</p>
-            <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
-            <h4>Keyword Summary</h4>
+            <legend>Profile</legend>
+            <h3>Profile Summary</h3>
+            <div className="summary-wrapper">
+              <div>
+                <p>Name: {name}</p>
+                <p>
+                  Email:{' '}
+                  <a href={`mailto: ${email}`} target="_blank" rel="noreferrer">
+                    {email}
+                  </a>
+                </p>
+                <p>Mobile: {telephoneNumber}</p>
+                <p>Create: {moment(profile?.createdAt).fromNow()}</p>
+                <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
+              </div>
+              <img
+                src={`../uploads/profiles/${profileImage}`}
+                alt={name}
+                className="image"
+              />
+            </div>
+
+            <h3>Description</h3>
+            <div className="summary-wrapper">
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: profile?.description,
+                }}
+              ></p>
+            </div>
+
+            <h3>Location</h3>
+            <div className="summary-wrapper">
+              <p>{location}</p>
+            </div>
+
+            <h3>Specialisation</h3>
+            <div className="summary-wrapper">
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: profile?.specialisation,
+                }}
+              ></p>
+            </div>
+
+            <h3>Qualifications</h3>
+            <div className="summary-wrapper">
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: profile?.qualifications,
+                }}
+              ></p>
+              <p>
+                QualificationsVerified:{' '}
+                {profile.isQualificationsVerified === true ? (
+                  <i
+                    className="fa fa-check"
+                    style={{
+                      fontSize: 20 + 'px',
+                      color: 'rgba(92, 184, 92, 1)',
+                    }}
+                  ></i>
+                ) : (
+                  <i
+                    className="fa fa-times"
+                    style={{ fontSize: 20 + 'px', color: 'crimson' }}
+                  ></i>
+                )}
+              </p>
+            </div>
+
+            <h3>Rating</h3>
+            <div className="summary-wrapper">
+              <Rating
+                value={profile?.rating}
+                text={`  from ${profile?.numReviews} reviews`}
+              />
+            </div>
+
+            {/* <h4>Keyword Summary</h4>
             <p className="search-algorithm">
               Search algorithm: {profile?.keyWordSearch}
-            </p>
-            <p>Keyword search One: {profile?.keyWordSearchOne}</p>
+            </p> */}
+            {/* <p>Keyword search One: {profile?.keyWordSearchOne}</p>
             <p>Keyword search Two: {profile?.keyWordSearchTwo}</p>
             <p>Keyword search Three: {profile?.keyWordSearchThree}</p>
             <p>Keyword search Four: {profile?.Four}</p>
             <p>Keyword search Five: {profile?.five}</p>
-            <p>Keyword search Six: {profile?.six}</p>
+            <p>Keyword search Six: {profile?.six}</p> */}
           </fieldset>
         </div>
       )}

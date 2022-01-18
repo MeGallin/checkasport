@@ -33,7 +33,12 @@ const Card = ({
       </div>
 
       <div className="item">
-        <img className="card-profile-image" src={src} alt={alt} />
+        <img
+          className="card-profile-image"
+          src={src}
+          alt={alt}
+          loading="lazy"
+        />
         <div>
           <div className="card-name">{name}</div>
           <Rating value={rating} text={`  from ${reviews} reviews`} />

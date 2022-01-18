@@ -106,13 +106,11 @@ const HomeView = () => {
                   src={`uploads/profiles/${profile.profileImage}`}
                   alt={profile.name}
                   description={
-                    <span
+                    <p
                       dangerouslySetInnerHTML={{
-                        __html: highlightKeywordMatch(
-                          profile.description.slice(0, 180) + '...',
-                        ),
+                        __html: profile.description.slice(0, 180) + '...',
                       }}
-                    ></span>
+                    ></p>
                   }
                   rating={profile.rating}
                   number

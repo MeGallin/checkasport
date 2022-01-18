@@ -104,11 +104,25 @@ const FullProfileView = () => {
                   </div>
 
                   <h1>My BIO</h1>
-                  <p>{profile?.description}</p>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: profile?.description,
+                    }}
+                  ></p>
+
                   <h1>Specialisation</h1>
-                  <p>{profile?.specialisation}</p>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: profile?.specialisation,
+                    }}
+                  ></p>
+
                   <h1>Qualifications</h1>
-                  <p>{profile?.qualifications}</p>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: profile?.qualifications,
+                    }}
+                  ></p>
 
                   <div className="verified">
                     <h1>Qualifications Verified</h1>
@@ -145,19 +159,6 @@ const FullProfileView = () => {
                       {profile?.specialisationFour}
                     </div>
                   </div>
-                  <h1>Contact Details</h1>
-                  <p>{profile?.location}</p>
-                  <p>Mobile number: {profile?.telephoneNumber}</p>
-                  <p>
-                    email:{' '}
-                    <a
-                      href={`mailto: ${profile?.email}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {profile?.email}
-                    </a>
-                  </p>
 
                   <div>
                     {profile?.reviews.length > 0 ? (
@@ -196,6 +197,21 @@ const FullProfileView = () => {
                         </p>
                       </>
                     )}
+                  </div>
+                  <div>
+                    <h1>Contact Details</h1>
+                    <p>{profile?.location}</p>
+                    <p>Mobile number: {profile?.telephoneNumber}</p>
+                    <p>
+                      email:{' '}
+                      <a
+                        href={`mailto: ${profile?.email}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {profile?.email}
+                      </a>
+                    </p>
                   </div>
                 </div>
               </div>
