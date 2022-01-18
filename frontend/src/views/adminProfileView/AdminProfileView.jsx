@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './AdminProfileView.scss';
@@ -19,6 +19,9 @@ const AdminProfileView = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [showReviewsId, setShowReviewsId] = useState('');
+  let [showReviews, setShowReviews] = useState(false);
+
   // Logged in user Details saved in local storage
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -33,6 +36,8 @@ const AdminProfileView = () => {
   const profilesState = useSelector((state) => state.profilesAdmin);
   const { loading, error, success, profilesAdmin } = profilesState;
 
+  // console.log('DDD', profilesAdmin);
+
   const handleDeleteProfile = (id) => {
     // Dispatch user delete action
     if (window.confirm(`Are you sure you want to delete ${id}`)) {
@@ -45,6 +50,11 @@ const AdminProfileView = () => {
     if (window.confirm(`Are you sure you want to update this ${id}`)) {
       dispatch(profileVerifyQualificationAction(id));
     }
+  };
+
+  const handleDeleteReview = (id) => {
+    console.log(id);
+    //Dispatch delete Review action
   };
 
   return (
@@ -125,7 +135,42 @@ const AdminProfileView = () => {
 
               <div className="item">{profile.rating}</div>
 
-              <div className="item">{profile.numReviews}</div>
+              <div className="item">
+                {profile.numReviews}
+                <Button
+                  colour="transparent"
+                  text={!showReviews ? 'Show Reviews' : 'Hide Reviews'}
+                  className="btn"
+                  title="Show Admin"
+                  onClick={() =>
+                    setShowReviewsId(
+                      profile._id,
+                      setShowReviews((showReviews = !showReviews)),
+                    )
+                  }
+                  disabled={false}
+                ></Button>
+
+                {showReviewsId === profile._id && showReviews
+                  ? profile.reviews.map((review) => (
+                      <div key={review._id}>
+                        <div className="review-item">
+                          <p>By: {review.name}</p>
+                          <p>Review: {review.comment}</p>
+                          <p>Rating: {review.rating}</p>
+                          <Button
+                            colour="transparent"
+                            text="Delete Review"
+                            className="btn"
+                            title="Delete Review"
+                            onClick={() => handleDeleteReview(review._id)}
+                            disabled={false}
+                          ></Button>
+                        </div>
+                      </div>
+                    ))
+                  : null}
+              </div>
 
               <div className="item">{moment(profile.createdAt).fromNow()}</div>
 
