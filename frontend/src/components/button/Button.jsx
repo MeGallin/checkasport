@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.scss';
 
-const Button = ({ colour, text, disabled, title, onClick }) => {
+const Button = ({ colour, text, disabled, title, onClick, type }) => {
   return (
     <button
+      type={type}
       onClick={onClick}
       style={{ backgroundColor: colour }}
       className={disabled ? 'btn disabled' : 'btn not-disabled'}
@@ -22,6 +23,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
+  type: PropTypes.string,
   text: PropTypes.string,
   title: PropTypes.string,
   colour: PropTypes.string,
