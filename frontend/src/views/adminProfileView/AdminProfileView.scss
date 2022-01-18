@@ -39,6 +39,11 @@
     text-align: left;
     width: $description-width;
   }
+  .review-item {
+    border: $border-colour 1px solid;
+    padding: 0.4em;
+    text-align: left;
+  }
 
   h6 {
     margin: 0;
