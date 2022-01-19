@@ -7,6 +7,7 @@ import {
   profilesAdminAction,
   deleteProfileAction,
   profileVerifyQualificationAction,
+  deleteReviewProfileAction,
 } from '../../store/actions/profileActions';
 
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
@@ -52,9 +53,11 @@ const AdminProfileView = () => {
     }
   };
 
-  const handleDeleteReview = (id) => {
-    console.log(id);
+  const handleDeleteReview = (profileId, reviewId) => {
     //Dispatch delete Review action
+    if (window.confirm(`Are you sure you want to update this ${profileId}`)) {
+      dispatch(deleteReviewProfileAction(profileId, reviewId));
+    }
   };
 
   return (
@@ -163,7 +166,9 @@ const AdminProfileView = () => {
                             text="Delete Review"
                             className="btn"
                             title="Delete Review"
-                            onClick={() => handleDeleteReview(review._id)}
+                            onClick={() =>
+                              handleDeleteReview(profile._id, review._id)
+                            }
                             disabled={false}
                           ></Button>
                         </div>

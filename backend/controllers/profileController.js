@@ -167,6 +167,29 @@ const deleteProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: Delete a single review
+// @route: DELETE /api/profile/review/admin/:id
+// @access: PRIVATE/Admin
+const deleteReview = asyncHandler(async (req, res) => {
+  const profile = await Profile.findOneAndUpdate(
+    { _id: req.params.id },
+    { $pull: { reviews: { _id: req.body.reviewId } } },
+  );
+
+  const review = profile.reviews.filter((review) => {
+    if (req.body.reviewId === review._id.toString()) {
+      return review;
+    }
+  });
+
+  if (review.length > 0) {
+    res.json({ message: 'Review successfully removed' });
+  } else {
+    res.status(404);
+    throw new Error('Review Not Found');
+  }
+});
+
 // @description: CREATE a new review
 // @route: POST /api/profiles/:id/reviews
 // @access: Private
@@ -231,4 +254,5 @@ export {
   deleteProfile,
   createProfileReview,
   updateProfileQualificationToTrue,
+  deleteReview,
 };
