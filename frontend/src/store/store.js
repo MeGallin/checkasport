@@ -22,6 +22,7 @@ import {
   profileUpdateReducer,
   profileDeleteReducer,
   profileVerifyQualificationReducer,
+  profileDeleteReviewReducer,
 } from './reducers/profileReducers';
 
 import {
@@ -50,6 +51,7 @@ const reducer = combineReducers({
   profileUpdate: profileUpdateReducer,
   profileDelete: profileDeleteReducer,
   profileVerifyQualification: profileVerifyQualificationReducer,
+  profileDeleteReview: profileDeleteReviewReducer,
   userReviewLogin: userReviewLoginReducer,
   userReviewId: userReviewIdReducer,
   userReviewerRegistration: userReviewerRegistrationReducer,

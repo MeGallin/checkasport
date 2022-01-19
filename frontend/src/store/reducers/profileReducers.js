@@ -12,6 +12,9 @@ import {
   PROFILE_CREATE_SUCCESS,
   PROFILE_DELETE_FAILURE,
   PROFILE_DELETE_REQUEST,
+  PROFILE_DELETE_REVIEW_FAILURE,
+  PROFILE_DELETE_REVIEW_REQUEST,
+  PROFILE_DELETE_REVIEW_SUCCESS,
   PROFILE_DELETE_SUCCESS,
   PROFILE_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_FAILURE,
@@ -147,6 +150,24 @@ export const profileDeleteReducer = (state = {}, action) => {
         success: true,
       };
     case PROFILE_DELETE_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+
+    default:
+      return { ...state };
+  }
+};
+//Delete REVIEW
+export const profileDeleteReviewReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PROFILE_DELETE_REVIEW_REQUEST:
+      return { ...state, loading: true };
+    case PROFILE_DELETE_REVIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case PROFILE_DELETE_REVIEW_FAILURE:
       return { ...state, loading: false, error: action.payload };
 
     default:

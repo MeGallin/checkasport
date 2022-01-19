@@ -11,6 +11,9 @@ import {
   PROFILE_CREATE_SUCCESS,
   PROFILE_DELETE_FAILURE,
   PROFILE_DELETE_REQUEST,
+  PROFILE_DELETE_REVIEW_FAILURE,
+  PROFILE_DELETE_REVIEW_REQUEST,
+  PROFILE_DELETE_REVIEW_SUCCESS,
   PROFILE_DELETE_SUCCESS,
   PROFILE_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_FAILURE,
@@ -233,6 +236,44 @@ export const deleteProfileAction = (id) => async (dispatch, getState) => {
     });
   }
 };
+// Delete REVIEW ADMIN
+export const deleteReviewProfileAction =
+  (id, reviewId) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: PROFILE_DELETE_REVIEW_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      // Note: This can only be done like this in axios delete body
+      //https://stackoverflow.com/questions/51069552/axios-delete-request-with-body-and-headers
+
+      await axios.delete(
+        `http://localhost:5000/api/profile/review/admin/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+          data: {
+            reviewId: reviewId,
+          },
+        },
+      );
+      dispatch({ type: PROFILE_DELETE_REVIEW_SUCCESS });
+      dispatch(profilesAdminAction());
+    } catch (error) {
+      dispatch({
+        type: PROFILE_DELETE_REVIEW_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 // Verify Profile qualification action
 export const profileVerifyQualificationAction =

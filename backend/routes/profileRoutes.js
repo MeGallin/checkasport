@@ -9,6 +9,7 @@ import {
   deleteProfile,
   createProfileReview,
   updateProfileQualificationToTrue,
+  deleteReview,
 } from '../controllers/profileController.js';
 
 import { protect, admin } from '../middleware/authMiddleware.js';
@@ -31,5 +32,10 @@ router
   .get(protect, admin, getAllProfilesAdmin)
   .delete(protect, admin, deleteProfile)
   .put(protect, admin, updateProfileQualificationToTrue);
+
+//Delete a single review route
+router
+  .route('/api/profile/review/admin/:id')
+  .delete(protect, admin, deleteReview);
 
 export default router;
