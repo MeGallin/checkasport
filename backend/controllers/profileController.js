@@ -171,16 +171,25 @@ const deleteProfile = asyncHandler(async (req, res) => {
 // @route: DELETE /api/profile/review/admin/:id
 // @access: PRIVATE/Admin
 const deleteReview = asyncHandler(async (req, res) => {
-  const profile = await Profile.findOneAndUpdate(
+  const profileReview = await Profile.findOneAndUpdate(
     { _id: req.params.id },
     { $pull: { reviews: { _id: req.body.reviewId } } },
   );
 
-  const review = profile.reviews.filter((review) => {
+  const review = profileReview.reviews.filter((review) => {
     if (req.body.reviewId === review._id.toString()) {
       return review;
     }
   });
+
+  // We need you update the number of reviews and rating
+  const profile = await Profile.findById(req.params.id);
+  profile.numReviews = profile.reviews.length;
+  profile.rating =
+    profile.reviews.reduce((acc, item) => item.rating + acc, 0) /
+    profile.reviews.length;
+  await profile.save();
+  // We need you update the number of reviews and rating
 
   if (review.length > 0) {
     res.json({ message: 'Review successfully removed' });
