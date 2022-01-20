@@ -8,6 +8,8 @@ import Message from '../../components/message/Message';
 import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
 import LinkComp from '../../components/linkComp/LinkComp';
+import Card from '../../components/card/Card';
+
 import {
   userReviewLoginAction,
   createUserReviewAction,
@@ -130,58 +132,74 @@ const ReviewerLoginView = () => {
           <fieldset className="fieldSet">
             <legend>Review a Trainer</legend>
 
-            <div>
-              NOTE:Cant bring in the card here You are about to review:{' '}
-              <h4>{profile.name}</h4>
-              <p>
-                {profile.email}
-                <img
-                  className="reviewer-profile-image"
-                  src={`../uploads/profiles/${profile.profileImage}`}
-                  alt={profile.name}
+            <div className="card-form-wrapper">
+              <div className="card-form-inner-wrapper">
+                <Card
+                  specialisationOne={profile?.specialisationOne}
+                  specialisationTwo={profile?.specialisationTwo}
+                  specialisationThree={profile?.specialisationThree}
+                  specialisationFour={profile?.specialisationFour}
+                  id={profile?._id}
+                  name={profile?.name}
+                  src={`uploads/profiles/${profile?.profileImage}`}
+                  alt={profile?.name}
+                  description={
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: profile?.description.slice(0, 180) + '...',
+                      }}
+                    ></p>
+                  }
+                  rating={profile?.rating}
+                  number
+                  of
+                  reviews={profile?.numReviews}
                 />
-              </p>
-            </div>
-            <form onSubmit={handleReviewSubmit}>
-              <div>
-                <label>Rating </label>
-                <div>
-                  <select
-                    value={rating}
-                    onChange={(e) => setRating(e.target.value)}
-                  >
-                    <option value="5">five</option>
-                    <option value="4">four</option>
-                    <option value="3">three</option>
-                    <option value="2">two</option>
-                    <option value="1">one</option>
-                  </select>
-                </div>
               </div>
 
-              <div>
-                <label>Review</label>
-                <textarea
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  type="text"
-                  name="comment"
-                  required
-                  className={comment?.length <= 10 ? 'invalid' : 'entered'}
-                  error={
-                    comment?.length <= 10
-                      ? `comment field must contain at least 10 characters!`
-                      : null
-                  }
-                />
+              <div className="card-form-inner-wrapper">
+                <form onSubmit={handleReviewSubmit}>
+                  <div>
+                    <label>Rating </label>
+                    <div>
+                      <select
+                        value={rating}
+                        onChange={(e) => setRating(e.target.value)}
+                      >
+                        <option value="5">five</option>
+                        <option value="4">four</option>
+                        <option value="3">three</option>
+                        <option value="2">two</option>
+                        <option value="1">one</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label>Review</label>
+                    <textarea
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      type="text"
+                      name="comment"
+                      required
+                      className={comment?.length <= 10 ? 'invalid' : 'entered'}
+                      error={
+                        comment?.length <= 10
+                          ? `comment field must contain at least 10 characters!`
+                          : null
+                      }
+                    />
+                  </div>
+                  <Button
+                    colour="transparent"
+                    text="submit"
+                    className="btn"
+                    disabled={!rating || (comment.length <= 10 && success)}
+                  ></Button>
+                </form>
               </div>
-              <Button
-                colour="transparent"
-                text="submit"
-                className="btn"
-                disabled={!rating || (comment.length <= 10 && success)}
-              ></Button>
-            </form>
+            </div>
             <div>
               <h3>Warning</h3>
               <p>Warning to info reviewer that this is a once off...</p>

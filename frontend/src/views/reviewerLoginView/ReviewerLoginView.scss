@@ -18,15 +18,31 @@
     background-color: $main-font-colour;
     border-radius: 4px;
   }
-  @media screen and (min-width: 0\0) {
-    select {
-      background-image: none\9;
-      padding: 5px\9;
+}
+.card-form-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .card-form-inner-wrapper {
+    flex-basis: 48%;
+    // flex-basis: clamp(48%, 48%, 100%);
+    form {
+      width: 100%;
+      border: 1px solid $border-colour;
+      padding: 0.5em;
+      background-color: black;
     }
   }
-  .reviewer-profile-image {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
+}
+/* Responsive layout */
+@media (max-width: 812px) {
+  .card-form-wrapper {
+    .card-form-inner-wrapper {
+      flex-basis: 100%;
+    }
   }
 }
