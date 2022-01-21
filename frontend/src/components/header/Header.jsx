@@ -42,7 +42,7 @@ const Header = () => {
           {userReviewInfo ? (
             <Button
               colour="primary"
-              text="Reviewer Logout"
+              text={`${userReviewInfo.name} logout`}
               className="btn"
               onClick={handleReviewerLogout}
               disabled={false}
@@ -51,15 +51,19 @@ const Header = () => {
 
           {userInfo ? (
             <div className="user-info-wrapper">
+              <i
+                className="fa fa-user"
+                style={{ fontSize: 20 + 'px', color: 'rgba(92, 184, 92, 1)' }}
+              ></i>
               <Button
                 colour="primary"
-                text="logout"
+                text={`${userInfo.name} logout`}
                 className="btn"
                 onClick={handleLogout}
                 disabled={false}
               />
 
-              <div className="header-profile-wrapper">
+              {/* <div className="header-profile-wrapper">
                 <i
                   className="fa fa-user"
                   style={{ fontSize: 20 + 'px', color: 'rgba(92, 184, 92, 1)' }}
@@ -70,13 +74,13 @@ const Header = () => {
                     routeName={userInfo.name}
                   />
                 </span>
-              </div>
+              </div> */}
             </div>
           ) : (
             <>
-              <LinkComp route="login" routeName="Login" />
-              or
-              <LinkComp route="registration" routeName="Register" />
+              {!userReviewInfo ? (
+                <LinkComp route="login" routeName="Login" />
+              ) : null}
             </>
           )}
         </div>
