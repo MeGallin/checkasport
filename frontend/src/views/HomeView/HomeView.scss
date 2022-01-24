@@ -1,8 +1,35 @@
 @import '../../index.scss';
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.main-heading {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2.6em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.sub-heading {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.6em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.keyword-search {
+  width: 50%;
+  margin: 0 auto;
+}
+.keyword-length {
+  font-size: 1em;
+  text-align: center;
+  font-size: 0.8em;
+}
+input[type='search']::placeholder {
+  text-align: center;
+}
 .home-view {
-  .keyword-length {
-    color: $light-orange;
-  }
+  height: (
+    100% - #{($header-height + $footer-height)}
+  ); //This is for the background image
+
   .card-wrapper {
     display: flex;
     flex-wrap: wrap;
