@@ -52,12 +52,16 @@
   input[type='search'].invalid {
     border-left: $secondary-bg-colour 4px solid;
   }
+  input[type='search']::placeholder {
+    text-align: center;
+  }
   input[type='tel'].entered {
     border-left: greenyellow 4px solid;
   }
   input[type='tel'].invalid {
     border-left: $secondary-bg-colour 4px solid;
   }
+
   margin-bottom: 0.4rem;
   margin-top: 0.4rem;
 }

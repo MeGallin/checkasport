@@ -19,6 +19,9 @@ const HomeView = () => {
   const profilesState = useSelector((state) => state.profiles);
   const { loading, error, profiles } = profilesState;
 
+  console.log('DDD', profiles.length);
+  const rndInt = Math.floor(Math.random() * profiles.length);
+
   const searchedProfiles = profiles.filter((profile) => {
     if (
       profile.name ||
@@ -70,21 +73,34 @@ const HomeView = () => {
   return (
     <>
       {error ? <Message message={error} /> : null}
-
-      <div className="home-view ">
+      <div
+        style={{
+          backgroundImage: `url(uploads/profiles/${profiles[rndInt]?.profileImage})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          height: '20vh',
+        }}
+      >
+        <div className="main-heading">Welcome to check-a-sport</div>
+        <div className="sub-heading">Find a trainer in your area</div>
+        <div className="keyword-search">
+          <SearchInput
+            type="search"
+            placeholder="search a discipline and location"
+            value={keyword}
+            handleSearch={handleSearch}
+          />
+        </div>
         {keyword.length > 0 ? (
           <div className="keyword-length">
             We found {searchedProfiles.length} profiles that match your search
             criteria.
           </div>
         ) : null}
-        <SearchInput
-          type="search"
-          placeholder="search a discipline and location"
-          value={keyword}
-          handleSearch={handleSearch}
-        />
+      </div>
 
+      <div className="home-view">
         {loading ? <LoadingSpinner /> : null}
         {keyword.length > 0 ? (
           <div className="card-wrapper">
