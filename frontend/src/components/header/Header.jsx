@@ -63,18 +63,14 @@ const Header = () => {
                 disabled={false}
               />
 
-              {/* <div className="header-profile-wrapper">
-                <i
-                  className="fa fa-user"
-                  style={{ fontSize: 20 + 'px', color: 'rgba(92, 184, 92, 1)' }}
-                ></i>
+              <div className="header-profile-wrapperXX">
                 <span>
                   <LinkComp
                     route="user-profile-edit"
-                    routeName={userInfo.name}
+                    routeName="Back to control panel"
                   />
                 </span>
-              </div> */}
+              </div>
             </div>
           ) : (
             <>

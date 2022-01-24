@@ -128,9 +128,12 @@ const ReviewerLoginView = () => {
       ) : (
         <>
           <div
-            className="reviewer-wrapper bg-image"
+            className="reviewer-wrapper"
             style={{
               backgroundImage: `url(uploads/profiles/${profile?.profileImage})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
             }}
           >
             {reviewError ? <Message message={reviewError} /> : null}
