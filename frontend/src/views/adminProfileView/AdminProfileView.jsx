@@ -13,6 +13,7 @@ import {
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import Message from '../../components/message/Message';
 import Button from '../../components/button/Button';
+import SearchInput from '../../components/searchInput/SearchInput';
 
 import moment from 'moment';
 
@@ -20,6 +21,7 @@ const AdminProfileView = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [keyword, setKeyword] = useState('');
   const [showReviewsId, setShowReviewsId] = useState('');
   let [showReviews, setShowReviews] = useState(false);
 
@@ -60,6 +62,22 @@ const AdminProfileView = () => {
     }
   };
 
+  const searchedProfiles = profilesAdmin.filter((profile) => {
+    if (keyword) {
+      return profile.name.toLowerCase().includes(keyword.toLowerCase());
+    } else {
+      return profilesAdmin;
+    }
+  });
+
+  const handleSearch = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const handleSearchClear = () => {
+    setKeyword('');
+  };
+
   return (
     <>
       {error ? <Message message={error} /> : null}
@@ -70,7 +88,26 @@ const AdminProfileView = () => {
         <LoadingSpinner />
       ) : (
         <div className="admin-profile-view-wrapper">
-          <p>There currently {profilesAdmin.length} profiles.</p>
+          <div className="admin-keyword-search">
+            <div className="admin-keyword-search-wrapper">
+              <SearchInput
+                type="search"
+                placeholder="Search a name"
+                value={keyword}
+                handleSearch={handleSearch}
+              />
+              <Button
+                colour="transparent"
+                text="Clear search"
+                className="btn"
+                title="Clear Search"
+                onClick={handleSearchClear}
+                disabled={!keyword}
+              ></Button>
+            </div>
+          </div>
+
+          <p>There currently {searchedProfiles.length} profiles.</p>
           <div className="heading admin-profile-inner-wrapper">
             <div className="item">NAME</div>
             <div className="item">Qualifications Verified</div>
@@ -80,7 +117,7 @@ const AdminProfileView = () => {
             <div className="item">CREATED</div>
             <div className="item">UPDATED</div>
           </div>
-          {profilesAdmin.map((profile) => (
+          {searchedProfiles.map((profile) => (
             <div key={profile._id} className="admin-profile-inner-wrapper">
               <div className="item">
                 <Button
