@@ -16,26 +16,21 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.route('/api/profiles').get(getAllProfiles).post(protect, createProfile);
-router.route('/api/profiles/:id/reviews').post(protect, createProfileReview);
+router.route('/profiles').get(getAllProfiles).post(protect, createProfile);
+router.route('/profiles/:id/reviews').post(protect, createProfileReview);
 
-router
-  .route('/api/profile/:id')
-  .get(getProfileById)
-  .put(protect, updateProfile);
+router.route('/profile/:id').get(getProfileById).put(protect, updateProfile);
 
-router.route('/api/profile').get(protect, getProfile);
+router.route('/profile').get(protect, getProfile);
 
 //Get all profiles ADMIN route
 router
-  .route('/api/profiles/admin/:id')
+  .route('/profiles/admin/:id')
   .get(protect, admin, getAllProfilesAdmin)
   .delete(protect, admin, deleteProfile)
   .put(protect, admin, updateProfileQualificationToTrue);
 
 //Delete a single review route
-router
-  .route('/api/profile/review/admin/:id')
-  .delete(protect, admin, deleteReview);
+router.route('/profile/review/admin/:id').delete(protect, admin, deleteReview);
 
 export default router;

@@ -10,9 +10,9 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/api/reviewers/admin/:id', protect, admin, getAllUsersReviews);
-router.delete('/api/reviewer/admin/:id', protect, admin, deleteReviewer);
-router.post('/api/users-review/login', authUserReview);
-router.post('/api/users-review', registerUserReviewer);
+router.get('/reviewers/admin/:id', protect, admin, getAllUsersReviews);
+router.delete('/reviewer/admin/:id', protect, admin, deleteReviewer);
+router.post('/users-review/login', authUserReview);
+router.post('/users-review', registerUserReviewer);
 
 export default router;

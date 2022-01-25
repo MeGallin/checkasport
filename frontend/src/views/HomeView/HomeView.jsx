@@ -10,17 +10,16 @@ import Card from '../../components/card/Card';
 
 const HomeView = () => {
   const [keyword, setKeyword] = useState('');
+  const [rndInt, setRndInt] = useState(null);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(profilesAction());
-  }, [dispatch]);
 
   const profilesState = useSelector((state) => state.profiles);
   const { loading, error, profiles } = profilesState;
 
-  console.log('DDD', profiles.length);
-  const rndInt = Math.floor(Math.random() * profiles.length);
+  useEffect(() => {
+    dispatch(profilesAction());
+    setRndInt(Math.floor(Math.random() * profiles.length));
+  }, [dispatch, profiles.length]);
 
   const searchedProfiles = profiles.filter((profile) => {
     if (
@@ -79,7 +78,7 @@ const HomeView = () => {
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
-          height: '20vh',
+          height: '28vh',
         }}
       >
         <div className="main-heading">Welcome to check-a-sport</div>
@@ -87,7 +86,7 @@ const HomeView = () => {
         <div className="keyword-search">
           <SearchInput
             type="search"
-            placeholder="search a discipline and location"
+            placeholder="Search a discipline and location"
             value={keyword}
             handleSearch={handleSearch}
           />
@@ -107,10 +106,26 @@ const HomeView = () => {
             {searchedProfiles.map((profile) => (
               <div key={profile?._id}>
                 <Card
-                  specialisationOne={profile.specialisationOne}
-                  specialisationTwo={profile.specialisationTwo}
-                  specialisationThree={profile.specialisationThree}
-                  specialisationFour={profile.specialisationFour}
+                  specialisationOne={
+                    profile.specialisationOne.length
+                      ? profile.specialisationOne
+                      : 'Personal Trainer'
+                  }
+                  specialisationTwo={
+                    profile.specialisationTwo.length
+                      ? profile.specialisationTwo
+                      : 'Personal Trainer'
+                  }
+                  specialisationThree={
+                    profile.specialisationThree.length
+                      ? profile.specialisationThree
+                      : 'Personal Trainer'
+                  }
+                  specialisationFour={
+                    profile.specialisationFour.length
+                      ? profile.specialisationFour
+                      : 'Personal Trainer'
+                  }
                   id={profile._id}
                   name={
                     <span

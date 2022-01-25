@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import './DateTime.scss';
 
-import LoadingSpinner from '../loadingSpinner/LoadingSpinner';
-
 const DateTime = () => {
   const [dateTime, setDateTime] = useState('');
 
@@ -13,7 +11,7 @@ const DateTime = () => {
     }, 1000);
   }, [dateTime]);
 
-  return <>{dateTime ? <div>{dateTime}</div> : <LoadingSpinner />}</>;
+  return <>{dateTime ? <div>{dateTime}</div> : null}</>;
 };
 
 export default DateTime;

@@ -24,20 +24,31 @@ app.use(cors());
 app.use(express.json()); // This needed to accept json data
 
 //Routes
-app.use('/', confirmEmailRoutes);
-app.use('/', contactFormRoutes);
-app.use('/', userRoutes);
-app.use('/', uploaderRoutes);
+app.use('/api', confirmEmailRoutes);
+app.use('/api', contactFormRoutes);
+app.use('/api', userRoutes);
+app.use('/api', uploaderRoutes);
 // Profiles Routes
-app.use('/', profileRoutes);
+app.use('/api', profileRoutes);
 // User Review routes
-app.use('/', authUserReview);
+app.use('/api', authUserReview);
 // User REVIEWER routes
-app.use('/', userReviewRoutes);
+app.use('/api', userReviewRoutes);
 
 //create static folder
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')));
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')),
+  );
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running');
+  });
+}
 
 // @Error handling middleware
 app.use(notFound);
@@ -45,6 +56,7 @@ app.use(errorHandler);
 // @Error handling middleware
 
 const PORT = process.env.PORT || 5000;
+const MODE = process.env.NODE_ENV;
 
 app.listen(
   PORT,

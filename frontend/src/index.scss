@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 /* variable setup */
-$main-bg-colour: rgba(32, 32, 32, 1);
+$main-bg-colour: rgba(12, 12, 12, 1);
 $secondary-bg-colour: rgba(255, 99, 0, 1);
 $light-orange: rgba(236, 127, 55, 1);
 $burnt-orange: rgba(190, 79, 12, 1);
@@ -13,6 +13,7 @@ $warning: rgba(240, 173, 78, 1);
 $rating-colour: orange;
 $main-font-colour: whitesmoke;
 $border-colour: rgba(200, 200, 200, 0.5);
+$border-colour-light: rgba(200, 200, 200, 0.2);
 $header-height: 52px;
 $footer-height: 40px;
 /* Box sizing rules */
