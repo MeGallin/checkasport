@@ -7,7 +7,6 @@
   input[type='search'],
   input[type='tel'],
   textarea {
-    background: rgba(255, 255, 255, 0.1);
     border: none;
     border-radius: 4px;
     font-size: 1rem;
@@ -18,8 +17,8 @@
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    background-color: #e8eeef;
-    color: #8a97a0;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: $main-font-colour;
     -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
   }

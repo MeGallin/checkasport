@@ -125,20 +125,25 @@ const FullProfileView = () => {
                   ></p>
 
                   <div className="verified">
-                    <h1>Qualifications Verified</h1>
+                    <h3>Qualifications Verified</h3>
 
                     {profile?.isQualificationsVerified === true ? (
                       <i
                         className="fa fa-check"
                         style={{
-                          fontSize: 40 + 'px',
+                          fontSize: 20 + 'px',
                           color: 'rgba(92, 184, 92, 1)',
+                          marginLeft: 12 + 'px',
                         }}
                       ></i>
                     ) : (
                       <i
                         className="fa fa-times"
-                        style={{ fontSize: 40 + 'px', color: 'crimson' }}
+                        style={{
+                          fontSize: 20 + 'px',
+                          color: 'crimson',
+                          marginLeft: 12 + 'px',
+                        }}
                       ></i>
                     )}
                   </div>
@@ -200,7 +205,6 @@ const FullProfileView = () => {
                   </div>
                   <div>
                     <h1>Contact Details</h1>
-                    <p>{profile?.location}</p>
                     <p>Mobile number: {profile?.telephoneNumber}</p>
                     <p>
                       email:{' '}
@@ -212,6 +216,10 @@ const FullProfileView = () => {
                         {profile?.email}
                       </a>
                     </p>
+                  </div>
+                  <div>
+                    <h1>Location</h1>
+                    <p>{profile?.location}</p>
                   </div>
                 </div>
               </div>

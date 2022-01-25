@@ -13,17 +13,17 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/api/users/login', authUser);
+router.post('/users/login', authUser);
 router
-  .route('/api/users/:id')
+  .route('/users/:id')
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile)
   .delete(protect, admin, deleteUser);
 
-router.route('/api/user/profile/:id').get(getUserProfileById);
+router.route('/user/profile/:id').get(getUserProfileById);
 
 router
-  .route('/api/users')
+  .route('/users')
   .post(registerUser)
   .get(protect, admin, getAllUsersProfile);
 

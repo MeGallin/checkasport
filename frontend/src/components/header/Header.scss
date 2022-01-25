@@ -9,6 +9,8 @@ header {
     justify-content: space-between;
   }
   .btn {
+    display: flex;
+    flex-direction: column;
     background-color: $main-bg-colour;
     color: $main-font-colour;
   }
@@ -21,5 +23,17 @@ header {
   }
   .header-profile-wrapper {
     font-size: 0.7em;
+  }
+  .members-login--wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    .members-login-text {
+      position: relative;
+      top: 6px;
+      font-size: 0.6em;
+      text-transform: uppercase;
+    }
   }
 }

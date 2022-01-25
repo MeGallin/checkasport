@@ -6,12 +6,14 @@
   font-size: 2.6em;
   text-transform: uppercase;
   text-align: center;
+  letter-spacing: 0.2em;
 }
 .sub-heading {
   font-family: 'Bebas Neue', cursive;
   font-size: 1.6em;
   text-transform: uppercase;
   text-align: center;
+  letter-spacing: 0.1em;
 }
 .keyword-search {
   width: 50%;
@@ -37,6 +39,10 @@ input[type='search']::placeholder {
     gap: 1rem;
     flex-direction: row;
     flex-wrap: wrap;
+  }
+
+  .card-inner-wrapper .item:first-child .specialisation {
+    border: 1px solid $border-colour-light;
   }
   /* Responsive layout */
   @media (max-width: 812px) {
