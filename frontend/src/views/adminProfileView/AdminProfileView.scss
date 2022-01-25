@@ -16,6 +16,15 @@
     height: 80px;
     border-radius: 50%;
   }
+  .admin-keyword-search {
+    .search-wrapper {
+      width: 50%;
+    }
+    .admin-keyword-search-wrapper {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
   .admin-profile-inner-wrapper {
     border: black 2px solid;
     display: flex;
