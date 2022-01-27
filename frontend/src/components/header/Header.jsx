@@ -10,6 +10,7 @@ import Button from '../../components/button/Button';
 import { logoutAction } from '../../store/actions/userActions';
 import { reviewLogoutAction } from '../../store/actions/userReviewActions';
 import { USER_REVIEW_CREATE_COMMENT_RESET } from '../../store/constants/userReviewConstants';
+import LoginOut from '../login-out/LoginOut';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -40,12 +41,10 @@ const Header = () => {
 
         <div className="nav-wrapper">
           {userReviewInfo ? (
-            <Button
-              colour="primary"
-              text={`${userReviewInfo.name} logout`}
-              className="btn"
+            <LoginOut
+              description={userReviewInfo.name}
+              definition="Logout"
               onClick={handleReviewerLogout}
-              disabled={false}
             />
           ) : null}
 
@@ -61,28 +60,22 @@ const Header = () => {
               </div>
 
               <div className="members-login--wrapper">
-                <span className="members-login-text">{userInfo.name}</span>
-                <Button
-                  colour="primary"
-                  text="logout"
-                  className="btn"
+                {/* Use definition if its not a link */}
+                <LoginOut
+                  description={userInfo.name}
+                  definition="Logout"
                   onClick={handleLogout}
-                  disabled={false}
                 />
               </div>
-
-              {/* <i
-                className="fa fa-user"
-                style={{ fontSize: 10 + 'px', color: 'rgba(92, 184, 92, 1)' }}
-              ></i> */}
             </div>
           ) : (
             <>
               {!userReviewInfo ? (
-                <div className="members-login--wrapper">
-                  <span className="members-login-text">Members</span>
-                  <LinkComp route="login" routeName="Login" />
-                </div>
+                <LoginOut
+                  description="Members"
+                  route="login"
+                  routeDescription="login"
+                />
               ) : null}
             </>
           )}
