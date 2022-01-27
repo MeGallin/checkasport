@@ -23,6 +23,7 @@ const AdminProfileView = () => {
 
   const [keyword, setKeyword] = useState('');
   const [showReviewsId, setShowReviewsId] = useState('');
+
   let [showReviews, setShowReviews] = useState(false);
 
   // Logged in user Details saved in local storage
@@ -70,13 +71,44 @@ const AdminProfileView = () => {
     }
   });
 
+  // Search
+  const [newProfilesAdmin, setNewProfilesAdmin] = useState(profilesAdmin);
   const handleSearch = (e) => {
     setKeyword(e.target.value);
   };
-
   const handleSearchClear = () => {
     setKeyword('');
   };
+  //SearchInput
+
+  //sort
+  const sortByRatingUp = (a, b) => {
+    return parseInt(a.rating) - parseInt(b.rating);
+  };
+  const sortByRatingDown = (a, b) => {
+    return parseInt(b.rating) - parseInt(a.rating);
+  };
+
+  const handleSort = (val) => {
+    const newProfilesAdmin = [...profilesAdmin];
+    switch (val) {
+      case 'ratingUp':
+        profilesAdmin.sort(sortByRatingUp);
+        break;
+      case 'ratingDown':
+        profilesAdmin.sort(sortByRatingDown);
+        break;
+      default:
+        return;
+    }
+    setNewProfilesAdmin(newProfilesAdmin);
+  };
+
+  useEffect(() => {
+    setNewProfilesAdmin(newProfilesAdmin);
+  }, [newProfilesAdmin]);
+
+  //sort
 
   return (
     <>
@@ -110,10 +142,34 @@ const AdminProfileView = () => {
           <p>There currently {searchedProfiles.length} profiles.</p>
           <div className="heading admin-profile-inner-wrapper">
             <div className="item">NAME</div>
-            <div className="item">Qualifications Verified</div>
-            <div className="item wider-item">Description</div>
-            <div className="item">Rating</div>
-            <div className="item">Reviews</div>
+            <div className="item"> VERIFIED</div>
+            <div className="item wider-item">DESCRIPTION</div>
+            <div className="item">
+              <div className="sort-wrapper">
+                <span onClick={() => handleSort('ratingUp')}>
+                  <i
+                    className="arrow fas fa-arrow-up"
+                    style={{
+                      fontSize: 14 + 'px',
+                      color: 'black',
+                      marginRight: 4 + 'px',
+                    }}
+                  ></i>
+                </span>
+                <span>RATING</span>
+                <span onClick={() => handleSort('ratingDown')}>
+                  <i
+                    className="arrow fas fa-arrow-down"
+                    style={{
+                      fontSize: 14 + 'px',
+                      color: 'black',
+                      marginLeft: 4 + 'px',
+                    }}
+                  ></i>
+                </span>
+              </div>
+            </div>
+            <div className="item">REVIEWS</div>
             <div className="item">CREATED</div>
             <div className="item">UPDATED</div>
           </div>
