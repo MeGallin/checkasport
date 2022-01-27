@@ -7,8 +7,10 @@
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    background-color: $main-bg-colour;
+    background-color: $main-font-colour;
+    color: $main-bg-colour;
     z-index: 100;
+    font-weight: bold;
   }
   .image {
     margin: 0 auto;
@@ -26,11 +28,23 @@
     }
   }
   .admin-profile-inner-wrapper {
-    border: black 2px solid;
     display: flex;
-    justify-content: center;
-    align-items: center;
+
     padding: 0.75rem;
+    .sort-wrapper {
+      display: flex;
+      justify-content: space-around;
+
+      .arrow {
+        opacity: 0.4;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .admin-profile-inner-wrapper:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   Button {
@@ -43,10 +57,13 @@
     text-align: center;
     width: (100% / 6);
     font-size: 0.8em;
+    border-left: 1px solid $border-colour;
   }
+
   .item + .wider-item {
     text-align: left;
     width: $description-width;
+    padding: 0 0.6em;
   }
   .review-item {
     border: $border-colour 1px solid;
