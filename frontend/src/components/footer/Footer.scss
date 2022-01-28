@@ -1,12 +1,17 @@
 @import '../../index.scss';
 @import '../../scssMixIn.scss';
 
-.footer {
+footer {
   @include border-all(1px, solid, $light-orange);
   height: $footer-height;
   font-size: 0.6em;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  .footer-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .date-time {
+    text-align: center;
+  }
 }
