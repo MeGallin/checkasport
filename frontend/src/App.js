@@ -17,6 +17,7 @@ import ReviewerLoginView from './views/reviewerLoginView/ReviewerLoginView';
 import ReviewerRegisterView from './views/reviewerRegisterView/ReviewerRegisterView';
 import CookiesView from './views/cookiesView/CookiesView';
 import PrivacyView from './views/privacyView/PrivacyView';
+import Cookies from './components/cookies/Cookies';
 
 // Change the display width by removing the --fluid after the container class
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
       <div className="container--fluid">
         <Header />
         <div className="content-wrapper">
+          <Cookies />
           <Routes>
             <Route path="/" element={<HomeView />} exact />
 

@@ -34,7 +34,10 @@ import {
   adminReviewerDeleteReducer,
 } from './reducers/userReviewReducer';
 
+import { cookiesReducer } from './reducers/cookiesReducer';
+
 const reducer = combineReducers({
+  cookies: cookiesReducer,
   contactForm: contactFormReducer,
   users: usersReducer,
   userLogin: userLoginReducer,
