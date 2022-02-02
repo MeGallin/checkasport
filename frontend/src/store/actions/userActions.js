@@ -3,6 +3,9 @@ import {
   USERS_FAILURE,
   USERS_REQUEST,
   USERS_SUCCESS,
+  USER_ADD_REMOVE_ADMIN_FAILURE,
+  USER_ADD_REMOVE_ADMIN_REQUEST,
+  USER_ADD_REMOVE_ADMIN_SUCCESS,
   USER_DELETE_FAILURE,
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
@@ -242,3 +245,40 @@ export const deleteUserAction = (id) => async (dispatch, getState) => {
     });
   }
 };
+// User Add or Remove as Admin action
+export const userAddRemoveAdminAction =
+  (isAdmin) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: USER_ADD_REMOVE_ADMIN_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `http://localhost:5000/api/user/profile/${isAdmin.id}`,
+        isAdmin,
+        config,
+      );
+
+      dispatch({ type: USER_ADD_REMOVE_ADMIN_SUCCESS, payload: data });
+      dispatch(usersAction());
+    } catch (error) {
+      dispatch({
+        type: USER_ADD_REMOVE_ADMIN_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
