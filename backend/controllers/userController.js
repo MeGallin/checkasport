@@ -191,6 +191,22 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: Update isAdmin to true/false
+// @route: PUT /user/profile/:id
+// @access: Private/Admin
+const updateIsAdmin = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    user.isAdmin = req.body.val;
+    const updateIsAdmin = await user.save();
+    res.json(updateIsAdmin);
+  } else {
+    res.status(404);
+    throw new Error('Order not found');
+  }
+});
+
 export {
   authUser,
   getUserProfile,
@@ -199,4 +215,5 @@ export {
   getAllUsersProfile,
   getUserProfileById,
   deleteUser,
+  updateIsAdmin,
 };

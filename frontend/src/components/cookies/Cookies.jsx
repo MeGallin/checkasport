@@ -41,7 +41,7 @@ const Cookies = () => {
             </div>
 
             <div>
-              <span className="smallText">
+              <span className="small-text">
                 Please email{' '}
                 <a href="mailto:zack@fisicalfitness.co.uk"> MANAGEMENT </a> with
                 any queries you might have.

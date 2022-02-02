@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './AdminUserView.scss';
 
-import { usersAction, deleteUserAction } from '../../store/actions/userActions';
+import {
+  usersAction,
+  deleteUserAction,
+  userAddRemoveAdminAction,
+} from '../../store/actions/userActions';
 
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import Message from '../../components/message/Message';
@@ -13,6 +17,7 @@ import moment from 'moment';
 
 const AdminView = () => {
   const [showAdmin, setShowAdmin] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,6 +43,11 @@ const AdminView = () => {
     }
   };
 
+  const handleMakeAdmin = (id, val) => {
+    //Dispatch Action here
+    dispatch(userAddRemoveAdminAction({ id, val }));
+  };
+
   const handleShowAdmin = () => {
     setShowAdmin(!showAdmin);
   };
@@ -61,7 +71,7 @@ const AdminView = () => {
           <div className="admin-view-wrapper">
             <div className=" heading admin-view-inner-wrapper">
               <div className="item">NAME</div>
-              <div className="item">ADMIN</div>
+              <div className="item">IS-ADMIN</div>
               <div className="item">CONFIRMED</div>
               <div className="item">CREATED</div>
               <div className="item">UPDATED</div>
@@ -79,6 +89,7 @@ const AdminView = () => {
                 <div
                   className={userProfile.isAdmin ? 'item showIsAdmin' : 'item'}
                 >
+                  <p className="small-text">{userProfile._id}</p>
                   <p>{userProfile.name}</p>
                   <img
                     className="image"
@@ -101,6 +112,34 @@ const AdminView = () => {
                 </div>
 
                 <div className="item">
+                  {userProfile.isAdmin ? (
+                    <Button
+                      colour="transparent"
+                      text="Remove as Admin"
+                      className="btn"
+                      title={
+                        userProfile.isAdmin
+                          ? 'You CANT create admin'
+                          : 'Make Admin'
+                      }
+                      onClick={() => handleMakeAdmin(userProfile._id, false)}
+                      disabled={!userProfile.isConfirmed}
+                    ></Button>
+                  ) : (
+                    <Button
+                      colour="transparent"
+                      text="Make Admin"
+                      className="btn"
+                      title={
+                        userProfile.isAdmin
+                          ? 'You CANT create admin'
+                          : 'Make Admin'
+                      }
+                      onClick={() => handleMakeAdmin(userProfile._id, true)}
+                      disabled={!userProfile.isConfirmed}
+                    ></Button>
+                  )}
+
                   {userProfile.isAdmin === true ? (
                     <i
                       className="fa fa-check"
