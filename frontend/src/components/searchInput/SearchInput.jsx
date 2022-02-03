@@ -11,19 +11,36 @@ const SearchInput = ({
   label,
 }) => {
   return (
-    <div className="search-wrapper">
-      <label>
-        <h1>{label}</h1>
+    <>
+      <div className="group">
         <input
           type={type}
-          className={className}
+          className="input"
           placeholder={placeholder}
           onChange={handleSearch}
           value={value}
           multiple
-        ></input>
-      </label>
-    </div>
+          required
+        />
+        <span className="highlight"></span>
+        <span className="bar"></span>
+        <label>{label}</label>
+      </div>
+
+      {/* <div className="search-wrapper">
+        <label>
+          <h1>{label}</h1>
+          <input
+            type={type}
+            className={className}
+            placeholder={placeholder}
+            onChange={handleSearch}
+            value={value}
+            multiple
+          ></input>
+        </label>
+      </div> */}
+    </>
   );
 };
 
