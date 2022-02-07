@@ -16,14 +16,11 @@
   letter-spacing: 0.1em;
 }
 .keyword-search {
-  position: relative;
-  top: 30%;
-  width: 50%;
-  margin: 0 auto;
+  // width: auto;
 }
 .keyword-length {
   font-size: 1em;
-  text-align: center;
+  // text-align: center;
   font-size: 0.8em;
 }
 input[type='search']::placeholder {
@@ -48,10 +45,6 @@ input[type='search']::placeholder {
   }
   /* Responsive layout */
   @media (max-width: 812px) {
-    .keyword-search {
-      background-color: red;
-      width: 100%;
-    }
     .card-wrapper {
       flex-wrap: wrap;
       flex-direction: column;

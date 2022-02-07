@@ -2,6 +2,9 @@
 @import '../../scssMixIn.scss';
 
 .contact-form-view-wrapper {
+  label {
+    font-size: 1em;
+  }
   textarea {
     background: rgba(255, 255, 255, 0.1);
     border: none;
