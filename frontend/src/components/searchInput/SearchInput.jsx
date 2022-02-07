@@ -11,9 +11,8 @@ const SearchInput = ({
   label,
 }) => {
   return (
-    <div className="search-wrapper">
-      <label>
-        <h1>{label}</h1>
+    <>
+      <div className="search-input-wrapper">
         <input
           type={type}
           className={className}
@@ -21,9 +20,13 @@ const SearchInput = ({
           onChange={handleSearch}
           value={value}
           multiple
-        ></input>
-      </label>
-    </div>
+          required
+        />
+        {/* <span className="highlight"></span> */}
+        <span className="bar"></span>
+        <label>{label}</label>
+      </div>
+    </>
   );
 };
 

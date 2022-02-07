@@ -19,13 +19,9 @@
     border-radius: 50%;
   }
   .admin-keyword-search {
-    .search-wrapper {
-      width: 50%;
-    }
-    .admin-keyword-search-wrapper {
-      display: flex;
-      justify-content: flex-start;
-    }
+    border: 1px solid $border-colour;
+    border-radius: 4px 4px 0 0; /*TL TR BR BL*/
+    display: block;
   }
   .admin-profile-inner-wrapper {
     display: flex;

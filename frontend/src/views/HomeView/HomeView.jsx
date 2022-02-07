@@ -78,17 +78,17 @@ const HomeView = () => {
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
-          height: '28vh',
+          paddingBottom: '1rem',
         }}
       >
         <div className="main-heading">Welcome to check-a-sport</div>
         <div className="sub-heading">Find a trainer in your area</div>
-        <div className="keyword-search">
+        <div className="keyword-searchXX">
           <SearchInput
             type="search"
-            placeholder="Search a discipline and location"
             value={keyword}
             handleSearch={handleSearch}
+            label="SEARCH FOR A PT AND LOCATION"
           />
         </div>
         {keyword.length > 0 ? (

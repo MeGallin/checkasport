@@ -40,7 +40,7 @@ const AdminProfileView = () => {
   const profilesState = useSelector((state) => state.profilesAdmin);
   const { loading, error, success, profilesAdmin } = profilesState;
 
-  // console.log('DDD', profilesAdmin);
+  console.log('DDD', profilesAdmin);
 
   const handleDeleteProfile = (id) => {
     // Dispatch user delete action
@@ -121,22 +121,23 @@ const AdminProfileView = () => {
       ) : (
         <div className="admin-profile-view-wrapper">
           <div className="admin-keyword-search">
-            <div className="admin-keyword-search-wrapper">
+            <div>
               <SearchInput
                 type="search"
-                placeholder="Search a name"
                 value={keyword}
                 handleSearch={handleSearch}
+                label="SEARCH A NAME"
               />
-              <Button
-                colour="transparent"
-                text="Clear search"
-                className="btn"
-                title="Clear Search"
-                onClick={handleSearchClear}
-                disabled={!keyword}
-              ></Button>
             </div>
+
+            <Button
+              colour="transparent"
+              text="Clear search"
+              className="btn"
+              title="Clear Search"
+              onClick={handleSearchClear}
+              disabled={!keyword}
+            ></Button>
           </div>
 
           <p>There currently {searchedProfiles.length} profiles.</p>
@@ -173,7 +174,7 @@ const AdminProfileView = () => {
             <div className="item">CREATED</div>
             <div className="item">UPDATED</div>
           </div>
-          {searchedProfiles.map((profile) => (
+          {searchedProfiles.map((profile, index) => (
             <div key={profile._id} className="admin-profile-inner-wrapper">
               <div className="item">
                 <Button
@@ -233,9 +234,14 @@ const AdminProfileView = () => {
 
               <div className="item">
                 {profile.numReviews}
+
                 <Button
                   colour="transparent"
-                  text={!showReviews ? 'Show Reviews' : 'Hide Reviews'}
+                  text={
+                    showReviewsId === profile._id && showReviews
+                      ? 'HIDE Reviews'
+                      : 'SHOW Reviews'
+                  }
                   className="btn"
                   title="Show Admin"
                   onClick={() =>
@@ -244,9 +250,10 @@ const AdminProfileView = () => {
                       setShowReviews((showReviews = !showReviews)),
                     )
                   }
-                  disabled={false}
+                  disabled={
+                    showReviewsId !== profile._id && showReviews ? true : false
+                  }
                 ></Button>
-
                 {showReviewsId === profile._id && showReviews
                   ? profile.reviews.map((review) => (
                       <div key={review._id}>
