@@ -18,6 +18,8 @@ import ReviewerRegisterView from './views/reviewerRegisterView/ReviewerRegisterV
 import CookiesView from './views/cookiesView/CookiesView';
 import PrivacyView from './views/privacyView/PrivacyView';
 import Cookies from './components/cookies/Cookies';
+import AboutView from './views/aboutView/AboutView';
+import FaqsView from './views/faqsView/FaqsView';
 
 // Change the display width by removing the --fluid after the container class
 const App = () => {
@@ -42,6 +44,8 @@ const App = () => {
               exact
             />
             <Route path="/contact" element={<ContactFormView />} />
+            <Route path="/about" element={<AboutView />} />
+            <Route path="/faq" element={<FaqsView />} />
             <Route path="/cookies" element={<CookiesView />} />
             <Route path="/privacy" element={<PrivacyView />} />
             <Route path="/login" element={<LoginFormView />} />

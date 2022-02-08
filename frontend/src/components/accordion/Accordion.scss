@@ -1,0 +1,42 @@
+@import '../../index.scss';
+
+.accordion-wrapper {
+  .question {
+    padding: 0.5em;
+    opacity: 0.5;
+    span {
+      padding: 0.5em;
+      font-size: 1em;
+      color: $danger;
+    }
+    & > span ~ span {
+      padding: 0;
+      color: $burnt-orange;
+    }
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+
+  .answer {
+    background-color: black;
+
+    span {
+      padding: 0.5em;
+      font-size: 1.5em;
+      color: $success;
+    }
+    & > span ~ span {
+      padding: 0;
+      font-size: 1em;
+      color: $burnt-orange;
+      background-color: none;
+    }
+    transition: all 0.6 ease-in-out;
+  }
+  .accordion-inner-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -35,6 +35,7 @@ const Header = () => {
         <div>
           <LinkComp route="" routeName="home" />
           <LinkComp route="contact" routeName="contact" />
+          <LinkComp route="about" routeName="about us" />
         </div>
 
         <div className="nav-wrapper">
