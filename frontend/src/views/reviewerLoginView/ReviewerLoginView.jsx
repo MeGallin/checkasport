@@ -27,6 +27,7 @@ const ReviewerLoginView = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rating, setRating] = useState(5);
+  let [showName, setShowName] = useState(false);
   const [comment, setComment] = useState('');
 
   const userReviewLogin = useSelector((state) => state.userReviewLogin);
@@ -50,12 +51,13 @@ const ReviewerLoginView = () => {
 
   const handleReviewSubmit = (e) => {
     e.preventDefault();
-    // Dispatch reviewer comment of trainer
 
+    // Dispatch reviewer comment of trainer
     dispatch(
       createUserReviewAction(userReviewInfo._id, {
         rating,
         comment,
+        showName,
         userProfileId,
       }),
     );
@@ -222,7 +224,19 @@ const ReviewerLoginView = () => {
 
               <form onSubmit={handleReviewSubmit}>
                 <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={showName}
+                      onChange={() => setShowName((showName = !showName))}
+                    />
+                    {profile?.name} by checking this box you are agreeing to
+                    display your name in the review.
+                  </label>
+                </div>
+                <div>
                   <label>Rating </label>
+
                   <div>
                     <select
                       value={rating}

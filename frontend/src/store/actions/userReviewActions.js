@@ -125,7 +125,6 @@ export const userReviewLoginAction =
 // Reviewer Registration actions
 export const reviewerRegisterAction =
   (name, email, password, userProfileId) => async (dispatch) => {
-    console.log('ACTION', userProfileId);
     try {
       dispatch({
         type: USER_REVIEWER_REGISTER_REQUEST,

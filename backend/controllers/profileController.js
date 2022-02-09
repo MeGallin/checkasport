@@ -66,6 +66,7 @@ const createProfile = asyncHandler(async (req, res) => {
     specialisationThree: 'Specialisation Three',
     specialisationFour: 'Specialisation Four',
     rating: 0,
+    showName: false,
     description: 'Sample Description',
     numReviews: 0,
   });
@@ -203,7 +204,7 @@ const deleteReview = asyncHandler(async (req, res) => {
 // @route: POST /api/profiles/:id/reviews
 // @access: Private
 const createProfileReview = asyncHandler(async (req, res) => {
-  const { rating, comment, userProfileId } = req.body;
+  const { rating, comment, showName, userProfileId } = req.body;
 
   const reviewerProfile = await UserReviewer.findById(req.params.id);
   const profile = await Profile.find({ user: userProfileId });
@@ -216,6 +217,7 @@ const createProfileReview = asyncHandler(async (req, res) => {
     const review = {
       user: req.params.id,
       name: reviewerProfile.name,
+      showName,
       rating: Number(rating),
       comment,
       userProfileId: reviewerProfile.userProfileId,

@@ -172,7 +172,9 @@ const FullProfileView = () => {
                         {profile.reviews.map((review) => (
                           <div key={review._id}>
                             <Review
-                              reviewer={review.name}
+                              reviewer={
+                                review.showName ? review.name : 'ANONYMOUS'
+                              }
                               review={review.comment}
                               reviewedOn={moment(review.createdAt).fromNow()}
                             />
