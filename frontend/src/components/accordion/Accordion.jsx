@@ -6,13 +6,11 @@ const Accordion = ({ question, answer, onClick }) => {
     <>
       <div className="accordion-wrapper">
         <div>
-          <div className={!answer ? 'question' : 'answer'} onClick={onClick}>
+          <div className="question" onClick={onClick}>
             {question ? (
               <div className="accordion-inner-wrapper">
                 <div>
-                  <span>Q</span>
-                  {question}
-                  <span>?</span>
+                  <h2>{question}</h2>
                 </div>
 
                 <div>
@@ -27,10 +25,9 @@ const Accordion = ({ question, answer, onClick }) => {
           </div>
           <div className="answer">
             {answer ? (
-              <>
-                <span>A</span>
-                {answer}
-              </>
+              <div className={!answer ? 'answer' : 'drop'}>
+                <p>{answer}</p>
+              </div>
             ) : null}
           </div>
         </div>
