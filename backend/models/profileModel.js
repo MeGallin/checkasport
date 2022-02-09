@@ -19,6 +19,11 @@ const reviewsSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    showName: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     userProfileId: {
       type: String,
     },
