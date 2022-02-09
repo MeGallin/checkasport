@@ -15,11 +15,8 @@ import userReviewRoutes from './routes/userReviewRoutes.js';
 
 dotenv.config();
 connectDB();
-const app = express();
 
-app.get('/', (req, res) => {
-  res.send('API is running');
-});
+const app = express();
 app.use(cors());
 app.use(express.json()); // This needed to accept json data
 
@@ -41,12 +38,15 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')));
+
   app.get('*', (req, res) =>
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')),
   );
+
+  console.log('hereGG');
 } else {
   app.get('/', (req, res) => {
-    res.send('API is running');
+    res.send('API is running in  Development or there was an error');
   });
 }
 
@@ -61,6 +61,6 @@ const MODE = process.env.NODE_ENV;
 app.listen(
   PORT,
   console.log(
-    `Server is running on port ${PORT} and you are running in ${process.env.NODE_ENV}`,
+    `Server is running on port ${PORT} and you are running in ${MODE}`,
   ),
 );
