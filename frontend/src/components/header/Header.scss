@@ -2,8 +2,8 @@
 @import '../../scssMixIn.scss';
 
 header {
-  @include border-all(1px, solid, $light-orange);
-  height: $header-height;
+  // @include border-all(1px, solid, $light-orange);
+  height: clamp(1rem, $header-height, auto);
   .nav-wrapper {
     display: flex;
     justify-content: space-between;

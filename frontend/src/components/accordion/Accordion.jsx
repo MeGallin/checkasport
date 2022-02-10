@@ -10,7 +10,7 @@ const Accordion = ({ question, answer, onClick }) => {
             {question ? (
               <div className="accordion-inner-wrapper">
                 <div>
-                  <h2>{question}</h2>
+                  <h2 className="accordion-heading">{question}</h2>
                 </div>
 
                 <div>

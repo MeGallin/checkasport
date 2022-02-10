@@ -221,17 +221,38 @@ const ReviewerLoginView = () => {
 
             <fieldset className="fieldSet item">
               <legend>Review {profile?.name}</legend>
+              <div className="review-specialisation-wrapper">
+                <p className="review-specialisation">
+                  {profile?.specialisationOne}
+                </p>
+                <p className="review-specialisation">
+                  {profile?.specialisationTwo}
+                </p>
+                <p className="review-specialisation">
+                  {profile?.specialisationThree}
+                </p>
+                <p className="review-specialisation">
+                  {profile?.specialisationFour}
+                </p>
+              </div>
 
               <form onSubmit={handleReviewSubmit}>
                 <div>
+                  <div>
+                    <h3>Warning</h3>
+                    <p>Warning to info reviewer that this is a once off...</p>
+                  </div>
                   <label>
                     <input
                       type="checkbox"
                       checked={showName}
                       onChange={() => setShowName((showName = !showName))}
                     />
-                    {profile?.name} by checking this box you are agreeing to
-                    display your name in the review.
+                    <span className="userReviewInfo">
+                      {userReviewInfo?.name}
+                    </span>
+                    , by checking this box you are agreeing to display your name
+                    in the review.
                   </label>
                 </div>
                 <div>
@@ -275,11 +296,6 @@ const ReviewerLoginView = () => {
                 ></Button>
               </form>
             </fieldset>
-
-            <div>
-              <h3>Warning</h3>
-              <p>Warning to info reviewer that this is a once off...</p>
-            </div>
           </div>
         </>
       )}

@@ -12,10 +12,10 @@ const LoginOut = ({
 }) => {
   return (
     <div className="login-out-wrapper">
-      <span className="login-out-text">{description}</span>
       <span onClick={onClick} className="login-out-definition">
         {definition}
       </span>
+      <span className="login-out-text">{description}</span>
       <LinkComp route={route} routeName={routeDescription} />
     </div>
   );
