@@ -33,4 +33,9 @@
     display: flex;
     justify-content: space-between;
   }
+  .accordion-heading {
+    font-family: inherit;
+    text-transform: uppercase;
+    font-size: 1.2em;
+  }
 }

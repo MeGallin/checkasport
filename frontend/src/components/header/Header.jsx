@@ -31,48 +31,53 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="nav-wrapper">
-        <div>
-          <LinkComp route="" routeName="home" />
-          <LinkComp route="contact" routeName="contact" />
-          <LinkComp route="about" routeName="about us" />
-        </div>
+      <fieldset className="fieldSet">
+        <legend>
+          <LinkComp route="" routeName="Sport Vantage Logo" />
+        </legend>
+        <nav className="nav-wrapper">
+          <div>
+            {/* <LinkComp route="" routeName="home" /> */}
+            <LinkComp route="contact" routeName="contact" />
+            <LinkComp route="about" routeName="about us" />
+          </div>
 
-        <div className="nav-wrapper">
-          {userReviewInfo ? (
-            <LoginOut
-              description={userReviewInfo.name}
-              definition="Logout"
-              onClick={handleReviewerLogout}
-            />
-          ) : null}
+          <div className="nav-wrapper">
+            {userReviewInfo ? (
+              <LoginOut
+                description={userReviewInfo.name}
+                definition="Logout"
+                onClick={handleReviewerLogout}
+              />
+            ) : null}
 
-          {userInfo ? (
-            <div className="user-info-wrapper">
-              <LinkComp route="user-profile-edit" routeName="control panel" />
+            {userInfo ? (
+              <div className="user-info-wrapper">
+                <LinkComp route="user-profile-edit" routeName="control panel" />
 
-              <div className="members-login--wrapper">
-                {/* Use attribute = definition if its not a link */}
-                <LoginOut
-                  description={userInfo.name}
-                  definition="Logout"
-                  onClick={handleLogout}
-                />
+                <div className="members-login--wrapper">
+                  {/* Use attribute = definition if its not a link */}
+                  <LoginOut
+                    description={userInfo.name}
+                    definition="Logout"
+                    onClick={handleLogout}
+                  />
+                </div>
               </div>
-            </div>
-          ) : (
-            <>
-              {!userReviewInfo ? (
-                <LoginOut
-                  description="Members"
-                  route="login"
-                  routeDescription="login"
-                />
-              ) : null}
-            </>
-          )}
-        </div>
-      </nav>
+            ) : (
+              <>
+                {!userReviewInfo ? (
+                  <LoginOut
+                    description="Members"
+                    route="login"
+                    routeDescription="login"
+                  />
+                ) : null}
+              </>
+            )}
+          </div>
+        </nav>
+      </fieldset>
     </header>
   );
 };
