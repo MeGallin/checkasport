@@ -1,0 +1,37 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+
+header {
+  // @include border-all(1px, solid, $light-orange);
+  height: clamp(1rem, $header-height, auto);
+  .nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  .btn {
+    display: flex;
+    flex-direction: column;
+    background-color: $main-bg-colour;
+    color: $main-font-colour;
+  }
+  nav {
+    display: flex;
+    .user-info-wrapper {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .members-login--wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    .members-login-text {
+      position: relative;
+      top: 6px;
+      font-size: 0.6em;
+      text-transform: uppercase;
+    }
+  }
+}
