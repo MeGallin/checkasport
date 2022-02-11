@@ -104,37 +104,75 @@ const ProfileEditView = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const arr = [
-      keyWordSearchOne.trim() + ' ',
-      keyWordSearchTwo.trim() + ' ',
-      keyWordSearchThree.trim() + ' ',
-      keyWordSearchFour.trim() + ' ',
-      keyWordSearchFive.trim() + ' ',
-    ];
-    const permutations = (len, val, existing) => {
-      if (len === 0) {
-        res.push(val);
-        return;
-      }
-      for (let i = 0; i < arr.length; i++) {
-        // so that we do not repeat the item, using an array here makes it
-
-        if (!existing[i]) {
-          existing[i] = true;
-          permutations(len - 1, val + arr[i], existing);
-          existing[i] = false;
+    // Keyword search Algo
+    // Created a promise in order to resolve first
+    let prom = new Promise((resolve, reject) => {
+      const arr = [
+        keyWordSearchOne.trim() + ' ',
+        keyWordSearchTwo.trim() + ' ',
+        keyWordSearchThree.trim() + ' ',
+        keyWordSearchFour.trim() + ' ',
+        keyWordSearchFive.trim() + ' ',
+      ];
+      const permutations = (len, val, existing) => {
+        if (len === 0) {
+          res.push(val);
+          return;
         }
-      }
-    };
-    let res = [];
-    const buildPermuations = (arr = []) => {
-      for (let i = 0; i < arr.length; i++) {
-        permutations(arr.length - i, ' ', []);
-      }
-    };
-    buildPermuations(arr);
+        for (let i = 0; i < arr.length; i++) {
+          // so that we do not repeat the item, using an array here makes it
 
-    console.log(res);
+          if (!existing[i]) {
+            existing[i] = true;
+            permutations(len - 1, val + arr[i], existing);
+            existing[i] = false;
+          }
+        }
+      };
+      let res = [];
+      const buildPermutations = (arr = []) => {
+        for (let i = 0; i < arr.length; i++) {
+          permutations(arr.length - i, ' ', []);
+        }
+      };
+      buildPermutations(arr);
+      if (res) {
+        resolve(res);
+      } else {
+        reject('Failed');
+      }
+    });
+
+    prom
+      .then((res) => {
+        // Dispatch UPDATE PROFILE Action
+        dispatch(
+          profileUpdateAction({
+            name,
+            email,
+            profileImage,
+            description,
+            specialisation,
+            qualifications,
+            location,
+            telephoneNumber,
+            keyWordSearch: res.join('').concat(pure),
+            keyWordSearchOne,
+            keyWordSearchTwo,
+            keyWordSearchThree,
+            keyWordSearchFour,
+            keyWordSearchFive,
+            specialisationOne,
+            specialisationTwo,
+            specialisationThree,
+            specialisationFour,
+          }),
+        );
+      })
+      .catch((message) => {
+        console.log(message);
+      });
+    // Keyword search Algo
 
     const purekeyWordSearch = description.concat(
       name,
@@ -149,30 +187,6 @@ const ProfileEditView = () => {
     // Add this to remove duplicates
     // const removeDuplicates = Array.from(new Set(pure.split(' '))).toString();
     // console.log(removeDuplicates.toString());
-
-    // Dispatch UPDATE PROFILE Action
-    dispatch(
-      profileUpdateAction({
-        name,
-        email,
-        profileImage,
-        description,
-        specialisation,
-        qualifications,
-        location,
-        telephoneNumber,
-        keyWordSearch: res.join('').concat(pure),
-        keyWordSearchOne,
-        keyWordSearchTwo,
-        keyWordSearchThree,
-        keyWordSearchFour,
-        keyWordSearchFive,
-        specialisationOne,
-        specialisationTwo,
-        specialisationThree,
-        specialisationFour,
-      }),
-    );
   };
 
   const isDisabled =
