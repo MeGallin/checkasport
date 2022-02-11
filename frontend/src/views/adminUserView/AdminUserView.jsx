@@ -54,137 +54,143 @@ const AdminView = () => {
 
   return (
     <>
-      {error ? <Message message={error} /> : null}
+      <fieldset className="fieldSet">
+        <legend>Users</legend>
+        {error ? <Message message={error} /> : null}
 
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <>
-          <Button
-            colour="transparent"
-            text={!showAdmin ? 'Show Admin' : 'Hide Admin'}
-            className="btn"
-            title="Show Admin"
-            onClick={handleShowAdmin}
-            disabled={false}
-          ></Button>
-          <div className="admin-view-wrapper">
-            <div className=" heading admin-view-inner-wrapper">
-              <div className="item">NAME</div>
-              <div className="item">IS-ADMIN</div>
-              <div className="item">CONFIRMED</div>
-              <div className="item">CREATED</div>
-              <div className="item">UPDATED</div>
-            </div>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            <Button
+              colour="transparent"
+              text={!showAdmin ? 'Show Admin' : 'Hide Admin'}
+              className="btn"
+              title="Show Admin"
+              onClick={handleShowAdmin}
+              disabled={false}
+            ></Button>
 
-            {userProfiles.map((userProfile) => (
-              <div
-                key={userProfile._id}
-                className={
-                  !showAdmin && userProfile.isAdmin
-                    ? 'admin-view-inner-wrapper isAdmin'
-                    : 'admin-view-inner-wrapper'
-                }
-              >
-                <div
-                  className={userProfile.isAdmin ? 'item showIsAdmin' : 'item'}
-                >
-                  <p className="small-text">{userProfile._id}</p>
-                  <p>{userProfile.name}</p>
-                  <img
-                    className="image"
-                    src={`../uploads/profiles/${userProfile.profileImage}`}
-                    alt={userProfile.name}
-                  />
-                  <p>{userProfile.email}</p>
-                  <Button
-                    colour="transparent"
-                    text="Delete User"
-                    className="btn"
-                    title={
-                      userProfile.isAdmin
-                        ? 'You CANT delete ADMIN'
-                        : 'Delete User'
-                    }
-                    onClick={() => handleDeleteUser(userProfile._id)}
-                    disabled={!userProfile.isConfirmed || userProfile.isAdmin}
-                  ></Button>
-                </div>
-
-                <div className="item">
-                  {userProfile.isAdmin ? (
-                    <Button
-                      colour="transparent"
-                      text="Remove as Admin"
-                      className="btn"
-                      title={
-                        userProfile.isAdmin
-                          ? 'You CANT create admin'
-                          : 'Make Admin'
-                      }
-                      onClick={() => handleMakeAdmin(userProfile._id, false)}
-                      disabled={!userProfile.isConfirmed}
-                    ></Button>
-                  ) : (
-                    <Button
-                      colour="transparent"
-                      text="Make Admin"
-                      className="btn"
-                      title={
-                        userProfile.isAdmin
-                          ? 'You CANT create admin'
-                          : 'Make Admin'
-                      }
-                      onClick={() => handleMakeAdmin(userProfile._id, true)}
-                      disabled={!userProfile.isConfirmed}
-                    ></Button>
-                  )}
-
-                  {userProfile.isAdmin === true ? (
-                    <i
-                      className="fa fa-check"
-                      style={{
-                        fontSize: 20 + 'px',
-                        color: 'rgba(92, 184, 92, 1)',
-                      }}
-                    ></i>
-                  ) : (
-                    <i
-                      className="fa fa-times"
-                      style={{ fontSize: 20 + 'px', color: 'crimson' }}
-                    ></i>
-                  )}
-                </div>
-
-                <div className="item">
-                  {userProfile.isConfirmed === true ? (
-                    <i
-                      className="fa fa-check"
-                      style={{
-                        fontSize: 20 + 'px',
-                        color: 'rgba(92, 184, 92, 1)',
-                      }}
-                    ></i>
-                  ) : (
-                    <i
-                      className="fa fa-times"
-                      style={{ fontSize: 20 + 'px', color: 'crimson' }}
-                    ></i>
-                  )}
-                </div>
-
-                <div className="item">
-                  {moment(userProfile.createdAt).fromNow()}
-                </div>
-
-                <div className="item">
-                  {moment(userProfile.updatedAt).fromNow()}
-                </div>
+            <div className="admin-view-wrapper">
+              <div className=" heading admin-view-inner-wrapper">
+                <div className="item">NAME</div>
+                <div className="item">IS-ADMIN</div>
+                <div className="item">CONFIRMED</div>
+                <div className="item">CREATED</div>
+                <div className="item">UPDATED</div>
               </div>
-            ))}
-          </div>
-        </>
-      )}
+
+              {userProfiles.map((userProfile) => (
+                <div
+                  key={userProfile._id}
+                  className={
+                    !showAdmin && userProfile.isAdmin
+                      ? 'admin-view-inner-wrapper isAdmin'
+                      : 'admin-view-inner-wrapper'
+                  }
+                >
+                  <div
+                    className={
+                      userProfile.isAdmin ? 'item showIsAdmin' : 'item'
+                    }
+                  >
+                    <p className="small-text">{userProfile._id}</p>
+                    <p>{userProfile.name}</p>
+                    <img
+                      className="image"
+                      src={`../uploads/profiles/${userProfile.profileImage}`}
+                      alt={userProfile.name}
+                    />
+                    <p>{userProfile.email}</p>
+                    <Button
+                      colour="transparent"
+                      text="Delete User"
+                      className="btn"
+                      title={
+                        userProfile.isAdmin
+                          ? 'You CANT delete ADMIN'
+                          : 'Delete User'
+                      }
+                      onClick={() => handleDeleteUser(userProfile._id)}
+                      disabled={!userProfile.isConfirmed || userProfile.isAdmin}
+                    ></Button>
+                  </div>
+
+                  <div className="item">
+                    {userProfile.isAdmin ? (
+                      <Button
+                        colour="transparent"
+                        text="Remove as Admin"
+                        className="btn"
+                        title={
+                          userProfile.isAdmin
+                            ? 'You CANT create admin'
+                            : 'Make Admin'
+                        }
+                        onClick={() => handleMakeAdmin(userProfile._id, false)}
+                        disabled={!userProfile.isConfirmed}
+                      ></Button>
+                    ) : (
+                      <Button
+                        colour="transparent"
+                        text="Make Admin"
+                        className="btn"
+                        title={
+                          userProfile.isAdmin
+                            ? 'You CANT create admin'
+                            : 'Make Admin'
+                        }
+                        onClick={() => handleMakeAdmin(userProfile._id, true)}
+                        disabled={!userProfile.isConfirmed}
+                      ></Button>
+                    )}
+
+                    {userProfile.isAdmin === true ? (
+                      <i
+                        className="fa fa-check"
+                        style={{
+                          fontSize: 20 + 'px',
+                          color: 'rgba(92, 184, 92, 1)',
+                        }}
+                      ></i>
+                    ) : (
+                      <i
+                        className="fa fa-times"
+                        style={{ fontSize: 20 + 'px', color: 'crimson' }}
+                      ></i>
+                    )}
+                  </div>
+
+                  <div className="item">
+                    {userProfile.isConfirmed === true ? (
+                      <i
+                        className="fa fa-check"
+                        style={{
+                          fontSize: 20 + 'px',
+                          color: 'rgba(92, 184, 92, 1)',
+                        }}
+                      ></i>
+                    ) : (
+                      <i
+                        className="fa fa-times"
+                        style={{ fontSize: 20 + 'px', color: 'crimson' }}
+                      ></i>
+                    )}
+                  </div>
+
+                  <div className="item">
+                    {moment(userProfile.createdAt).fromNow()}
+                  </div>
+
+                  <div className="item">
+                    {moment(userProfile.updatedAt).fromNow()}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </fieldset>
     </>
   );
 };

@@ -22,6 +22,14 @@
     -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
   }
+  input[type='text']:focus,
+  input[type='email']:focus,
+  input[type='password']:focus,
+  input[type='search']:focus,
+  input[type='tel']:focus {
+    background-color: rgba(255, 255, 255, 1);
+    color: $main-bg-colour;
+  }
   .validation-error {
     color: $danger;
     padding: 0.2em;
