@@ -71,88 +71,91 @@ const HomeView = () => {
 
   return (
     <>
-      {error ? <Message message={error} /> : null}
-      <div
-        style={{
-          backgroundImage: `url(uploads/profiles/${profiles[rndInt]?.profileImage})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          paddingBottom: '1rem',
-        }}
-      >
-        <div className="main-heading">Welcome to check-a-sport</div>
-        <div className="sub-heading">Find a trainer in your area</div>
-        <div className="keyword-searchXX">
-          <SearchInput
-            type="search"
-            value={keyword}
-            handleSearch={handleSearch}
-            label="SEARCH FOR A PT AND LOCATION"
-          />
+      <fieldset className="fieldSet">
+        <legend>Home</legend>
+        {error ? <Message message={error} /> : null}
+        <div
+          style={{
+            backgroundImage: `url(uploads/profiles/${profiles[rndInt]?.profileImage})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            paddingBottom: '1rem',
+          }}
+        >
+          <div className="main-heading">Welcome to SPORT-VANTAGE</div>
+          <div className="sub-heading">Find a trainer near you</div>
+          <div className="keyword-searchXX">
+            <SearchInput
+              type="search"
+              value={keyword}
+              handleSearch={handleSearch}
+              label="SEARCH FOR A PT AND LOCATION"
+            />
+          </div>
+          {keyword.length > 0 ? (
+            <div className="keyword-length">
+              We found {searchedProfiles.length} profiles that match your search
+              criteria.
+            </div>
+          ) : null}
         </div>
-        {keyword.length > 0 ? (
-          <div className="keyword-length">
-            We found {searchedProfiles.length} profiles that match your search
-            criteria.
-          </div>
-        ) : null}
-      </div>
 
-      <div className="home-view">
-        {loading ? <LoadingSpinner /> : null}
-        {keyword.length > 0 ? (
-          <div className="card-wrapper">
-            {searchedProfiles.map((profile) => (
-              <div key={profile?._id}>
-                <Card
-                  specialisationOne={
-                    profile.specialisationOne.length
-                      ? profile.specialisationOne
-                      : 'Personal Trainer'
-                  }
-                  specialisationTwo={
-                    profile.specialisationTwo.length
-                      ? profile.specialisationTwo
-                      : 'Personal Trainer'
-                  }
-                  specialisationThree={
-                    profile.specialisationThree.length
-                      ? profile.specialisationThree
-                      : 'Personal Trainer'
-                  }
-                  specialisationFour={
-                    profile.specialisationFour.length
-                      ? profile.specialisationFour
-                      : 'Personal Trainer'
-                  }
-                  id={profile._id}
-                  name={
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: highlightKeywordMatch(profile.name),
-                      }}
-                    ></span>
-                  }
-                  src={`uploads/profiles/${profile.profileImage}`}
-                  alt={profile.name}
-                  description={
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: profile.description.slice(0, 180) + '...',
-                      }}
-                    ></p>
-                  }
-                  rating={profile.rating}
-                  number
-                  of
-                  reviews={profile.numReviews}
-                />
-              </div>
-            ))}
-          </div>
-        ) : null}
-      </div>
+        <div className="home-view">
+          {loading ? <LoadingSpinner /> : null}
+          {keyword.length > 0 ? (
+            <div className="card-wrapper">
+              {searchedProfiles.map((profile) => (
+                <div key={profile?._id}>
+                  <Card
+                    specialisationOne={
+                      profile.specialisationOne.length
+                        ? profile.specialisationOne
+                        : 'Personal Trainer'
+                    }
+                    specialisationTwo={
+                      profile.specialisationTwo.length
+                        ? profile.specialisationTwo
+                        : 'Personal Trainer'
+                    }
+                    specialisationThree={
+                      profile.specialisationThree.length
+                        ? profile.specialisationThree
+                        : 'Personal Trainer'
+                    }
+                    specialisationFour={
+                      profile.specialisationFour.length
+                        ? profile.specialisationFour
+                        : 'Personal Trainer'
+                    }
+                    id={profile._id}
+                    name={
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: highlightKeywordMatch(profile.name),
+                        }}
+                      ></span>
+                    }
+                    src={`uploads/profiles/${profile.profileImage}`}
+                    alt={profile.name}
+                    description={
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: profile.description.slice(0, 180) + '...',
+                        }}
+                      ></p>
+                    }
+                    rating={profile.rating}
+                    number
+                    of
+                    reviews={profile.numReviews}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </fieldset>
     </>
   );
 };

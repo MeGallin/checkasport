@@ -115,6 +115,10 @@ const ContactFormView = ({ type }) => {
               ></Button>
             </form>
           </fieldset>
+          <fieldset className="fieldSet">
+            <legend>Contact Details</legend>
+            Address: 1233, Tell: 113 Email: something@mail.com
+          </fieldset>
         </div>
       )}
     </>
