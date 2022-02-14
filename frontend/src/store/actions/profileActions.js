@@ -36,7 +36,7 @@ export const profilesAction = () => async (dispatch, getState) => {
       type: PROFILE_REQUEST,
     });
 
-    const { data } = await axios.get(`http://localhost:5000/api/profiles`);
+    const { data } = await axios.get(`/api/profiles`);
     dispatch({ type: PROFILE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -66,10 +66,7 @@ export const profilesAdminAction = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:5000/api/profiles/admin/:id`,
-      config,
-    );
+    const { data } = await axios.get(`/api/profiles/admin/:id`, config);
     dispatch({ type: PROFILE_ADMIN_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -85,7 +82,7 @@ export const profilesAdminAction = () => async (dispatch, getState) => {
 export const profileByIdAction = (id) => async (dispatch) => {
   try {
     dispatch({ type: PROFILE_BY_ID_REQUEST });
-    const { data } = await axios.get(`http://localhost:5000/api/profile/${id}`);
+    const { data } = await axios.get(`/api/profile/${id}`);
 
     dispatch({ type: PROFILE_BY_ID_SUCCESS, payload: data });
   } catch (error) {
@@ -114,10 +111,7 @@ export const profileOfLoggedInUserAction = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:5000/api/profile/`,
-      config,
-    );
+    const { data } = await axios.get(`/api/profile/`, config);
 
     dispatch({ type: PROFILE_OF_LOGGED_IN_USER_SUCCESS, payload: data });
   } catch (error) {
@@ -148,11 +142,7 @@ export const createProfileAction = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(
-      `http://localhost:5000/api/profiles`,
-      {},
-      config,
-    );
+    const { data } = await axios.post(`/api/profiles`, {}, config);
     dispatch({ type: PROFILE_CREATE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -184,7 +174,7 @@ export const profileUpdateAction = (profile) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/profile/${userInfo._id}`,
+      `/api/profile/${userInfo._id}`,
       profile,
       config,
     );
@@ -219,11 +209,7 @@ export const deleteProfileAction = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(
-      `http://localhost:5000/api/profiles/admin/${id}`,
-      {},
-      config,
-    );
+    await axios.delete(`/api/profiles/admin/${id}`, {}, config);
     dispatch({ type: PROFILE_DELETE_SUCCESS });
     dispatch(profilesAdminAction());
   } catch (error) {
@@ -251,17 +237,14 @@ export const deleteReviewProfileAction =
       // Note: This can only be done like this in axios delete body
       //https://stackoverflow.com/questions/51069552/axios-delete-request-with-body-and-headers
 
-      await axios.delete(
-        `http://localhost:5000/api/profile/review/admin/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${userInfo.token}`,
-          },
-          data: {
-            reviewId: reviewId,
-          },
+      await axios.delete(`/api/profile/review/admin/${id}`, {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
         },
-      );
+        data: {
+          reviewId: reviewId,
+        },
+      });
       dispatch({ type: PROFILE_DELETE_REVIEW_SUCCESS });
       dispatch(profilesAdminAction());
     } catch (error) {
@@ -294,11 +277,7 @@ export const profileVerifyQualificationAction =
         },
       };
 
-      await axios.put(
-        `http://localhost:5000/api/profiles/admin/${id}`,
-        {},
-        config,
-      );
+      await axios.put(`/api/profiles/admin/${id}`, {}, config);
 
       dispatch({ type: PROFILE_VERIFY_QUALIFICATION_SUCCESS });
       dispatch(profilesAdminAction());
