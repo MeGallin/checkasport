@@ -41,10 +41,7 @@ export const userAdminReviewersDetailsAction =
         },
       };
 
-      const { data } = await axios.get(
-        `http://localhost:5000/api/reviewers/admin/:id`,
-        config,
-      );
+      const { data } = await axios.get(`/api/reviewers/admin/:id`, config);
       dispatch({ type: USER_ADMIN_REVIEWER_DETAILS_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
@@ -73,10 +70,7 @@ export const deleteReviewerAdminAction = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(
-      `http://localhost:5000/api/reviewer/admin/${id}`,
-      config,
-    );
+    await axios.delete(`/api/reviewer/admin/${id}`, config);
     dispatch({ type: USER_ADMIN_DELETE_SUCCESS });
     dispatch(userAdminReviewersDetailsAction());
   } catch (error) {
@@ -105,7 +99,7 @@ export const userReviewLoginAction =
       };
 
       const { data } = await axios.post(
-        'http://localhost:5000/api/users-review/login',
+        '/api/users-review/login',
         { email: email, password: password, userProfileId: userProfileId },
         config,
       );
@@ -137,7 +131,7 @@ export const reviewerRegisterAction =
       };
 
       const { data } = await axios.post(
-        'http://localhost:5000/api/users-review',
+        '/api/users-review',
         {
           name: name,
           email: email,
@@ -205,7 +199,7 @@ export const createUserReviewAction =
       };
 
       await axios.post(
-        `http://localhost:5000/api/profiles/${userReviewerId}/reviews`,
+        `/api/profiles/${userReviewerId}/reviews`,
         review,
         config,
       );
