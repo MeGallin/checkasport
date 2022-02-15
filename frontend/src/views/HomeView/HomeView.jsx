@@ -83,9 +83,9 @@ const HomeView = () => {
             paddingBottom: '1rem',
           }}
         >
-          <div className="main-heading">Welcome to SPORT-VANTAGE</div>
+          <div className="main-heading">Welcome to BODY-VANTAGE</div>
           <div className="sub-heading">Find a trainer near you</div>
-          <div className="keyword-searchXX">
+          <div>
             <SearchInput
               type="search"
               value={keyword}
