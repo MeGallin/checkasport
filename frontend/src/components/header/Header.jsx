@@ -33,7 +33,7 @@ const Header = () => {
     <header>
       <fieldset className="fieldSet">
         <legend>
-          <LinkComp route="" routeName="Sport Vantage Logo" />
+          <LinkComp route="" routeName="Body Vantage Logo" />
         </legend>
         <nav className="nav-wrapper">
           <div>
