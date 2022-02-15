@@ -1,9 +1,9 @@
 export const faqs = [
   {
     id: 1,
-    question: 'What is bodyvantage?',
+    question: 'What is body-vantage?',
     answer:
-      'Bodyvantage is an opportunity for you to find a specialist in their chosen field to  help you with your body i.e. weight loss, nutrition, physical therapy etc.  You will be able to search, select, and connect with a specialist of your choice in your local area at no cost to you.',
+      'Body-Vantage is an opportunity for you to find a specialist in their chosen field to  help you with your body i.e. weight loss, nutrition, physical therapy etc.  You will be able to search, select, and connect with a specialist of your choice in your local area at no cost to you.',
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ export const faqs = [
     question:
       'Are my personal details put online when leaving a review about members services?',
     answer:
-      'No, all questions that is asked to customers, who are leaving reviews are strictly for Bodyvantage use only as per our privacy Policy.  We simply need the necessary information in order to prove the validity of the review.',
+      'No, all questions that is asked to customers, who are leaving reviews are strictly for Body-Vantage use only as per our privacy Policy.  We simply need the necessary information in order to prove the validity of the review.',
   },
   {
     id: 7,
