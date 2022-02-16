@@ -87,13 +87,13 @@ const Header = () => {
           ) : null}
 
           <div className="large-tabs">
-            {/* {userReviewInfo ? (
+            {userReviewInfo ? (
               <LoginOut
                 description={userReviewInfo.name}
-                definition="LogoutXX"
+                definition="Logout"
                 onClick={handleReviewerLogout}
               />
-            ) : null} */}
+            ) : null}
 
             {userInfo ? (
               <div className="user-info-wrapper">
