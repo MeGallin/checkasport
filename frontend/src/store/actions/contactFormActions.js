@@ -19,7 +19,7 @@ export const contactFormMessageAction =
       };
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/send`,
+        `/api/send`,
         { name: name, email: email, message: message },
         config,
       );

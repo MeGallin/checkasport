@@ -83,9 +83,9 @@ const HomeView = () => {
             paddingBottom: '1rem',
           }}
         >
-          <div className="main-heading">Welcome to SPORT-VANTAGE</div>
+          <div className="main-heading">Welcome to BODY-VANTAGE</div>
           <div className="sub-heading">Find a trainer near you</div>
-          <div className="keyword-searchXX">
+          <div>
             <SearchInput
               type="search"
               value={keyword}
@@ -102,56 +102,59 @@ const HomeView = () => {
         </div>
 
         <div className="home-view">
-          {loading ? <LoadingSpinner /> : null}
           {keyword.length > 0 ? (
             <div className="card-wrapper">
-              {searchedProfiles.map((profile) => (
-                <div key={profile?._id}>
-                  <Card
-                    specialisationOne={
-                      profile.specialisationOne.length
-                        ? profile.specialisationOne
-                        : 'Personal Trainer'
-                    }
-                    specialisationTwo={
-                      profile.specialisationTwo.length
-                        ? profile.specialisationTwo
-                        : 'Personal Trainer'
-                    }
-                    specialisationThree={
-                      profile.specialisationThree.length
-                        ? profile.specialisationThree
-                        : 'Personal Trainer'
-                    }
-                    specialisationFour={
-                      profile.specialisationFour.length
-                        ? profile.specialisationFour
-                        : 'Personal Trainer'
-                    }
-                    id={profile._id}
-                    name={
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: highlightKeywordMatch(profile.name),
-                        }}
-                      ></span>
-                    }
-                    src={`uploads/profiles/${profile.profileImage}`}
-                    alt={profile.name}
-                    description={
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: profile.description.slice(0, 180) + '...',
-                        }}
-                      ></p>
-                    }
-                    rating={profile.rating}
-                    number
-                    of
-                    reviews={profile.numReviews}
-                  />
-                </div>
-              ))}
+              {searchedProfiles.map((profile) =>
+                loading ? (
+                  <LoadingSpinner />
+                ) : (
+                  <div key={profile?._id}>
+                    <Card
+                      specialisationOne={
+                        profile.specialisationOne.length
+                          ? profile.specialisationOne
+                          : 'Personal Trainer'
+                      }
+                      specialisationTwo={
+                        profile.specialisationTwo.length
+                          ? profile.specialisationTwo
+                          : 'Personal Trainer'
+                      }
+                      specialisationThree={
+                        profile.specialisationThree.length
+                          ? profile.specialisationThree
+                          : 'Personal Trainer'
+                      }
+                      specialisationFour={
+                        profile.specialisationFour.length
+                          ? profile.specialisationFour
+                          : 'Personal Trainer'
+                      }
+                      id={profile._id}
+                      name={
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: highlightKeywordMatch(profile.name),
+                          }}
+                        ></span>
+                      }
+                      src={`uploads/profiles/${profile.profileImage}`}
+                      alt={profile.name}
+                      description={
+                        <p
+                          dangerouslySetInnerHTML={{
+                            __html: profile.description.slice(0, 180) + '...',
+                          }}
+                        ></p>
+                      }
+                      rating={profile.rating}
+                      number
+                      of
+                      reviews={profile.numReviews}
+                    />
+                  </div>
+                ),
+              )}
             </div>
           ) : null}
         </div>

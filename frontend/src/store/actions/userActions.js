@@ -45,7 +45,7 @@ export const usersAction = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`http://localhost:5000/api/users`, config);
+    const { data } = await axios.get(`/api/users`, config);
     dispatch({ type: USERS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -71,7 +71,7 @@ export const loginAction = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      'http://localhost:5000/api/users/login',
+      '/api/users/login',
       { email: email, password: password },
       config,
     );
@@ -106,7 +106,7 @@ export const registerAction = (name, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      'http://localhost:5000/api/users',
+      '/api/users',
       { name: name, email: email, password: password },
       config,
     );
@@ -144,10 +144,7 @@ export const getUserDetailsAction = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `http://localhost:5000/api/users/${id}`,
-      config,
-    );
+    const { data } = await axios.get(`/api/users/${id}`, config);
 
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
@@ -178,11 +175,7 @@ export const updateUserProfileAction = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(
-      `http://localhost:5000/api/users/profile`,
-      user,
-      config,
-    );
+    const { data } = await axios.put(`/api/users/profile`, user, config);
 
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
@@ -201,9 +194,7 @@ export const updateUserProfileAction = (user) => async (dispatch, getState) => {
 export const userProfileByIdAction = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_FULL_DETAILS_BY_ID_REQUEST });
-    const { data } = await axios.get(
-      `http://localhost:5000/api/user/profile/${id}`,
-    );
+    const { data } = await axios.get(`/api/user/profile/${id}`);
 
     dispatch({ type: USER_FULL_DETAILS_BY_ID_SUCCESS, payload: data });
   } catch (error) {
@@ -233,7 +224,7 @@ export const deleteUserAction = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`http://localhost:5000/api/users/${id}`, config);
+    await axios.delete(`/api/users/${id}`, config);
     dispatch({ type: USER_DELETE_SUCCESS });
   } catch (error) {
     dispatch({
@@ -265,7 +256,7 @@ export const userAddRemoveAdminAction =
       };
 
       const { data } = await axios.put(
-        `http://localhost:5000/api/user/profile/${isAdmin.id}`,
+        `/api/user/profile/${isAdmin.id}`,
         isAdmin,
         config,
       );
