@@ -77,9 +77,7 @@ const registerUser = asyncHandler(async (req, res) => {
       },
     });
 
-    const link = `${
-      process.env.MAILER_LOCAL_URL
-    }api/verify/token=${generateToken(user._id)}`;
+    const link = `/api/verify/token=${generateToken(user._id)}`;
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
