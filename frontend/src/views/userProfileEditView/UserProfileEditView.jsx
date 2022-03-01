@@ -242,7 +242,7 @@ const UserProfileEditView = () => {
 
             <span className="small-text">ID: {user._id}</span>
             <img
-              src={`/uploads/profiles${user.profileImage}`}
+              src={`/uploads${user.profileImage}`}
               alt={user.name}
               className="image"
             />
