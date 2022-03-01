@@ -114,7 +114,7 @@ const UserProfileEditView = () => {
         },
       };
 
-      const { data } = await axios.post('/uploads', formData, config);
+      const { data } = await axios.post('uploads/profiles', formData, config);
 
       setProfileImage(data);
       setUploading(false);
@@ -242,7 +242,7 @@ const UserProfileEditView = () => {
 
             <span className="small-text">ID: {user._id}</span>
             <img
-              src={`/uploads${user.profileImage}`}
+              src={`/uploads/profiles/${user.profileImage}`}
               alt={user.name}
               className="image"
             />
