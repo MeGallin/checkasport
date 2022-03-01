@@ -211,7 +211,7 @@ const ProfileEditView = () => {
         },
       };
 
-      const { data } = await axios.post('/api/profileUpload', formData, config);
+      const { data } = await axios.post('/profileUpload', formData, config);
 
       setProfileImage(data);
       setUploading(false);
