@@ -211,7 +211,7 @@ const ProfileEditView = () => {
         },
       };
 
-      const { data } = await axios.post('/upload', formData, config);
+      const { data } = await axios.post('/api/upload', formData, config);
 
       setProfileImage(data);
       setUploading(false);
@@ -606,7 +606,7 @@ const ProfileEditView = () => {
                 <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
               </div>
               <img
-                src={`/uploads${profileImage}`}
+                src={`/frontend/build/uploads/profiles${profileImage}`}
                 alt={name}
                 className="image"
               />
