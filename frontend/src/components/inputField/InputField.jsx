@@ -15,7 +15,7 @@ const InputField = ({
   const inputFocus = useRef(null);
 
   useEffect(() => {
-    if (inputFocus.current.type === 'text') {
+    if (inputFocus.current.name === 'name') {
       inputFocus.current.focus();
     }
   }, []);

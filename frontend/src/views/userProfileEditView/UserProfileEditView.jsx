@@ -64,11 +64,12 @@ const UserProfileEditView = () => {
         dispatch(getUserDetailsAction(userInfo._id));
       } else {
         setName(user.name);
-        setProfileImage(profileImage);
+        setProfileImage(user.profileImage);
         setEmail(user.email);
       }
     }
     dispatch(profileOfLoggedInUserAction());
+
     const abortConst = new AbortController();
     return () => {
       abortConst.abort();
