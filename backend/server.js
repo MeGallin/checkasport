@@ -33,6 +33,7 @@ app.use('/api', authUserReview);
 app.use('/api', userReviewRoutes);
 
 if (process.env.NODE_ENV === 'production') {
+  const __dirname = path.resolve();
   app.use(express.static(path.join(__dirname, '/frontend/build')));
 
   app.get('*', (req, res) =>
@@ -40,7 +41,6 @@ if (process.env.NODE_ENV === 'production') {
   );
 
   //create static folder
-  const __dirname = path.resolve();
   app.use(
     '/frontend/public/uploads/profiles',
     express.static(path.join(__dirname, '/frontend/public/uploads/profiles')),
