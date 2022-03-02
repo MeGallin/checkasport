@@ -201,7 +201,7 @@ const ProfileEditView = () => {
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
-    formData.append('profileImage', file);
+    formData.append('image', file);
     setUploading(true);
 
     try {
@@ -211,7 +211,7 @@ const ProfileEditView = () => {
         },
       };
 
-      const { data } = await axios.post('/profileUpload', formData, config);
+      const { data } = await axios.post('/upload', formData, config);
 
       setProfileImage(data);
       setUploading(false);
@@ -606,7 +606,7 @@ const ProfileEditView = () => {
                 <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
               </div>
               <img
-                src={`../uploads/profiles/${profileImage}`}
+                src={`/uploads${profileImage}`}
                 alt={name}
                 className="image"
               />

@@ -6,7 +6,7 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, 'frontend/public/uploads/profiles');
+    cb(null, 'uploads/'); // This is the folder in the root
   },
   filename(req, file, cb) {
     cb(
@@ -35,8 +35,8 @@ const upload = multer({
   },
 });
 
-router.post('/profileUpload', upload.single('profileImage'), (req, res) => {
-  res.send(`/${req.file.filename}`);
+router.post('/', upload.single('profileImage'), (req, res) => {
+  res.send(`/${req.file.path}`);
 });
 
 export default router;
