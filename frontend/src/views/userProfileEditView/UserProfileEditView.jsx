@@ -115,7 +115,7 @@ const UserProfileEditView = () => {
         },
       };
 
-      const { data } = await axios.post('uploads/profiles', formData, config);
+      const { data } = await axios.post('/api/profileUpload', formData, config);
 
       setProfileImage(data);
       setUploading(false);
