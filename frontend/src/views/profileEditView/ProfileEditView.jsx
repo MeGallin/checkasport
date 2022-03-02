@@ -288,11 +288,16 @@ const ProfileEditView = () => {
                 onChange={(e) => setProfileImage(e.target.value)}
               />
               {uploading ? <LoadingSpinner /> : null}
-              <InputField
+              <input
                 type="file"
                 name="files"
                 onChange={uploadFileHandler}
-              />
+              ></input>
+              {/* <InputField
+                type="file"
+                name="files"
+                onChange={uploadFileHandler}
+              /> */}
 
               <div>
                 {description?.length < 10 ? (
