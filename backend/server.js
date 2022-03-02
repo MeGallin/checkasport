@@ -42,8 +42,8 @@ if (process.env.NODE_ENV === 'production') {
 
   //create static folder
   app.use(
-    '/frontend/public/uploads/profiles',
-    express.static(path.join(__dirname, '/frontend/public/uploads/profiles')),
+    '/uploads/profiles',
+    express.static(path.join(__dirname, '/uploads/profiles')),
   );
 } else {
   app.get('/', (req, res) => {
